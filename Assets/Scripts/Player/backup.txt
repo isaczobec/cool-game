@@ -1,0 +1,321 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Scripting;
+using UnityEngine.UIElements;
+
+
+
+public class Player : MonoBehaviour
+{
+
+    [SerializeField] private PlayerInputHandler playerInputHandler;
+
+
+    [Header("Movement Variables")]
+    [SerializeField] private float maxGroundedMovementSpeed = 10f;
+    [SerializeField] private float groundedAcceleration = 3f;
+    [SerializeField] private float groundedMovementDamping = 1f;
+    [SerializeField] private float maxAerialMovementSpeed = 10f;
+    [SerializeField] private float aerialAcceleration = 0.5f;
+    [SerializeField] private float aerialMovementDamping = 1f;
+
+    [SerializeField] private float gravityAcceleration = 3f;
+    [SerializeField] private float jumpPower = 6f;
+    [SerializeField] private Transform movementCastTransformStartPoint;
+    [SerializeField] private Transform movementCastTransformEndPoint;
+    [SerializeField] private float movementCastRadius = 0.5f;
+    [SerializeField] private float skinwidth = 0.015f;
+
+    
+
+
+
+    private Vector2 velocity = Vector2.zero;
+
+    private bool isGrouded = false;
+
+    void Start()
+    {
+        playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
+    }
+
+
+    void Update()
+    {
+        HandleMovement();
+    }
+
+
+    private void HandleMovement() {
+    
+        //change velocity
+        velocity += (playerInputHandler.GetPlayerMovementVector() * new Vector2(1,0) * groundedAcceleration + Vector2.down*gravityAcceleration) * Time.deltaTime;
+
+        CollisionDetectionOutput collisionDetection = HandleCollisions(transform.position, velocity);
+        //Debug.Log(collisionDetection.newPositionVector);
+        //Debug.Log(collisionDetection.newVelocityVector);
+        transform.position = collisionDetection.newPositionVector;
+        velocity = collisionDetection.newVelocityVector;
+
+       
+
+
+    }
+
+    public class CollisionDetectionOutput {
+        public Vector3 newPositionVector;
+        public Vector3 newVelocityVector;
+    }
+    private CollisionDetectionOutput HandleCollisions(Vector3 position, Vector3 velocity) {
+
+        float leftoverMagnitude = velocity.magnitude;
+        Vector3 leftoverVelocity = velocity;
+
+        RaycastHit raycastHit;
+        RaycastHit previousRaycastHit = new RaycastHit();
+        bool hitSomething = false;
+
+        bool collisionDone = false;
+        while ( collisionDone == false) {
+            if (Physics.CapsuleCast(position + movementCastTransformStartPoint.localPosition,position + movementCastTransformEndPoint.localPosition,movementCastRadius - 2*skinwidth,leftoverVelocity.normalized,out raycastHit,leftoverMagnitude*Time.deltaTime+skinwidth)) {
+                hitSomething = true;
+                previousRaycastHit = raycastHit;
+
+                Vector3 positionChangeVector = leftoverVelocity.normalized * (raycastHit.distance - skinwidth);
+
+                if (positionChangeVector.magnitude <= skinwidth) {
+                    
+                }
+
+                position += leftoverVelocity.normalized * (raycastHit.distance - skinwidth);
+                leftoverMagnitude -= raycastHit.distance;
+                leftoverVelocity = leftoverVelocity.normalized * leftoverMagnitude;
+
+
+
+                leftoverVelocity = Vector3.ProjectOnPlane(leftoverVelocity,raycastHit.normal);
+
+            }
+            else {
+
+                collisionDone = true;
+                if (hitSomething) {
+                    //Calculate how much of the momentum should be kept after the collision
+                    float velocityCollisionFactor = Mathf.Sin(Mathf.Deg2Rad*Vector3.Angle(previousRaycastHit.normal.normalized,velocity.normalized));
+                    Debug.Log(velocityCollisionFactor);
+
+                    return new CollisionDetectionOutput{newPositionVector=position,newVelocityVector = leftoverVelocity.normalized * velocity.magnitude * velocityCollisionFactor};
+                }
+
+
+                return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity};
+
+
+            }
+        }
+
+        return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity};
+
+
+
+    }
+
+
+
+
+    private void OnJumpEvent(object sender, PlayerInputHandler.OnPlayerJumpEventArgs e)
+    {
+        if (e.startedJumping) {
+
+        velocity += Vector2.up * jumpPower;
+        }
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Player : MonoBehaviour
+{
+
+    [SerializeField] private PlayerInputHandler playerInputHandler;
+
+
+    [Header("Movement Variables")]
+    [SerializeField] private float maxGroundedMovementSpeed = 10f;
+    [SerializeField] private float groundedAcceleration = 3f;
+    [SerializeField] private float groundedMovementDamping = 1f;
+    [SerializeField] private float maxAerialMovementSpeed = 10f;
+    [SerializeField] private float aerialAcceleration = 0.5f;
+    [SerializeField] private float aerialMovementDamping = 1f;
+
+    [SerializeField] private float gravityAcceleration = 3f;
+    [SerializeField] private float jumpPower = 6f;
+    [SerializeField] private Transform movementCastTransformStartPoint;
+    [SerializeField] private Transform movementCastTransformEndPoint;
+    [SerializeField] private float movementCastRadius = 0.5f;
+
+
+
+    private Vector2 velocity = Vector2.zero;
+
+    private bool isGrouded = false;
+
+    void Start()
+    {
+        playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
+    }
+
+
+    void Update()
+    {
+        HandleMovement();
+    }
+
+
+    private void HandleMovement() {
+    
+        //change velocity
+        velocity += (playerInputHandler.GetPlayerMovementVector() * new Vector2(1,0) * groundedAcceleration + Vector2.down*gravityAcceleration) * Time.deltaTime;
+
+        
+
+        if (!Physics.CapsuleCast(movementCastTransformStartPoint.position,movementCastTransformEndPoint.position,movementCastRadius,new Vector3(velocity.x,velocity.y,0).normalized,out RaycastHit raycastHit,velocity.magnitude*Time.deltaTime)) {
+            transform.position += new Vector3(velocity.x,velocity.y) * Time.deltaTime;
+        }
+        else {
+            velocity = Vector2.zero;
+        }
+
+
+    }
+
+    public class CollisionDetectionOutput {
+        public Vector3 positionChangeVector;
+        public Vector3 newVelocityVector;
+    }
+    
+    private CollisionDetectionOutput HandleCollisions(Vector3 position, Vector3 velocity) {
+
+        
+
+        return null;
+
+    }
+
+
+
+
+    private void OnJumpEvent(object sender, PlayerInputHandler.OnPlayerJumpEventArgs e)
+    {
+        if (e.startedJumping) {
+
+        velocity += Vector2.up * jumpPower;
+        }
+    }
+
+
+
+}
+
+
+
+
+
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Player : MonoBehaviour
+{
+
+    [SerializeField] private PlayerInputHandler playerInputHandler;
+
+
+    [Header("Movement Variables")]
+    [SerializeField] private float maxGroundedMovementSpeed = 10f;
+    [SerializeField] private float groundedAcceleration = 3f;
+    [SerializeField] private float groundedMovementDamping = 1f;
+    [SerializeField] private float maxAerialMovementSpeed = 10f;
+    [SerializeField] private float aerialAcceleration = 0.5f;
+    [SerializeField] private float aerialMovementDamping = 1f;
+
+    [SerializeField] private float gravityAcceleration = 3f;
+    [SerializeField] private float jumpPower = 6f;
+    [SerializeField] private Transform movementCastTransformStartPoint;
+    [SerializeField] private Transform movementCastTransformEndPoint;
+    [SerializeField] private float movementCastRadius = 0.5f;
+
+
+
+    private Vector2 velocity = Vector2.zero;
+
+    private bool isGrouded = false;
+
+    void Start()
+    {
+        playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
+    }
+
+
+    void Update()
+    {
+        HandleMovement();
+    }
+
+
+    private void HandleMovement() {
+    
+        //change velocity
+        velocity += (playerInputHandler.GetPlayerMovementVector() * new Vector2(1,0) * groundedAcceleration + Vector2.down*gravityAcceleration) * Time.deltaTime;
+
+        
+
+        if (!Physics.CapsuleCast(movementCastTransformStartPoint.position,movementCastTransformEndPoint.position,movementCastRadius,new Vector3(velocity.x,velocity.y,0).normalized,out RaycastHit raycastHit,velocity.magnitude*Time.deltaTime)) {
+            transform.position += new Vector3(velocity.x,velocity.y) * Time.deltaTime;
+        }
+        else {
+            velocity = Vector2.zero;
+        }
+    }
+
+
+
+
+    private void OnJumpEvent(object sender, PlayerInputHandler.OnPlayerJumpEventArgs e)
+    {
+        if (e.startedJumping) {
+
+        velocity += Vector2.up * jumpPower;
+        }
+    }
+
+
+
+}
