@@ -401,7 +401,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 9fa92ca9c2bd8984bbaceccd50374ebb, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 68ec5b4e5adee60488f68a998cc5ed18, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 9fa92ca9c2bd8984bbaceccd50374ebb, type: 2}
+  m_Texture: {fileID: 8400000, guid: 68ec5b4e5adee60488f68a998cc5ed18, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1385,7 +1385,7 @@ PrefabInstance:
     - target: {fileID: 6231046335246940828, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
         type: 3}
       propertyPath: maxGroundedMovementSpeed
-      value: 36
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6231046335246940828, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
         type: 3}
