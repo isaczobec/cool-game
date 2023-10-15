@@ -299,6 +299,15 @@ public class Player : MonoBehaviour
         return maxGroundedMovementSpeed;
     }
 
+    public bool GetPlayerIsAttacking() {
+        if (playerInputHandler.GetPlayerAttackInput() > 0) { //a float that is either 1 or 0 depending on is the player is holding the attack button or not
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+
 
 
 }

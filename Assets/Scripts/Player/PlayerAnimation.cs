@@ -15,7 +15,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Transform visualParentTransform; //the visualobject parent transform of the model
 
 
+    
+
+
     [Header("Animation Variables")]
+    [Header("Base movement Variables")]
     [SerializeField] float turnAroundSpeed = 14f;
 
     private string isRunning = "isRunning";
@@ -24,6 +28,31 @@ public class PlayerAnimation : MonoBehaviour
     private string playerJumped = "playerJumped";
 
     private string xVelocityPercent = "xVelocityPercent"; //how much of the max x momentum the player is currently moving at
+
+
+
+
+    [Header("Attacking Variables")]
+    private string isAttacking = "isAttacking";
+
+    private float attackingWheightChangeSpeed = 4f;
+
+
+    [SerializeField] private float attackingSpeed = 5f;
+
+    
+    
+
+    
+    
+    
+    //animator layer indexes
+
+
+
+
+    [SerializeField] private int baseMovementLayerIndex = 0;
+    [SerializeField] private int attackingLayerIndex = 1;
 
     
 
@@ -35,37 +64,88 @@ public class PlayerAnimation : MonoBehaviour
 
         player.OnPlayerJumped += Player_OnJumpedEvent;
 
+
     }
+
+
+    private void Update() {
+
+
+            playerMovementVector = playerInputHandler.GetPlayerMovementVector();
+
+
+            //set animator variables for movement
+            animator.SetBool(isRunning,player.GetIsRunning());
+            animator.SetBool(isGrounded,player.GetIsGrounded());
+
+            animator.SetFloat(xVelocityPercent,MathF.Abs(player.GetVelocity().x/player.GetMaxGroundedMovementSpeed())); //set velocitypercent
+
+            animator.SetBool(isAttacking,player.GetPlayerIsAttacking());
+
+
+
+            UpdatePlayerOrientation(playerMovementVector);
+            HandleNoInputTime(playerMovementVector);
+
+            UpdateAttacking();
+
+
+
+
+
+
+
+    }
+
+    private void UpdateAttacking()
+    {
+        float weightChange;  
+        if (player.GetPlayerIsAttacking()) {
+            weightChange = 1f;
+        } else {
+            weightChange = -1f;
+        }
+
+
+
+        float newAttackingLayerWheight = Mathf.Clamp(weightChange * attackingWheightChangeSpeed * Time.deltaTime + animator.GetLayerWeight(attackingLayerIndex),0f,1f); //the wheight of an animator layer can at max be 1, min 0
+            animator.SetLayerWeight(attackingLayerIndex,newAttackingLayerWheight);
+    }
+
+
+
 
     private void Player_OnJumpedEvent(object sender, EventArgs e)
     {
         animator.SetTrigger(playerJumped);
     }
 
-    private void Update() {
-
-            playerMovementVector = playerInputHandler.GetPlayerMovementVector();
-
-            animator.SetBool(isRunning,player.GetIsRunning());
-            animator.SetBool(isGrounded,player.GetIsGrounded());
-
-            UpdatePlayerOrientation(playerMovementVector);
-            HandleNoInputTime(playerMovementVector);
-
-
-
-            animator.SetFloat(xVelocityPercent,MathF.Abs(player.GetVelocity().x/player.GetMaxGroundedMovementSpeed())); //set velocitypercent
-
-
-
-    }
     
 
     private void UpdatePlayerOrientation(Vector2 movementVector) {
 
+        if (player.GetPlayerIsAttacking()) { // if the player is currently attacking, change their direction to whichever way they are attacking
+
+            Vector3 slerpDirection;
+            if (MouseInfo.Instance.GetMousePixelPosition().x > 0) {
+                slerpDirection = Vector3.right;
+            } else {
+
+                slerpDirection = Vector3.left;
+            }
+
+        visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,slerpDirection,Time.deltaTime * turnAroundSpeed);
+
+
+        } else { // else change their direction to the direction they are moving
+
+
+
         Vector3 xInputVector = movementVector * Vector3.right;
 
         visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,xInputVector,Time.deltaTime * turnAroundSpeed);
+
+        }
     }
 
 
