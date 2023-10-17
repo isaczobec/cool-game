@@ -37,6 +37,10 @@ public class MouseInfo : MonoBehaviour
 
         float mouseAngleDegrees = Mathf.Atan(adjustedCursorPosition.y/adjustedCursorPosition.x) * Mathf.Rad2Deg;
 
+        if (adjustedCursorPosition.x > 0) {
+            mouseAngleDegrees *= -1;
+        }
+
         return mouseAngleDegrees;
 
     }

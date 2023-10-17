@@ -35,7 +35,7 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Attacking Variables")]
     private string isAttacking = "isAttacking";
 
-    private float attackingWheightChangeSpeed = 4f;
+    [SerializeField] private float attackingWheightChangeSpeed = 8f;
 
 
     [SerializeField] private float attackingSpeed = 5f;
