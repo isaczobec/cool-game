@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4975392374416837432}
+  - component: {fileID: 3301734789716488602}
   m_Layer: 0
   m_Name: FireElemental
   m_TagString: Untagged
@@ -64,6 +65,21 @@ Transform:
   - {fileID: 6225117057761908578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3301734789716488602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952433559703414170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b078ce30134d1204cb217825354c97b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  maxHealth: 0
+  movementSpeed: 10
 --- !u!1001 &3742549643205489456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,6 +151,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2101833761845167006}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 144f1756d4a22554c86a52f14d63bf76,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8039717395012886370}
   m_SourcePrefab: {fileID: 100100000, guid: 144f1756d4a22554c86a52f14d63bf76, type: 3}
 --- !u!4 &3781489246225454299 stripped
 Transform:
@@ -169,3 +189,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8039717395012886370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553522693815275105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d08a42fcc80a154f8ecbc96983e81aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 3301734789716488602}
+  player: {fileID: 0}
+  spinAroundSpeed: 4.8
+  minSpinLerpAngle: 1
+  rightSpinLerpAngle: 135
+  leftSpinLerpAngle: 225

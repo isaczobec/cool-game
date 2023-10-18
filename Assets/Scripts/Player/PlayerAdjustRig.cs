@@ -58,7 +58,6 @@ public class PlayerAdjustRig : MonoBehaviour
 
                 float intervalLength = max - min;
                 float percentOfInterval = (value-min)/intervalLength;
-                Debug.Log(percentOfInterval);
                 
 
                 return (Mathf.Pow(percentOfInterval,2) * 3 - Mathf.Pow(percentOfInterval,3) * 2) * intervalLength + min;

@@ -65,7 +65,18 @@ public class Player : MonoBehaviour
 
     private bool isRunning = false;
 
-    void Start()
+
+    public static Player Instance {get; private set;}
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Debug.Log("there is more than one Player instance!");
+        }
+    }
+
+    private void Start()
     {
         playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
     }
