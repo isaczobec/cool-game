@@ -80,6 +80,7 @@ MonoBehaviour:
   player: {fileID: 0}
   maxHealth: 0
   movementSpeed: 10
+  agroDistance: 20
 --- !u!1001 &3742549643205489456
 PrefabInstance:
   m_ObjectHideFlags: 0

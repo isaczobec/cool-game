@@ -1,17 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Scripting;
-using UnityEngine.UIElements;
 
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHittableEntity
 {
 
     [SerializeField] private PlayerInputHandler playerInputHandler;
@@ -50,6 +42,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float GroundedDistanceOffset = 0.02f;
 
 
+    [Header("Health Variables")]
+    [SerializeField] private float maxHealth = 400f;
+    private float health;
+
+
+    [Header("Other")]
+    [SerializeField] private int MovementColliderLayerInt = 6;
+    private int MovementColliderLayerMask;
+
+
 
     public event EventHandler<EventArgs> OnPlayerJumped;
 
@@ -78,6 +80,11 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        MovementColliderLayerMask = 1 << MovementColliderLayerInt;
+
+
+        health = maxHealth;
+
         playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
     }
 
@@ -88,6 +95,7 @@ public class Player : MonoBehaviour
 
 
     private void HandleMovement() {
+        
 
 
         CollisionDetectionOutput collisionDetection = HandleCollisions(transform.position, velocity);
@@ -184,6 +192,7 @@ public class Player : MonoBehaviour
     }
     private CollisionDetectionOutput HandleCollisions(Vector3 position, Vector3 velocity) {
 
+       
         Vector3 originalPosition = position;
 
         float leftoverMagnitude = velocity.magnitude;
@@ -195,7 +204,7 @@ public class Player : MonoBehaviour
 
         bool collisionDone = false;
         while ( collisionDone == false) {
-            if (Physics.CapsuleCast(position + movementCastTransformStartPoint.localPosition,position + movementCastTransformEndPoint.localPosition,movementCastRadius + skinwidth,leftoverVelocity.normalized,out raycastHit,leftoverMagnitude*Time.deltaTime)) {
+            if (Physics.CapsuleCast(position + movementCastTransformStartPoint.localPosition,position + movementCastTransformEndPoint.localPosition,movementCastRadius + skinwidth,leftoverVelocity.normalized,out raycastHit,leftoverMagnitude*Time.deltaTime,layerMask: MovementColliderLayerMask)) {
                 hitSomething = true;
                 previousRaycastHit = raycastHit;
 
@@ -236,7 +245,7 @@ public class Player : MonoBehaviour
         
 
 
-        if (Physics.SphereCast(transform.position + movementCastTransformStartPoint.localPosition,GroundCheckRadius,Vector3.down,out RaycastHit raycastHit,movementCastRadius - GroundCheckRadius + GroundCheckOffset)) {
+        if (Physics.SphereCast(transform.position + movementCastTransformStartPoint.localPosition,GroundCheckRadius,Vector3.down,out RaycastHit raycastHit,movementCastRadius - GroundCheckRadius + GroundCheckOffset,layerMask: MovementColliderLayerMask)) {
 
             float floorAngle = Vector3.Angle(raycastHit.normal.normalized,Vector3.up.normalized);
 
@@ -317,8 +326,9 @@ public class Player : MonoBehaviour
             return false;
         }
     }
-    
 
-
-
+    public void GetHit(HitInfo hitInfo)
+    {
+        Debug.Log("ouch");
+    }
 }

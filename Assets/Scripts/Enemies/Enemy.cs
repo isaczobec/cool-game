@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHittableEntity
 {
 
     public Player player;
@@ -47,5 +47,8 @@ public class Enemy : MonoBehaviour
         return maxHealth;
     }
 
-
+    public void GetHit(HitInfo hitInfo)
+    {
+        Debug.Log("Ouch but enemy");
+    }
 }
