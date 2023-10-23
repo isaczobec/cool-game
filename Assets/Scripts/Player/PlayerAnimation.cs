@@ -127,7 +127,7 @@ public class PlayerAnimation : MonoBehaviour
         if (player.GetPlayerIsAttacking()) { // if the player is currently attacking, change their direction to whichever way they are attacking
 
             Vector3 slerpDirection;
-            if (MouseInfo.Instance.GetMousePixelPosition().x > 0) {
+            if (MouseInfo.GetMousePixelPosition().x > 0) {
                 slerpDirection = Vector3.right;
             } else {
 

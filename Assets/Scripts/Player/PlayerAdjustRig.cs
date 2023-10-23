@@ -38,7 +38,7 @@ public class PlayerAdjustRig : MonoBehaviour
         if (player.GetPlayerIsAttacking()) {
             
             Vector3 spineOldTransform = spineTransform.rotation.eulerAngles;
-            float newSpineRotation = SmoothFunction(mouseInfo.GetPlayerMouseAngle(),minSpineRotation,maxSpineRotation);
+            float newSpineRotation = SmoothFunction(MouseInfo.GetPlayerMouseAngle(),minSpineRotation,maxSpineRotation);
 
             spineTransform.rotation = Quaternion.Euler(new Vector3(newSpineRotation,spineOldTransform.y,spineOldTransform.z));
             

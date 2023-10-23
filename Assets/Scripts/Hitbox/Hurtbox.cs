@@ -7,7 +7,6 @@ public class Hurtbox : MonoBehaviour
     
     [SerializeField] private bool isPlayer;
 
-    [SerializeField] private Collider collider;
 
 
     // enemy is null if the hurtbox belongs to a player, and vice versa

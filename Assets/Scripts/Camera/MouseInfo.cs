@@ -24,13 +24,13 @@ public class MouseInfo : MonoBehaviour
     }
 
 
-    public Vector3 GetMousePixelPosition() {
+    public static Vector3 GetMousePixelPosition() {
         Vector3 cursorPosition = Mouse.current.position.ReadValue();
         Vector3 adjustedCursorPosition = new Vector3(cursorPosition.x - Screen.width/2, cursorPosition.y - Screen.height/2, 0);
         return adjustedCursorPosition;
     }
 
-    public float GetPlayerMouseAngle() { //returns the angle which the player is pointing the mouse
+    public static float GetPlayerMouseAngle() { //returns the angle which the player is pointing the mouse
 
         Vector3 cursorPosition = Mouse.current.position.ReadValue();
         Vector3 adjustedCursorPosition = new Vector3(cursorPosition.x - Screen.width/2, cursorPosition.y - Screen.height/2, 0);
@@ -42,6 +42,20 @@ public class MouseInfo : MonoBehaviour
         }
 
         return mouseAngleDegrees;
+
+    }
+
+    /// <summary>
+    /// Gets normalized direction vector for the player's mouse cursor. 
+    /// </summary>
+    /// <returns></returns>
+    public static Vector2 GetPlayerMouseDirectionVector() {
+
+        Vector3 cursorPosition = Mouse.current.position.ReadValue();
+        Vector3 adjustedCursorPosition = new Vector3(cursorPosition.x - Screen.width/2, cursorPosition.y - Screen.height/2, 0);
+        adjustedCursorPosition = adjustedCursorPosition.normalized;
+
+        return adjustedCursorPosition;
 
     }
 }

@@ -9,19 +9,27 @@ public class Hitbox : MonoBehaviour
     
     [SerializeField] private bool isPlayer;
 
-    [SerializeField] private Collider collider;
 
     [SerializeField] private Projectile projectile; // the projectile this hitbox is attached to, null if there is not projectile asociated with this object
 
 
     [SerializeField] private LayerMask layerMask;
 
+    /// <summary>
+    /// called when this hitbox hits something else
+    /// </summary>
+    /// <param name="otherCollider"> The Hurtbox which was hit </param>
     private void OnTriggerEnter(Collider otherCollider) {
 
         if (layerMask == (layerMask | (1 << otherCollider.transform.gameObject.layer)))  {// if the collided with object is on the same layer as this one
             if (otherCollider.TryGetComponent<Hurtbox>(out Hurtbox hurtbox)) {
-                if (hurtbox.getIsPlayer() != isPlayer) { // if the hitbox belongs to the player and hits the player; do nothing
-                    hurtbox.getOwnerEntity().GetHit(GetHitInfo()); //makes the HittableEntity take damage
+                if (hurtbox.getIsPlayer() != isPlayer) { // if the hitbox belongs to the player and hits the player (or vice versa); do nothing
+                    HitInfo hitInfo = GetHitInfo();
+                    
+
+
+                    hurtbox.getOwnerEntity().GetHit(hitInfo); //makes the HittableEntity get hit
+                    projectile?.HitSomething(hitInfo); // sends hit info to the projectile that hit something
                 }
             }
         }
