@@ -9,10 +9,16 @@ using UnityEngine;
 /// </summary>
 public class Item : MonoBehaviour
 {
+    private Player player; // the player that is holding this item
 
-    [SerializeField] public GameObject visualObject; // the visualObject associated with this item
+    [SerializeField] private GameObject visualObject; // the visualObject associated with this item
     
-    [SerializeField] public Player player; // the player that is holding this item
+    /// <summary>
+    /// The point in space which the player should be holding this object at.
+    /// </summary>
+    [SerializeField] private Transform holdingTransform; 
+
+    
 
     /// <summary>
     /// Called when the player uses this item with their primary action.
@@ -25,6 +31,23 @@ public class Item : MonoBehaviour
     /// </summary>
     public virtual void SecondaryUse() {
 
+    }
+
+
+    /// <summary>
+    /// Get the transform this item should be held at.
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetHoldingTransform() {
+        return holdingTransform;
+    }
+
+    public void SetPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player GetPlayer() {
+        return player;
     }
 
 }

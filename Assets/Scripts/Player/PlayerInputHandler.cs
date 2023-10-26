@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
 
-    [SerializeField] private GameObject noteProjectileTEST;
 
     private PlayerMovementControls playerMovementControls;
 
@@ -41,10 +40,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         onPlayerAttackEvent?.Invoke(this,true);
 
-        GameObject projectileObject = Instantiate(noteProjectileTEST);
-        NoteProjectile projectile = projectileObject.GetComponent<NoteProjectile>();
-        projectile.SetOwner(Player.Instance);
-        projectile.Initialize();
         
         
     }

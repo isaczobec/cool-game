@@ -14,6 +14,9 @@ public class NoteProjectile : Projectile
     /// Initializes this projectile. Should be called DIRECTLY AFTER the owner of this projectile is set. 
     /// </summary>
     public void Initialize() {
+
+        transform.position = player.transform.position;
+
         velocity = GetVelocityToCursor(travelSpeed);
         Debug.Log(velocity);
     }

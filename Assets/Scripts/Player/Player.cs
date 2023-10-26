@@ -50,6 +50,13 @@ public class Player : MonoBehaviour, IHittableEntity
     [Header("Other")]
     [SerializeField] private int MovementColliderLayerInt = 6;
     private int MovementColliderLayerMask;
+    [SerializeField] private Transform holdingTransform; // the object that held items will be parented to
+
+    [SerializeField] private PlayerAnimationEvents playerAnimationEvents;
+
+
+
+    [SerializeField] private GameObject testWeaponPrefab;
 
 
 
@@ -66,6 +73,10 @@ public class Player : MonoBehaviour, IHittableEntity
     private float currentFloorAngle = 0f;
 
     private bool isRunning = false;
+
+
+
+    private Item equipedItem; // the item the player is currently holding
 
 
     public static Player Instance {get; private set;}
@@ -86,7 +97,13 @@ public class Player : MonoBehaviour, IHittableEntity
         health = maxHealth;
 
         playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
+
+        ChangeEquippedItem(testWeaponPrefab);
+
+        playerAnimationEvents.playerUsedItem += PlayerUseEquippedItem;
+
     }
+
 
     void Update()
     {
@@ -304,6 +321,26 @@ public class Player : MonoBehaviour, IHittableEntity
         }
     }
 
+    /// <summary>
+    /// Sets the players equipped item to the one specefied in the agruments.
+    /// </summary>
+    /// <param name="newItem">The item the player equips.</param>
+    public void ChangeEquippedItem(GameObject newItemPrefab) {
+        GameObject newItemObject = Instantiate(newItemPrefab,holdingTransform);
+        Item newItem = newItemObject.GetComponent<Item>();
+
+        equipedItem = newItem;
+        newItem.SetPlayer(this);
+
+        newItemObject.transform.localPosition = newItem.GetHoldingTransform().localPosition * -1;
+    }
+
+
+    private void PlayerUseEquippedItem(object sender, EventArgs e)
+    {
+        equipedItem.PrimaryUse();
+    }
+
 
     public bool GetIsGrounded() {
         return isGrounded;
@@ -319,6 +356,10 @@ public class Player : MonoBehaviour, IHittableEntity
         return maxGroundedMovementSpeed;
     }
 
+    public Item GetEquippedItem() {
+        return equipedItem;
+    }
+
     public bool GetPlayerIsAttacking() {
         if (playerInputHandler.GetPlayerAttackInput() > 0) { //a float that is either 1 or 0 depending on is the player is holding the attack button or not
             return true;
@@ -331,4 +372,5 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         Debug.Log("ouch");
     }
+    
 }
