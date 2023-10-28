@@ -9,6 +9,9 @@ using UnityEngine;
 /// </summary>
 public class Item : MonoBehaviour
 {
+
+    [SerializeField] private ItemData itemDataSO;
+
     private Player player; // the player that is holding this item
 
     [SerializeField] private GameObject visualObject; // the visualObject associated with this item
@@ -48,6 +51,10 @@ public class Item : MonoBehaviour
 
     public Player GetPlayer() {
         return player;
+    }
+
+    public ItemData GetItemData() {
+        return itemDataSO;
     }
 
 }

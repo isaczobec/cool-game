@@ -10,8 +10,8 @@ public class Hurtbox : MonoBehaviour
 
 
     // enemy is null if the hurtbox belongs to a player, and vice versa
-    [SerializeField, SerializeReference] private Player player;
-    [SerializeField, SerializeReference] private Enemy enemy;
+    [SerializeField] private Player player;
+    [SerializeField] private Enemy enemy;
 
 
     /// <summary>
@@ -21,6 +21,7 @@ public class Hurtbox : MonoBehaviour
         if (player != null) {
             return player;
         } else if (enemy != null) {
+            Debug.Log(enemy);
             return enemy;
         } else {
             return null;

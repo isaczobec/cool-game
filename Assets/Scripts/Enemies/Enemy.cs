@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHittableEntity
@@ -26,10 +27,20 @@ public class Enemy : MonoBehaviour, IHittableEntity
     void Update()
     {
         HandleAI();
+        HandleDeath();
     }
 
     public virtual void HandleAI() {
 
+    }
+
+    /// <summary>
+    /// Base class method that checks if the entity should die this frame. Runs every frame.
+    /// </summary>
+    public virtual void HandleDeath() {
+        if (health <= 0) {
+            Destroy(gameObject); // destroys this enemy
+        }
     }
 
 
@@ -49,6 +60,7 @@ public class Enemy : MonoBehaviour, IHittableEntity
 
     public void GetHit(HitInfo hitInfo)
     {
+        health -= hitInfo.damage;
         Debug.Log("Ouch but enemy");
     }
 }

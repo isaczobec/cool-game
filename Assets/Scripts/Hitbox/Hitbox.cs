@@ -24,7 +24,7 @@ public class Hitbox : MonoBehaviour
         if (layerMask == (layerMask | (1 << otherCollider.transform.gameObject.layer)))  {// if the collided with object is on the same layer as this one
             if (otherCollider.TryGetComponent<Hurtbox>(out Hurtbox hurtbox)) {
                 if (hurtbox.getIsPlayer() != isPlayer) { // if the hitbox belongs to the player and hits the player (or vice versa); do nothing
-                    HitInfo hitInfo = GetHitInfo();
+                    HitInfo hitInfo = GetHitInfo(hurtbox.getOwnerEntity());
                     
 
 
@@ -36,11 +36,15 @@ public class Hitbox : MonoBehaviour
     }
 
 
-    private HitInfo GetHitInfo() {
+    private HitInfo GetHitInfo(IHittableEntity hurtEntity) {
         if (projectile != null) {
-            return projectile.GetHitInfo();
+            Debug.Log(projectile);
+            HitInfo hitInfo = projectile.GetHitInfo();
+            hitInfo.attackingEntity = ownerEntity;
+            hitInfo.hurtEntity = hurtEntity;
+            return hitInfo;
         } else {
-            return null; // placeholder until i figure out if any attacks wont have hitboxes attached to them
+            return null; // placeholder until i figure out if any attacks wont have projectiles attached to them
         }
     }
 

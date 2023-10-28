@@ -29,6 +29,8 @@ public class NoteProjectile : Projectile
     public override void HitSomething(HitInfo hitInfo)
     {
         Destroy(gameObject);
+
+
     }
 
 

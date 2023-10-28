@@ -13,7 +13,9 @@ public class Item_ElectricGuitar : Item
         GameObject projectileObject = Instantiate(noteProjectilePrefab);
         NoteProjectile projectile = projectileObject.GetComponent<NoteProjectile>();
         projectile.SetOwner(Player.Instance);
+        projectile.parentItem = this;
         projectile.Initialize();
+        
     }
 
 }

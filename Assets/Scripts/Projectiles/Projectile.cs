@@ -6,9 +6,21 @@ public class Projectile : MonoBehaviour
 {
 
 
+    /// <summary>
+    /// the player this projectile belongs to. Null if it does not belong to the player.
+    /// </summary>
+    public Player player; 
+    /// <summary>
+    /// the enemy this projectile belongs to. Null if it does not belong to an enemy.
+    /// </summary>
+    public Enemy enemy; 
 
-    public Player player; // the player this projectile belongs to. Null if it does not belong to the player.
-    public Enemy enemy; // the enemy this projectile belongs to. Null if it does not belong to an enemy.
+    /// <summary>
+    /// the item this projectile was created by or is associated with. Null if it is not associated an item.
+    /// </summary>
+    public Item parentItem; 
+
+    
 
     
 
@@ -67,14 +79,18 @@ public class Projectile : MonoBehaviour
     /// </summary>
     /// <param name="hitInfo">Class that passes on all info for the hit to the regarded classes.</param>
     public virtual void HitSomething(HitInfo hitInfo) {
-
+        
     }
 
     /// <summary>
-    /// Parent class method that is called when this projectile hits something. passes information onto what was hit so that damage can be taken, etc.
+    /// Parent class method that is called when this projectile hits something. passes information onto what was hit so that damage can be taken, etc. Does not need to set the hurtEntity or attackingEntity as that is done in the hitbox class.
     /// </summary>
     public virtual HitInfo GetHitInfo() { // placeholder method that will be replaced in each individual subclass
-        return new HitInfo();
+        HitInfo hitInfo = new HitInfo();
+        if (parentItem != null) {
+            hitInfo.damage = parentItem.GetItemData().damage;
+        }
+        return hitInfo;
     }
 
 
