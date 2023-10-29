@@ -15,21 +15,29 @@ public class Hitbox : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
 
+
+    [SerializeField] private Collider hitboxCollider; // the collider component associated with this hitbox
+
     /// <summary>
     /// called when this hitbox hits something else
     /// </summary>
     /// <param name="otherCollider"> The Hurtbox which was hit </param>
-    private void OnTriggerEnter(Collider otherCollider) {
+    private void OnTriggerStay(Collider otherCollider) {
 
         if (layerMask == (layerMask | (1 << otherCollider.transform.gameObject.layer)))  {// if the collided with object is on the same layer as this one
             if (otherCollider.TryGetComponent<Hurtbox>(out Hurtbox hurtbox)) {
                 if (hurtbox.getIsPlayer() != isPlayer) { // if the hitbox belongs to the player and hits the player (or vice versa); do nothing
-                    HitInfo hitInfo = GetHitInfo(hurtbox.getOwnerEntity());
-                    
+
+                    IHittableEntity hurtEntity = hurtbox.getOwnerEntity();
+                        if (hurtEntity.GetInvincibilityTime() <= 0) { //checks if the hurt entity still has invicibility frames
+                            HitInfo hitInfo = GetHitInfo(hurtEntity);
+                            
 
 
-                    hurtbox.getOwnerEntity().GetHit(hitInfo); //makes the HittableEntity get hit
-                    projectile?.HitSomething(hitInfo); // sends hit info to the projectile that hit something
+                            hurtEntity.GetHit(hitInfo); //makes the HittableEntity get hit
+                            projectile?.HitSomething(hitInfo); // sends hit info to the projectile that hit something
+                        }
+
                 }
             }
         }
@@ -46,6 +54,14 @@ public class Hitbox : MonoBehaviour
         } else {
             return null; // placeholder until i figure out if any attacks wont have projectiles attached to them
         }
+    }
+
+    public void DisableHitbox() {
+        hitboxCollider.enabled = false;
+    }
+
+    public void EnableHitbox() {
+        hitboxCollider.enabled = true;
     }
 
     public bool getIsPlayer() {

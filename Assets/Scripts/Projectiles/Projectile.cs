@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,32 @@ public class Projectile : MonoBehaviour
     /// </summary>
     public Item parentItem; 
 
+    /// <summary>
+    /// the hitbox that is connected to this projectile.
+    /// </summary>
+    public Hitbox hitbox; 
+
+
+    /// <summary>
+    /// the amount of seconds this projectile has been alive
+    /// </summary>
+    public float lifeTime {get; private set;} 
+
+
+    
+
+    /// <summary>
+    /// the amount of seconds the entity which got hit will be invincible.
+    /// </summary>
+    public float invincibilityTimeOnHit;
+
+
+    /// <summary>
+    /// the visual object parented to this object, used to display the projectiles graphics.
+    /// </summary>
+    [SerializeField] public GameObject visualGameObject;
+
+    public event EventHandler<EventArgs> ProjectileHitSomething;
     
 
     
@@ -27,6 +54,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        HandleLifetime();
         UpdateProjectile();
     }
 
@@ -67,7 +95,7 @@ public class Projectile : MonoBehaviour
 
 
     /// <summary>
-    /// Parent class method that is called every frame. Updates the projectile.
+    /// Parent class method that is called every frame. Updates the projectile. Conatains some logic that usually should be ran every frame
     /// </summary>
     public virtual void UpdateProjectile() {
 
@@ -79,17 +107,19 @@ public class Projectile : MonoBehaviour
     /// </summary>
     /// <param name="hitInfo">Class that passes on all info for the hit to the regarded classes.</param>
     public virtual void HitSomething(HitInfo hitInfo) {
-        
+        Debug.Log(this);
+        ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
     /// Parent class method that is called when this projectile hits something. passes information onto what was hit so that damage can be taken, etc. Does not need to set the hurtEntity or attackingEntity as that is done in the hitbox class.
     /// </summary>
-    public virtual HitInfo GetHitInfo() { // placeholder method that will be replaced in each individual subclass
+    public virtual HitInfo GetHitInfo() { // base class method that can be replaced in each individual subclass
         HitInfo hitInfo = new HitInfo();
         if (parentItem != null) {
             hitInfo.damage = parentItem.GetItemData().damage;
         }
+        hitInfo.invincibilityTime = invincibilityTimeOnHit;
         return hitInfo;
     }
 
@@ -107,6 +137,13 @@ public class Projectile : MonoBehaviour
         } else {
             return Vector2.zero;
         }
+    }
+
+    /// <summary>
+    /// Base class method that increases lifetime of a projectile. 
+    /// </summary>
+    private void HandleLifetime() {
+        lifeTime += Time.deltaTime;
     }
 
 }

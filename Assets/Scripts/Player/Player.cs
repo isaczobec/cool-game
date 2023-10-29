@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.UI;
 using UnityEngine;
 
 
@@ -74,6 +75,11 @@ public class Player : MonoBehaviour, IHittableEntity
 
     private bool isRunning = false;
 
+    /// <summary>
+    /// time in seconds the player still cannot be hit.
+    /// </summary>
+    private float invincibilityTime;
+
 
 
     private Item equipedItem; // the item the player is currently holding
@@ -108,6 +114,11 @@ public class Player : MonoBehaviour, IHittableEntity
     void Update()
     {
         HandleMovement();
+        HandleInvincibilityTime();
+    }
+
+    private void HandleInvincibilityTime() {
+        invincibilityTime -= Time.deltaTime;
     }
 
 
@@ -370,7 +381,19 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void GetHit(HitInfo hitInfo)
     {
-        Debug.Log("ouch");
+        if (hitInfo != null) {
+            health -= hitInfo.damage;
+            invincibilityTime = hitInfo.invincibilityTime;
+        }
+    }
+
+
+    public float GetInvincibilityTime() {
+        return invincibilityTime;
+    }
+
+    public void SetInvincibilityTime(float invincibilityTime) {
+        this.invincibilityTime = invincibilityTime;
     }
     
 }

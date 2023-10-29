@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class NoteProjectile : Projectile
 {
 
-    [SerializeField] float travelSpeed = 1f;
+    [SerializeField] private float travelSpeed = 1f;
 
     private Vector2 velocity = Vector2.zero;
+
+    [SerializeField] private float maxLifeTime = 10;
+
+
+    
 
     
     /// <summary>
@@ -19,19 +25,28 @@ public class NoteProjectile : Projectile
 
         velocity = GetVelocityToCursor(travelSpeed);
         Debug.Log(velocity);
+        
     }
 
     public override void UpdateProjectile()
     {
         transform.position += new Vector3(velocity.x * Time.deltaTime, velocity.y * Time.deltaTime, 0f);
+
+        if (lifeTime > maxLifeTime) {
+            HitInfo empty = new HitInfo();
+            base.HitSomething(empty);
+        }
+
     }
 
     public override void HitSomething(HitInfo hitInfo)
     {
-        Destroy(gameObject);
-
-
+        base.HitSomething(hitInfo);
+        velocity = Vector2.zero;
+        hitbox.DisableHitbox();
+        
     }
+
 
 
 

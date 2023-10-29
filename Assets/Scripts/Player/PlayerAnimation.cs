@@ -36,6 +36,9 @@ public class PlayerAnimation : MonoBehaviour
     private string isAttacking = "isAttacking";
 
     [SerializeField] private float attackingWheightChangeSpeed = 8f;
+    [SerializeField] private float startAttackAnimationSpeed = 3f;
+    [SerializeField] private float stopAttackAnimationSpeed = -1f;
+
 
 
     [SerializeField] private float attackingSpeed = 5f;
@@ -101,9 +104,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         float weightChange;  
         if (player.GetPlayerIsAttacking()) {
-            weightChange = 1f;
+            weightChange = startAttackAnimationSpeed;
         } else {
-            weightChange = -1f;
+            weightChange = stopAttackAnimationSpeed;
         }
 
 

@@ -13,6 +13,12 @@ public class Enemy : MonoBehaviour, IHittableEntity
     private float health;
 
 
+    /// <summary>
+    /// time in seconds the enemy still cannot be hit.
+    /// </summary>
+    private float invincibilityTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +34,11 @@ public class Enemy : MonoBehaviour, IHittableEntity
     {
         HandleAI();
         HandleDeath();
+        HandleInvincibilityTime();
+    }
+
+    private void HandleInvincibilityTime() {
+        invincibilityTime -= Time.deltaTime;
     }
 
     public virtual void HandleAI() {
@@ -61,6 +72,15 @@ public class Enemy : MonoBehaviour, IHittableEntity
     public void GetHit(HitInfo hitInfo)
     {
         health -= hitInfo.damage;
+        invincibilityTime = hitInfo.invincibilityTime;
         Debug.Log("Ouch but enemy");
+    }
+
+    public float GetInvincibilityTime() {
+        return invincibilityTime;
+    }
+
+    public void SetInvincibilityTime(float invincibilityTime) {
+        this.invincibilityTime = invincibilityTime;
     }
 }

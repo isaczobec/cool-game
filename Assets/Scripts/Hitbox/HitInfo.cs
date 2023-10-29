@@ -11,5 +11,7 @@ public class HitInfo
 
     public float damage;
 
+    public float invincibilityTime;
+
 
 }
