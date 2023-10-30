@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -109,6 +110,8 @@ public class Projectile : MonoBehaviour
     public virtual void HitSomething(HitInfo hitInfo) {
         Debug.Log(this);
         ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
+
+        CreateDamageNumber(hitInfo);
     }
 
     /// <summary>
@@ -116,12 +119,32 @@ public class Projectile : MonoBehaviour
     /// </summary>
     public virtual HitInfo GetHitInfo() { // base class method that can be replaced in each individual subclass
         HitInfo hitInfo = new HitInfo();
+
         if (parentItem != null) {
-            hitInfo.damage = parentItem.GetItemData().damage;
+            hitInfo.baseDamage = parentItem.GetItemData().damage;
         }
+
+        hitInfo.damage = CalculateDamage();
         hitInfo.invincibilityTime = invincibilityTimeOnHit;
         return hitInfo;
     }
+
+    /// <summary>
+    /// Calculates how much damage a projectile should do.
+    /// </summary>
+    /// <returns></returns>
+    public virtual float CalculateDamage() {
+        if (parentItem != null) {
+
+            ItemData parentItemData = parentItem.GetItemData();
+
+            float damageMultiplier = 1 - UnityEngine.Random.Range(-1f,1f) * parentItemData.damageVariance;
+            return math.round(parentItemData.damage * damageMultiplier); // calcul
+        } else {
+            return 0;
+        }
+    }
+    
 
 
     /// <summary>
@@ -144,6 +167,15 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void HandleLifetime() {
         lifeTime += Time.deltaTime;
+    }
+
+    /// <summary>
+    /// Creates a damage number popup at this projectiles location.
+    /// </summary>
+    public void CreateDamageNumber(HitInfo hitInfo) {
+        GameObject damagePopup = Instantiate(TextHandler.Instance.GetDamagePopup());
+        damagePopup.transform.localPosition = transform.position;
+        damagePopup.GetComponent<DamagePopup>().Setup(hitInfo);
     }
 
 }

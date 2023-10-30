@@ -1,0 +1,12 @@
+ANIMATIONS
+https://assetstore.unity.com/packages/3d/animations/rpg-character-mecanim-animation-pack-free-65284
+https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-3-free-47320
+https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-2-free-42454
+https://assetstore.unity.com/packages/3d/animations/melee-warrior-animations-free-165785
+https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-1-free-36405
+https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271
+^^^ All of theese should be fine to use without credit, royalty free (check again?)
+
+FONTS
+TT-ShinGo-Medium Medium from https://fontsisland.com/font/tt-shingo-medium-medium
+^^^ Not ok to use comercially, buy a license or replace it with something free

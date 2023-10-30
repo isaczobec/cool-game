@@ -10,4 +10,5 @@ public interface IHittableEntity
     public void SetInvincibilityTime(float Time);
     public float GetInvincibilityTime();
 
+
 }

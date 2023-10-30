@@ -292,7 +292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: redGuitar
   displayName: Red Guitar
-  damage: 10
+  damage: 500
+  damageVariance: 0.5
 --- !u!4 &3175491860496503395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5503299193321910622, guid: 01038f7cf4e70084b8d514c8ac8a4ca0,

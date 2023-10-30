@@ -34,7 +34,10 @@ public class NoteProjectile : Projectile
 
         if (lifeTime > maxLifeTime) {
             HitInfo empty = new HitInfo();
-            base.HitSomething(empty);
+
+            //disable the projectile and play the "death" animation if the lifetime expires
+            visualGameObject.GetComponent<ProjectileVisual>().animator.SetTrigger("hitSomething");
+            hitbox.DisableHitbox();
         }
 
     }

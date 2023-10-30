@@ -83,4 +83,5 @@ public class Enemy : MonoBehaviour, IHittableEntity
     public void SetInvincibilityTime(float invincibilityTime) {
         this.invincibilityTime = invincibilityTime;
     }
+
 }

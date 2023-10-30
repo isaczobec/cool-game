@@ -22,5 +22,10 @@ public class ItemData : MonoBehaviour
     /// the amount of damage this item does, provided its a weapon
     /// </summary>
     public float damage;
+
+    /// <summary>
+    /// The percent of how much the damage of this item (Usually) varies (Randomized).
+    /// </summary>
+    public float damageVariance;
     
 }

@@ -395,5 +395,7 @@ public class Player : MonoBehaviour, IHittableEntity
     public void SetInvincibilityTime(float invincibilityTime) {
         this.invincibilityTime = invincibilityTime;
     }
+
+    
     
 }

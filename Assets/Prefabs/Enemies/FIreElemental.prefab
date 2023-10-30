@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxHealth: 60
+  maxHealth: 40000
   movementSpeed: 10
   agroDistance: 20
 --- !u!4 &2105616546764657853 stripped
