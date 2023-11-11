@@ -435,6 +435,7 @@ MonoBehaviour:
   playerAnimationEvents: {fileID: 4411100915752822413}
   testWeaponPrefab: {fileID: 2666946130834263188, guid: d203b455caf71a14995be19f530a4b08,
     type: 3}
+  holdingBone: {fileID: 7639226142231191619}
 --- !u!114 &2214729451053372418
 MonoBehaviour:
   m_ObjectHideFlags: 0

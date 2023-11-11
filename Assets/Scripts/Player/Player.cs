@@ -59,6 +59,8 @@ public class Player : MonoBehaviour, IHittableEntity
 
     [SerializeField] private GameObject testWeaponPrefab;
 
+    [SerializeField] private Transform holdingBone;
+
 
 
     public event EventHandler<EventArgs> OnPlayerJumped;
@@ -394,6 +396,15 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void SetInvincibilityTime(float invincibilityTime) {
         this.invincibilityTime = invincibilityTime;
+    }
+
+
+    /// <summary>
+    /// get the bone the player uses to hold items.
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetHoldingBone() {
+        return holdingBone;
     }
 
     
