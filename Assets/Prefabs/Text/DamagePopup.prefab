@@ -49,6 +49,13 @@ MonoBehaviour:
   initialVelocity: 5.86
   velocityDamping: 4.49
   randomSpawnLocationRadius: 2.4
+  enemyColor:
+    serializedVersion: 2
+    rgba: 4278254847
+  playerColor:
+    serializedVersion: 2
+    rgba: 4280301567
+  playerScaleFactor: 1.7
 --- !u!1 &6968469024439517547
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +165,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278254847
+  m_fontColor: {r: 1, g: 0.989954, b: 0, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:

@@ -11,6 +11,16 @@ public class FireElemental : Enemy
 
     private Vector3 velocity = Vector3.zero;
 
+
+    [Header("Projectile references")]
+    [SerializeField] private GameObject fireBallProjectilePrefab;
+
+    /// <summary>
+    /// time in seconds in between the fire elemental will fire fireballs.
+    /// </summary>
+    [SerializeField] private float maxFireBallCoolDown = 1;
+    private float fireBallCoolDown;
+
     public override void HandleAI()
     {
 
@@ -24,6 +34,23 @@ public class FireElemental : Enemy
             velocity = Vector3.zero;
         }
 
+
+        fireBallCoolDown -= Time.deltaTime;
+        if (fireBallCoolDown <= 0) {
+            ShootFireBall();
+            fireBallCoolDown = maxFireBallCoolDown;
+        }
+
+    }
+
+
+    private void ShootFireBall() {
+
+        GameObject projectileObject = Instantiate(fireBallProjectilePrefab);
+        FireBallProjectile projectile = projectileObject.GetComponent<FireBallProjectile>();
+        projectile.SetOwner(null, this);
+        projectile.ownerEntity = this;
+        projectile.Initialize();
 
     }
 

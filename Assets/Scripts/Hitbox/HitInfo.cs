@@ -5,8 +5,8 @@ using UnityEngine;
 public class HitInfo
 {
     
-    public IHittableEntity hurtEntity;
-    public IHittableEntity attackingEntity;
+    public IEntity hurtEntity;
+    public IEntity attackingEntity;
     public Projectile projectile;
 
 

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IHittableEntity
+public class Enemy : MonoBehaviour, IEntity
 {
 
     public Player player;
 
 
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float maxHealth;
+
+    /// <summary>
+    /// variable attack damage can be multiplied with for scaling.
+    /// </summary>
+    [SerializeField] public float baseDamage;
     private float health;
 
 
@@ -82,6 +87,10 @@ public class Enemy : MonoBehaviour, IHittableEntity
 
     public void SetInvincibilityTime(float invincibilityTime) {
         this.invincibilityTime = invincibilityTime;
+    }
+
+    public Transform GetTransform() {
+        return transform;
     }
 
 }

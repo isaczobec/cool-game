@@ -7,11 +7,13 @@ public class Item_ElectricGuitar : Item
 
     [SerializeField] private GameObject noteProjectilePrefab; // the prefab of the projectile the guitar fires
 
-    [SerializeField] SlashVFX slashVFX;
+    [SerializeField] private SlashVFX slashVFX;
 
 
     public override void PrimaryUse()
     {
+
+        // shoot a note projectile
         GameObject projectileObject = Instantiate(noteProjectilePrefab);
         NoteProjectile projectile = projectileObject.GetComponent<NoteProjectile>();
         projectile.SetOwner(Player.Instance);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class Player : MonoBehaviour, IHittableEntity
+public class Player : MonoBehaviour, IEntity
 {
 
     [SerializeField] private PlayerInputHandler playerInputHandler;
@@ -405,6 +405,10 @@ public class Player : MonoBehaviour, IHittableEntity
     /// <returns></returns>
     public Transform GetHoldingBone() {
         return holdingBone;
+    }
+
+    public Transform GetTransform() {
+        return transform;
     }
 
     

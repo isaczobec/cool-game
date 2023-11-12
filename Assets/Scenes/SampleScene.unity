@@ -1616,6 +1616,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7822193052837984330, guid: 7be0fc54b6e40f945ac228331451fead,
+        type: 3}
+      propertyPath: maxFireBallCoolDown
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

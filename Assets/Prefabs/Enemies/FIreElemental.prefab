@@ -336,8 +336,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   maxHealth: 40000
+  baseDamage: 200
   movementSpeed: 10
   agroDistance: 20
+  fireBallProjectilePrefab: {fileID: 7733447657660921148, guid: 30d8cfd91f384dd408340ef25ef57605,
+    type: 3}
 --- !u!4 &2105616546764657853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6845424593853323683, guid: 48a1ff196308e7b4aa7e4918ab836a42,

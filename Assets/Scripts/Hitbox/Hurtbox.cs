@@ -17,7 +17,7 @@ public class Hurtbox : MonoBehaviour
     /// <summary>
     /// Returns the IHittableEntity which this hitbox is attached to. 
     /// </summary>
-    public IHittableEntity getOwnerEntity() {
+    public IEntity getOwnerEntity() {
         if (player != null) {
             return player;
         } else if (enemy != null) {

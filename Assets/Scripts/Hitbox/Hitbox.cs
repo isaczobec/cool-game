@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
 
-    [SerializeField] private IHittableEntity ownerEntity; // the owner of this hitbox
+    [SerializeField] private IEntity ownerEntity; // the owner of this hitbox
     
     [SerializeField] private bool isPlayer;
 
@@ -28,7 +28,7 @@ public class Hitbox : MonoBehaviour
             if (otherCollider.TryGetComponent<Hurtbox>(out Hurtbox hurtbox)) {
                 if (hurtbox.getIsPlayer() != isPlayer) { // if the hitbox belongs to the player and hits the player (or vice versa); do nothing
 
-                    IHittableEntity hurtEntity = hurtbox.getOwnerEntity();
+                    IEntity hurtEntity = hurtbox.getOwnerEntity();
                         if (hurtEntity.GetInvincibilityTime() <= 0) { //checks if the hurt entity still has invicibility frames
                             HitInfo hitInfo = GetHitInfo(hurtEntity);
                             
@@ -44,7 +44,7 @@ public class Hitbox : MonoBehaviour
     }
 
 
-    private HitInfo GetHitInfo(IHittableEntity hurtEntity) {
+    private HitInfo GetHitInfo(IEntity hurtEntity) {
         if (projectile != null) {
             Debug.Log(projectile);
             HitInfo hitInfo = projectile.GetHitInfo();

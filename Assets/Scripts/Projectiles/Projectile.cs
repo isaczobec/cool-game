@@ -7,6 +7,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
+    /// <summary>
+    /// the entity which owns this projectile. Null if it isnt owned by any entity.
+    /// </summary>
+    public IEntity ownerEntity;
+
 
     /// <summary>
     /// the player this projectile belongs to. Null if it does not belong to the player.
@@ -122,9 +127,13 @@ public class Projectile : MonoBehaviour
 
         if (parentItem != null) {
             hitInfo.baseDamage = parentItem.GetItemData().damage;
+            hitInfo.damage = CalculateDamage();
+        } 
+        else if (enemy != null) {
+            hitInfo.baseDamage = enemy.baseDamage;
+            hitInfo.damage = enemy.baseDamage;
         }
 
-        hitInfo.damage = CalculateDamage();
         hitInfo.invincibilityTime = invincibilityTimeOnHit;
         return hitInfo;
     }
@@ -141,6 +150,9 @@ public class Projectile : MonoBehaviour
             float damageMultiplier = 1 - UnityEngine.Random.Range(-1f,1f) * parentItemData.damageVariance;
             return math.round(parentItemData.damage * damageMultiplier); // calcul
         } else {
+
+            
+
             return 0;
         }
     }
