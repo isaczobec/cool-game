@@ -17,7 +17,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void PlayPlayerItemUseSound() {
         Item item = player.GetEquippedItem();
-        item.audioManager.Play(item.useSoundName);
+        item.audioManager.Play(item.useSoundName,UnityEngine.Random.Range(0.8f,1.2f));
     }
 
     public void PlayerEndedAttack() {

@@ -394,7 +394,9 @@ public class Player : MonoBehaviour, IEntity
     }
     private void PlayerStoppedAttacking(object sender, EventArgs e)
     {
+        if (playerInputHandler.GetPlayerAttackInput() == 0) { // if the player isnt inputting attack
         isAttacking = false;
+        }
     }
 
     public void GetHit(HitInfo hitInfo)
