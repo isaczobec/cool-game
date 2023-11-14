@@ -8,6 +8,7 @@ public class Item_ElectricGuitar : Item
     [SerializeField] private GameObject noteProjectilePrefab; // the prefab of the projectile the guitar fires
 
     [SerializeField] private SlashVFX slashVFX;
+    
 
 
     public override void PrimaryUse()
@@ -22,6 +23,7 @@ public class Item_ElectricGuitar : Item
 
         // play the slash vfx when this item is used
         slashVFX.Slash();
+        
         
     }
 

@@ -82,6 +82,11 @@ public class Player : MonoBehaviour, IEntity
     /// </summary>
     private float invincibilityTime;
 
+    /// <summary>
+    /// If the player is currently attacking or not.
+    /// </summary>
+    private bool isAttacking;
+
 
 
     private Item equipedItem; // the item the player is currently holding
@@ -110,6 +115,8 @@ public class Player : MonoBehaviour, IEntity
 
         playerAnimationEvents.playerUsedItem += PlayerUseEquippedItem;
 
+        playerAnimationEvents.playerStoppedAttacking += PlayerStoppedAttacking;
+
     }
 
 
@@ -117,6 +124,8 @@ public class Player : MonoBehaviour, IEntity
     {
         HandleMovement();
         HandleInvincibilityTime();
+
+        UpdateAttacking();
     }
 
     private void HandleInvincibilityTime() {
@@ -374,11 +383,18 @@ public class Player : MonoBehaviour, IEntity
     }
 
     public bool GetPlayerIsAttacking() {
+        return isAttacking;
+    }
+
+    //
+    private void UpdateAttacking() {
         if (playerInputHandler.GetPlayerAttackInput() > 0) { //a float that is either 1 or 0 depending on is the player is holding the attack button or not
-            return true;
-        } else {
-            return false;
+            isAttacking = true;
         }
+    }
+    private void PlayerStoppedAttacking(object sender, EventArgs e)
+    {
+        isAttacking = false;
     }
 
     public void GetHit(HitInfo hitInfo)
