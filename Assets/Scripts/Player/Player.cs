@@ -44,8 +44,8 @@ public class Player : MonoBehaviour, IEntity
 
 
     [Header("Health Variables")]
-    [SerializeField] private float maxHealth = 400f;
-    private float health;
+    [SerializeField] public float maxHealth = 400f;
+    public float health;
 
 
     [Header("Other")]
@@ -405,10 +405,10 @@ public class Player : MonoBehaviour, IEntity
     {
         if (hitInfo != null) {
 
-            OnPlayerGotHit?.Invoke(this, hitInfo);
 
             health -= hitInfo.damage;
             invincibilityTime = hitInfo.invincibilityTime;
+            OnPlayerGotHit?.Invoke(this, hitInfo);
         }
     }
 

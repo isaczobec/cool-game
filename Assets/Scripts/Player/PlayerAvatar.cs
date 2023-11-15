@@ -44,6 +44,8 @@ public class PlayerAvatar : MonoBehaviour
 
         foreach (Transform child in playerAvatarObject.transform) {
             child.gameObject.layer = LayerMask.NameToLayer(targetLayerName);
+
+            
         }
 
     }

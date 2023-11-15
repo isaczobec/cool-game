@@ -29,7 +29,6 @@ public class FireBallProjectile : Projectile
             velocity = (Player.Instance.transform.position - transform.position).normalized * travelSpeed;
         }
 
-        Debug.Log(velocity);
         
     }
 

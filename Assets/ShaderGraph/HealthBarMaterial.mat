@@ -38,19 +38,27 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _GradientTexture:
-        m_Texture: {fileID: 2800000, guid: e4d65bcb94fd3f04d8536ad24b898fca, type: 3}
+        m_Texture: {fileID: 2800000, guid: db69f7a8a2ecfb44ab858aa313bca167, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HalfToneGradientTexture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HealthBarBareTexture:
-        m_Texture: {fileID: 2800000, guid: bcb8cc3e6b2edf94aa495e8f3c30c3b0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 37ebde8a82209954e93967683d0107d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HealthBarHealthMeter:
-        m_Texture: {fileID: 2800000, guid: bc766ed4e59965545b65a6f3031dbf6e, type: 3}
+        m_Texture: {fileID: 2800000, guid: fc3e08bb99a1a374bb369ba8505a96cc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HealthBarTexture:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlayerTexture:
+        m_Texture: {fileID: 8400000, guid: 03775c9307bbf5c409478fca3b986583, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
@@ -77,14 +85,22 @@ Material:
     - _DrawOrder: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _VoronoiPower: 5.11
+    - _VoronoiPower: 2.92
     - _VoronoiScale: 12.04
+    - _VoronoiStrength: 1.9559326
     - _voronoiSpeed: 2
     m_Colors:
-    - _HealthBarColorBottom: {r: 0.7163018, g: 1, b: 0.6745283, a: 0}
+    - _HealthAlertSlider: {r: 0.47485, g: 0, b: 0, a: 0}
+    - _HealthBarColorBottom: {r: 0.6348829, g: 1, b: 0.23113209, a: 0}
     - _HealthBarColorTop: {r: 0.004811049, g: 1, b: 0, a: 0}
-    - _HealthSlider: {r: 0.20400001, g: 0, b: 0, a: 0}
-    - _LostHealthColor: {r: 1, g: 0, b: 0, a: 0}
-    - _LostHealthColor2: {r: 0.95283014, g: 0.37304196, b: 0.37304196, a: 0}
-    - _VoronoiColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HealthFullyLostBottomColor: {r: 0.6509434, g: 0.009211446, b: 0.009211446,
+        a: 1}
+    - _HealthFullyLostTopColor: {r: 0.31132078, g: 0.0014684978, b: 0.0014684978,
+        a: 1}
+    - _HealthSlider: {r: -0.028, g: 0, b: 0, a: 0}
+    - _LostHealthColor: {r: 1, g: 0.6034185, b: 0, a: 1}
+    - _LostHealthColor2: {r: 1, g: 0.99997777, b: 0, a: 1}
+    - _PlayerTextureOffset: {r: -3.53, g: -0.21, b: 0, a: 0}
+    - _PlayerTextureTiling: {r: 4.33, g: 1.32, b: 0, a: 0}
+    - _VoronoiColor: {r: 0.588153, g: 1, b: 0.3443396, a: 1}
   m_BuildTextureStacks: []
