@@ -30,6 +30,7 @@ public class Item : MonoBehaviour
     /// the name of the usesound of this item. "UseSound" is the default.
     /// </summary>
     [SerializeField] public string useSoundName = "UseSound";
+    
 
     
 
@@ -38,6 +39,7 @@ public class Item : MonoBehaviour
     /// </summary>
     public virtual void PrimaryUse() {
         audioManager.Play(useSoundName,Random.Range(0.8f,1.2f));
+
     }
     /// <summary>
     /// Called when the player uses this item with their secondary action.

@@ -65,6 +65,8 @@ public class Player : MonoBehaviour, IEntity
 
     public event EventHandler<EventArgs> OnPlayerJumped;
 
+    public event EventHandler<HitInfo> OnPlayerGotHit;
+
     
 
 
@@ -402,9 +404,16 @@ public class Player : MonoBehaviour, IEntity
     public void GetHit(HitInfo hitInfo)
     {
         if (hitInfo != null) {
+
+            OnPlayerGotHit?.Invoke(this, hitInfo);
+
             health -= hitInfo.damage;
             invincibilityTime = hitInfo.invincibilityTime;
         }
+    }
+
+    public float GetHealthPercent() {
+        return health/maxHealth;
     }
 
 

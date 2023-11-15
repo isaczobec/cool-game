@@ -14,7 +14,7 @@ TagManager:
   - MovementColliders
   - HitHurtBoxes
   - UIWorldElements
-  - Player
+  - PlayerAvatar
   - 
   - 
   - 
