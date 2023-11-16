@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6845424593853323683}
+  - component: {fileID: 9052090322586405069}
   m_Layer: 0
   m_Name: VisualParent
   m_TagString: Untagged
@@ -64,6 +65,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7767172051959371746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9052090322586405069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869264397309092770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6ce8f9f5e4c9d49b13aae2990d8687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedMaterial: {fileID: 2100000, guid: 37b45d43dc200d64c8aa85f36e9ea447, type: 2}
+  enemy: {fileID: 0}
+  player: {fileID: 0}
+  entityVisualGameObject: {fileID: 0}
 --- !u!1 &6903125629814784065
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  collider: {fileID: 4886787502921891307}
   player: {fileID: 0}
   enemy: {fileID: 0}
 --- !u!54 &965130979266845026

@@ -471,6 +471,7 @@ MonoBehaviour:
   GroundCheckOffset: 0.1
   GroundedDistanceOffset: 0.02
   maxHealth: 400
+  health: 0
   MovementColliderLayerInt: 6
   holdingTransform: {fileID: 7639226142231191619}
   playerAnimationEvents: {fileID: 4411100915752822413}
@@ -630,6 +631,7 @@ GameObject:
   - component: {fileID: 8350982516463690141}
   - component: {fileID: 3790984207277276210}
   - component: {fileID: 4411100915752822413}
+  - component: {fileID: 7293626947807772604}
   m_Layer: 0
   m_Name: PlayerVisualParent
   m_TagString: Untagged
@@ -729,6 +731,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6231046335246940828}
+--- !u!114 &7293626947807772604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666438659869929770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6ce8f9f5e4c9d49b13aae2990d8687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedMaterial: {fileID: 2100000, guid: d97bc516889de884b8d0d84051ce40f8, type: 2}
+  enemy: {fileID: 0}
+  player: {fileID: 6231046335246940828}
+  entityVisualGameObject: {fileID: 5168766340649423162}
 --- !u!1001 &3354729798108875516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3608,6 +3626,12 @@ PrefabInstance:
 --- !u!4 &2869482600751931055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7829577706673091268, guid: cb7332335cc60694080aab85f0393481,
+    type: 3}
+  m_PrefabInstance: {fileID: 5438743372551072875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5168766340649423162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cb7332335cc60694080aab85f0393481,
     type: 3}
   m_PrefabInstance: {fileID: 5438743372551072875}
   m_PrefabAsset: {fileID: 0}

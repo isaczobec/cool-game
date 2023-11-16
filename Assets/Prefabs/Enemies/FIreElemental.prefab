@@ -58,10 +58,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 144f1756d4a22554c86a52f14d63bf76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 144f1756d4a22554c86a52f14d63bf76,
         type: 3}
       propertyPath: m_Name
       value: FireElemental
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233112405309087440, guid: 144f1756d4a22554c86a52f14d63bf76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -219,6 +229,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 404051753368949802, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 7822193052837984330}
+    - target: {fileID: 404051753368949802, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      propertyPath: damagedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 37b45d43dc200d64c8aa85f36e9ea447, type: 2}
+    - target: {fileID: 404051753368949802, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      propertyPath: entityVisualGameObject
+      value: 
+      objectReference: {fileID: 89398466515055845}
     - target: {fileID: 3576874290740415544, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
       propertyPath: enemy
@@ -247,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 6903125629814784065, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7767172051959371746, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
@@ -299,8 +324,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9052090322586405069, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 7822193052837984330}
+    - target: {fileID: 9052090322586405069, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      propertyPath: entityVisualGameObject
+      value: 
+      objectReference: {fileID: 89398466515055845}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6903125629814784065, guid: 48a1ff196308e7b4aa7e4918ab836a42, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7767172051959371746, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
@@ -341,6 +377,7 @@ MonoBehaviour:
   agroDistance: 20
   fireBallProjectilePrefab: {fileID: 7733447657660921148, guid: 30d8cfd91f384dd408340ef25ef57605,
     type: 3}
+  maxFireBallCoolDown: 1
 --- !u!4 &2105616546764657853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6845424593853323683, guid: 48a1ff196308e7b4aa7e4918ab836a42,
