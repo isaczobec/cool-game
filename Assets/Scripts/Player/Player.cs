@@ -54,6 +54,7 @@ public class Player : MonoBehaviour, IEntity
     [SerializeField] private Transform holdingTransform; // the object that held items will be parented to
 
     [SerializeField] private PlayerAnimationEvents playerAnimationEvents;
+    [SerializeField] private PlayerAnimation playerAnimation;
 
 
 
@@ -357,6 +358,9 @@ public class Player : MonoBehaviour, IEntity
         newItem.SetPlayer(this);
 
         newItemObject.transform.localPosition = newItem.GetHoldingTransform().localPosition * -1;
+
+
+        playerAnimation.SetAttackSpeed(newItem.GetItemData().useSpeedMultiplier); // updates the attackspeed with this item
     }
 
 

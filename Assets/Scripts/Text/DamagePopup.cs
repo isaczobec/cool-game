@@ -10,11 +10,15 @@ public class DamagePopup : MonoBehaviour
 
     [Header("Animation Variables")]
     [SerializeField] float initialVelocity;
+    [SerializeField] float lowerVelocityRandomizationRange = 0.7f;
+    [SerializeField] float maxVelAngle = 90;
+    [SerializeField] float minVelAngle = 0;
     [SerializeField] float velocityDamping;
     [SerializeField] float randomSpawnLocationRadius;
 
 
     [SerializeField] private Color32 enemyColor;
+    [SerializeField] private float enemyAlpha = 0.5f;
     [SerializeField] private Color32 playerColor;
     /// <summary>
     /// The amount the scale is multiplied by if the player is hit (intended to alert them)
@@ -27,8 +31,8 @@ public class DamagePopup : MonoBehaviour
     public void Setup(HitInfo hitInfo) {
         textMeshPro.text = hitInfo.damage.ToString();
 
-        float randomAngle = Random.Range(0f,6.283185f);
-        velocity = new Vector3(Mathf.Sin(randomAngle),Mathf.Cos(randomAngle),0f) * Random.Range(0f,1f);
+        float randomAngle = Random.Range(minVelAngle * Mathf.Deg2Rad,maxVelAngle * Mathf.Deg2Rad);
+        velocity = new Vector3(Mathf.Sin(randomAngle),Mathf.Cos(randomAngle),0f) * Random.Range(lowerVelocityRandomizationRange,1f) * initialVelocity;
         transform.position += new Vector3(randomSpawnLocationRadius * Random.Range(0f,1f),randomSpawnLocationRadius * Random.Range(0f,1f),0f); // randomizes the number's spawn location.
         transform.localScale *= hitInfo.damage/hitInfo.baseDamage; //change the scale based on the damage variance
 
@@ -38,6 +42,8 @@ public class DamagePopup : MonoBehaviour
         transform.localScale *= playerScaleFactor;
         } else {
         textMeshPro.color = enemyColor;
+
+        textMeshPro.alpha = enemyAlpha;
         }
 
 

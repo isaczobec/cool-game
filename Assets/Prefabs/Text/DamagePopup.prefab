@@ -46,12 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 118532606049675840}
-  initialVelocity: 5.86
-  velocityDamping: 4.49
-  randomSpawnLocationRadius: 2.4
+  initialVelocity: 30
+  lowerVelocityRandomizationRange: 0.7
+  maxVelAngle: 90
+  minVelAngle: -90
+  velocityDamping: 6.5
+  randomSpawnLocationRadius: 3
   enemyColor:
     serializedVersion: 2
-    rgba: 4278254847
+    rgba: 64767
+  enemyAlpha: 1
   playerColor:
     serializedVersion: 2
     rgba: 4280301567

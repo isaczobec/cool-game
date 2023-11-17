@@ -10,7 +10,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 
-    [SerializeField] private ItemData itemDataSO;
+    [SerializeField] private ItemData itemData;
 
     private Player player; // the player that is holding this item
 
@@ -66,7 +66,7 @@ public class Item : MonoBehaviour
     }
 
     public ItemData GetItemData() {
-        return itemDataSO;
+        return itemData;
     }
 
 }

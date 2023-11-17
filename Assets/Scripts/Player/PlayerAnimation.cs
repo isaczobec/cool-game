@@ -28,12 +28,14 @@ public class PlayerAnimation : MonoBehaviour
     private string playerJumped = "playerJumped";
 
     private string xVelocityPercent = "xVelocityPercent"; //how much of the max x momentum the player is currently moving at
+    
 
 
 
 
     [Header("Attacking Variables")]
     private string isAttacking = "isAttacking";
+    private string attackSpeedMultiplier = "attackSpeedMultiplier";
 
     [SerializeField] private float attackingWheightChangeSpeed = 8f;
     [SerializeField] private float startAttackAnimationSpeed = 3f;
@@ -68,6 +70,9 @@ public class PlayerAnimation : MonoBehaviour
         player.OnPlayerJumped += Player_OnJumpedEvent;
 
 
+        
+
+
     }
 
 
@@ -85,6 +90,8 @@ public class PlayerAnimation : MonoBehaviour
 
             animator.SetBool(isAttacking,player.GetPlayerIsAttacking());
 
+            
+
 
 
             UpdatePlayerOrientation(playerMovementVector);
@@ -99,9 +106,18 @@ public class PlayerAnimation : MonoBehaviour
 
 
     }
+    
+    public void SetAttackSpeed(float attackSpeed) {
+                animator.SetFloat(attackSpeedMultiplier, attackSpeed);
+    }
+
 
     private void UpdateAttacking()
     {
+
+        
+        
+
         float weightChange;  
         if (player.GetPlayerIsAttacking()) {
             weightChange = startAttackAnimationSpeed;

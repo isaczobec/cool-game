@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
 
     [SerializeField] private Animator animator;
+
     [SerializeField] private string isHovering = "isHovered";
 
 
@@ -15,7 +16,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData) {
         animator.SetBool(isHovering,true);
-
     }
     public void OnPointerExit(PointerEventData eventData) {
         animator.SetBool(isHovering,false);

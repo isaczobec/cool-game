@@ -17,8 +17,13 @@ public class SlashVFX : MonoBehaviour
     /// </summary>
     [SerializeField] VisualEffect visualEffect;
 
+    /// <summary>
+    /// remaining time until this gameobject destroys itself
+    /// </summary>
+    [SerializeField] float timeUntilDestroy;
+ 
     private void Start() {
-        visualEffect.Stop();
+        Slash();
     }
 
     public void Slash() {
@@ -33,7 +38,14 @@ public class SlashVFX : MonoBehaviour
 
         transform.parent = player.transform;
 
-        visualEffect.Play();
 
     }
+
+    private void Update() {
+        timeUntilDestroy -= Time.deltaTime;
+        if (timeUntilDestroy <= 0) {
+            Destroy(gameObject);
+        }
+    }
+
 }

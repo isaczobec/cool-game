@@ -28,4 +28,10 @@ public class ItemData : MonoBehaviour
     /// </summary>
     public float damageVariance;
     
+
+    /// <summary>
+    /// The multiplier by which the speed of this item's use animation is multiplied.
+    /// </summary>
+    public float useSpeedMultiplier = 1f;
+
 }

@@ -475,6 +475,7 @@ MonoBehaviour:
   MovementColliderLayerInt: 6
   holdingTransform: {fileID: 7639226142231191619}
   playerAnimationEvents: {fileID: 4411100915752822413}
+  playerAnimation: {fileID: 8350982516463690141}
   testWeaponPrefab: {fileID: 2666946130834263188, guid: d203b455caf71a14995be19f530a4b08,
     type: 3}
   holdingBone: {fileID: 7639226142231191619}
