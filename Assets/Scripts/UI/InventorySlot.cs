@@ -12,6 +12,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private string toggled = "toggled";
 
 
+    
+
+
+    /// <summary>
+    /// the inventory class this inventory slot belongs to.
+    /// </summary>
+    private InventoryUI inventoryUI;
+
+
 
     public bool waitingToBeToggled = false;
     /// <summary>
@@ -25,11 +34,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData) {
         animator.SetBool(isHovering,true);
+        inventoryUI.PlayInvSlotHoverSound();
     }
     public void OnPointerExit(PointerEventData eventData) {
         animator.SetBool(isHovering,false);
-
+        inventoryUI.PlayInvSlotHoverSound();
     }
+
+
+    
 
     private void Update() {
 
@@ -58,6 +71,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void Toggle() {
         animator.SetTrigger(toggled);
+    }
+
+    public void SetInventoryUI(InventoryUI inventoryUI) {
+        this.inventoryUI = inventoryUI;
+    }
+
+    public InventoryUI GetInventoryUI() {
+        return inventoryUI;
     }
 
 }

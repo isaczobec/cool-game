@@ -15,6 +15,8 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     [SerializeField] private Transform slotsOffsetTransform;
 
+
+
     [Header("Animation variables")]
     [SerializeField] private Animator animator;
 
@@ -26,6 +28,14 @@ public class InventoryUI : MonoBehaviour
     private List<GameObject> InventorySlotObjects = new List<GameObject>();
     private List<InventorySlot> InventorySlots = new List<InventorySlot>();
 
+    [Header("Sound variables")]
+    [SerializeField] private AudioManager audioManager;
+
+    [SerializeField] private string inventoryClose = "inventoryClose";
+    [SerializeField] private string inventoryOpen = "inventoryOpen";
+    [SerializeField] private string inventorySlotHover = "inventorySlotHover";
+
+
     [Header("Dimension Settings")]
     [SerializeField] private int DimensionX;
     [SerializeField] private int DimensionY;
@@ -34,6 +44,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private float gridSpacingX;
 
     private float slotScaleFactor;
+
+
+    private bool inventoryOn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +67,16 @@ public class InventoryUI : MonoBehaviour
         for (int x = 0; x < DimensionX; x++) {
             for (int y = 0; y < DimensionY; y++) {
 
-                GameObject inventorySlot = Instantiate(InventorySlotPrefab,inventoryParentObject.transform);
-                inventorySlot.transform.localPosition = new Vector3(x * gridSpacingX + slotsOffsetTransform.localPosition.x,y * gridSpacingY + slotsOffsetTransform.localPosition.y, 0f);
-                InventorySlotObjects.Add(inventorySlot);
+                GameObject inventorySlotObject = Instantiate(InventorySlotPrefab,inventoryParentObject.transform);
+                inventorySlotObject.transform.localPosition = new Vector3(x * gridSpacingX + slotsOffsetTransform.localPosition.x,y * gridSpacingY + slotsOffsetTransform.localPosition.y, 0f);
+                InventorySlotObjects.Add(inventorySlotObject);
 
-                InventorySlots.Add(inventorySlot.GetComponent<InventorySlot>());
+
+                InventorySlot invSlot = inventorySlotObject.GetComponent<InventorySlot>(); 
+                invSlot.SetInventoryUI(this);
+                InventorySlots.Add(invSlot);
+                
+
 
             }
 
@@ -70,7 +88,9 @@ public class InventoryUI : MonoBehaviour
 
     private void ToggleInventory(object sender, EventArgs e)
     {
-        Debug.Log("B");
+
+        inventoryOn = !inventoryOn;
+
         animator.SetTrigger(inventoryToggled);
 
         float cooldownTime = 1f;
@@ -88,6 +108,18 @@ public class InventoryUI : MonoBehaviour
             cooldownTime += 1f;
         }
 
+        if (inventoryOn) {
+        audioManager.Play(inventoryOpen);
+        } else {
+        audioManager.Play(inventoryClose);
+        }
+
     }
+
+
+    public void PlayInvSlotHoverSound() {
+        audioManager.Play(inventorySlotHover);
+    }
+
 
 }

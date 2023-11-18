@@ -153,6 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4258332925118799574}
   - component: {fileID: 8919314452355396281}
+  - component: {fileID: 7145480877435386778}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -199,10 +200,42 @@ MonoBehaviour:
   animator: {fileID: 3021692929351567217}
   inventoryToggled: inventoryToggled
   toggleTimeDifferenceBetweenSlots: 0.005
+  audioManager: {fileID: 7145480877435386778}
+  inventoryClose: inventoryClose
+  inventoryOpen: inventoryOpen
+  inventorySlotHover: inventorySlotHover
   DimensionX: 5
   DimensionY: 4
   gridSpacingY: 85
   gridSpacingX: 89
+--- !u!114 &7145480877435386778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088665436813906713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29c3ea95c375864c9d60e8ff2d30903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: inventorySlotHover
+    clip: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: inventoryOpen
+    clip: {fileID: 8300000, guid: 81133e95a009506448930b9cce0e3d44, type: 3}
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: inventoryClose
+    clip: {fileID: 8300000, guid: 74f8c7ed6ab18e9468e0ad49f8aa551e, type: 3}
+    volume: 1
+    pitch: 1
+    audioSource: {fileID: 0}
 --- !u!1 &7042483458001490148
 GameObject:
   m_ObjectHideFlags: 0
