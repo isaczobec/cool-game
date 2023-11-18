@@ -1,15 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-
+    
+    [Header("References")]
     [SerializeField] private GameObject InventorySlotPrefab;
     [SerializeField] private GameObject inventoryParentObject;
 
-    private List<GameObject> InventorySlotObjects = new List<GameObject>();
+    /// <summary>
+    /// Transform whichs position is added onto every inventory slot
+    /// </summary>
+    [SerializeField] private Transform slotsOffsetTransform;
 
+    [Header("Animation variables")]
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private string inventoryToggled = "inventoryToggled";
+
+    [SerializeField] private float toggleTimeDifferenceBetweenSlots = 0.01f;
+
+
+    private List<GameObject> InventorySlotObjects = new List<GameObject>();
+    private List<InventorySlot> InventorySlots = new List<InventorySlot>();
+
+    [Header("Dimension Settings")]
     [SerializeField] private int DimensionX;
     [SerializeField] private int DimensionY;
 
@@ -21,7 +38,13 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        PlayerInputHandler.Instance.inventoryToggled += ToggleInventory;
+
         CreateGrid();
+
+        
+
     }
 
 
@@ -32,8 +55,10 @@ public class InventoryUI : MonoBehaviour
             for (int y = 0; y < DimensionY; y++) {
 
                 GameObject inventorySlot = Instantiate(InventorySlotPrefab,inventoryParentObject.transform);
-                inventorySlot.transform.localPosition = new Vector3(x * gridSpacingX,y * gridSpacingY, 0f);
+                inventorySlot.transform.localPosition = new Vector3(x * gridSpacingX + slotsOffsetTransform.localPosition.x,y * gridSpacingY + slotsOffsetTransform.localPosition.y, 0f);
                 InventorySlotObjects.Add(inventorySlot);
+
+                InventorySlots.Add(inventorySlot.GetComponent<InventorySlot>());
 
             }
 
@@ -41,4 +66,28 @@ public class InventoryUI : MonoBehaviour
 
 
     }
+
+
+    private void ToggleInventory(object sender, EventArgs e)
+    {
+        Debug.Log("B");
+        animator.SetTrigger(inventoryToggled);
+
+        float cooldownTime = 1f;
+        foreach (InventorySlot invSlot in InventorySlots) {
+
+            if (!invSlot.waitingToBeToggled) {
+
+            invSlot.BeginToggleCountdown(cooldownTime * toggleTimeDifferenceBetweenSlots);
+            } else {
+                invSlot.CancelToggleCountdown();
+            }
+
+
+
+            cooldownTime += 1f;
+        }
+
+    }
+
 }

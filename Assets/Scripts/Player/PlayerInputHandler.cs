@@ -11,7 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
 
 
-    private PlayerMovementControls playerMovementControls;
+    private PlayerControls playerMovementControls;
 
     
     public event EventHandler<OnPlayerJumpEventArgs> onPlayerJumpEvent;
@@ -19,29 +19,40 @@ public class PlayerInputHandler : MonoBehaviour
         public bool startedJumping;
     }
 
+
+    public event EventHandler<EventArgs> inventoryToggled;
+
     public event EventHandler<bool> onPlayerAttackEvent; // the bool is if the player started attaqcking or not
+
+
+    public static PlayerInputHandler Instance {get; private set;}
     
     private void Awake() {
-        playerMovementControls = new PlayerMovementControls();
+        playerMovementControls = new PlayerControls();
         playerMovementControls.NormalMovement.Enable();
         playerMovementControls.NormalMovement.Jump.performed += JumpStarted;
         playerMovementControls.NormalMovement.Jump.canceled += JumpCanceled;
         playerMovementControls.NormalMovement.Attack.performed += AttackStarted;
         playerMovementControls.NormalMovement.Attack.canceled += AttackCanceled;
+
+
+        playerMovementControls.UI.Enable();
+        playerMovementControls.UI.Inventory.performed += InventoryToggled;
+
+        Instance = this;
         
 
     }
 
+    private void InventoryToggled(InputAction.CallbackContext context)
+    {
+        inventoryToggled?.Invoke(this, EventArgs.Empty);
+        Debug.Log("A");
+    }
 
     private void AttackStarted(InputAction.CallbackContext context)
     {
-
-        
-
         onPlayerAttackEvent?.Invoke(this,true);
-
-        
-        
     }
 
     private void AttackCanceled(InputAction.CallbackContext context)

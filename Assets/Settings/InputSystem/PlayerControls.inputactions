@@ -1,5 +1,5 @@
 {
-    "name": "PlayerMovementControls",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "NormalMovement",
@@ -108,6 +108,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "b4275225-a5d5-4d89-8477-75154f76a529",
+            "actions": [
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "e4bb75a2-00e9-401c-a062-64861e7bf1c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1aee05f2-297f-4c11-a778-d1bb41e2589c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
