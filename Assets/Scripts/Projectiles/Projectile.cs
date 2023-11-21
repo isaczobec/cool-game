@@ -52,6 +52,17 @@ public class Projectile : MonoBehaviour
     /// </summary>
     [SerializeField] public GameObject visualGameObject;
 
+
+    [Header("Audio")]
+
+    /// <summary>
+    /// The audiomanager used to play sounds for this projectile.
+    /// </summary>
+    [SerializeField] public AudioManager audioManager;
+
+    [SerializeField] private string defaultHitSoundName = "defaultHitSound";
+    [SerializeField] private string defaultHitSoundGroupName = "defaultHitSoundGroup";
+
     public event EventHandler<EventArgs> ProjectileHitSomething;
     
 
@@ -117,6 +128,10 @@ public class Projectile : MonoBehaviour
         ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
 
         CreateDamageNumber(hitInfo);
+
+        // play hit sound
+        audioManager.PlayRandom(defaultHitSoundGroupName);
+        audioManager.Play(defaultHitSoundName);
     }
 
     /// <summary>

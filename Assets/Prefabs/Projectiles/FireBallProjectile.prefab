@@ -164,6 +164,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6443942274827587633}
   m_SourcePrefab: {fileID: 100100000, guid: ccfadb6cd7f8b944b839a7619bb3b682, type: 3}
+--- !u!114 &424556289377509808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6111232355991802034, guid: ccfadb6cd7f8b944b839a7619bb3b682,
+    type: 3}
+  m_PrefabInstance: {fileID: 5848811151059775746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29c3ea95c375864c9d60e8ff2d30903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1232917440755224285 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4627190376390442975, guid: ccfadb6cd7f8b944b839a7619bb3b682,
@@ -206,6 +218,9 @@ MonoBehaviour:
   hitbox: {fileID: 1227714842745161196}
   invincibilityTimeOnHit: 0.3
   visualGameObject: {fileID: 1232917440755224285}
+  audioManager: {fileID: 424556289377509808}
+  defaultHitSoundName: defaultHitSound
+  defaultHitSoundGroupName: defaultHitSoundGroup
   travelSpeed: 25
   maxLifeTime: 10
 --- !u!1001 &8737960715034055366

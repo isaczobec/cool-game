@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
     /// Called when the player uses this item with their primary action.
     /// </summary>
     public virtual void PrimaryUse() {
-        audioManager.Play(useSoundName,Random.Range(0.8f,1.2f));
+        audioManager.Play(useSoundName);
 
     }
     /// <summary>

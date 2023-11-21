@@ -15,6 +15,19 @@ public class Sound
     [Range(0.1f,3f)]
     public float pitch = 1f;
 
+    /// <summary>
+    /// Which level of pitch randomization this sound will play with. 0 = no randomization.
+    /// </summary>
+    [Range(0f,1f)]
+    public float pitchRandomnessLevel = 0;
+
+    [Range(0f,1f)]
+    public float spatialBlend = 1f;
+
+    [Range(0f,1f)]
+    public float dopplerLevel = 0f;
+
+
 
     [HideInInspector]
     public AudioSource audioSource;

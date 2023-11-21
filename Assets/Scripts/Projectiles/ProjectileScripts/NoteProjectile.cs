@@ -13,6 +13,11 @@ public class NoteProjectile : Projectile
     [SerializeField] private float maxLifeTime = 10;
 
 
+    [Header("Sound Variables")]
+    [SerializeField] private string dizzySoundsString = "dizzySounds";
+    [SerializeField] private float chanceToPlayDizzySounds = 0.2f;
+
+
     
 
     
@@ -47,6 +52,8 @@ public class NoteProjectile : Projectile
         base.HitSomething(hitInfo);
         velocity = Vector2.zero;
         hitbox.DisableHitbox();
+
+        audioManager.PlayRandom(dizzySoundsString,chanceToPlay: chanceToPlayDizzySounds);
         
     }
 
