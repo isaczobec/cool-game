@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  scaleFactor: 1
+  scaleFactor: 3
   visualEffect: {fileID: 8739915652197514667}
+  timeUntilDestroy: 0
 --- !u!1 &3423487985118807278
 GameObject:
   m_ObjectHideFlags: 0

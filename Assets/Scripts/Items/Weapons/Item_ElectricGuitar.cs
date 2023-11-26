@@ -32,8 +32,9 @@ public class Item_ElectricGuitar : Item
         GameObject starBurst = Instantiate(starBurstVFXObject,GetHoldingTransform());
         starBurst.transform.localPosition = Vector3.zero;
         starBurst.transform.parent = null;
-        starBurst.transform.localScale = Vector3.one * 3;
-        starBurst.GetComponent<StarBurstVFX>().Setup(); 
+
+        StarBurstVFX starBurstVFX = starBurst.GetComponent<StarBurstVFX>();
+        starBurstVFX.Setup(MouseInfo.GetPlayerMouseAngleNew()); 
         
         
         

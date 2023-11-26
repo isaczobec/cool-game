@@ -6,28 +6,24 @@ using UnityEngine.UIElements;
 
 public class StarBurstVFX : MonoBehaviour
 {
+
+    [SerializeField] public float scaleFactor = 1f;
+
+    [SerializeField] private GameObject vfxObject;
+
     // Start is called before the first frame update
-    public void Setup()
+    public void Setup(float angle)
     {
-        Vector3 origDirVec = MouseInfo.GetPlayerMouseDirectionVector();
-        Vector3 dirVec = MouseInfo.GetPlayerMouseDirectionVector();
-
-        if (dirVec.x >= 0) {
-            dirVec = new Vector3(dirVec.y,-dirVec.x,0f);
-        } else {
-            dirVec = new Vector3(-dirVec.y,dirVec.x,0f);
-        }
 
 
-        Vector3 lookAtVec = transform.position + dirVec;
-        transform.LookAt(lookAtVec);
+        vfxObject.SetActive(true);
 
         
-        if (origDirVec.y <= 0) {
-            
-            transform.rotation = Quaternion.Inverse(transform.rotation);
-        }
-        
+        Debug.Log(new Vector3(0,0,angle));
+
+        transform.localScale = Vector3.one * scaleFactor;
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,angle));
+
     }
 
     

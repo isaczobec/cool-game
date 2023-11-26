@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,6 +45,40 @@ public class MouseInfo : MonoBehaviour
         return mouseAngleDegrees;
 
     }
+    public static float GetPlayerMouseAngleNew() { //returns the angle which the player is pointing the mouse
+
+        Vector3 cursorPosition = Mouse.current.position.ReadValue();
+        Vector3 adjustedCursorPosition = new Vector3(cursorPosition.x - Screen.width/2, cursorPosition.y - Screen.height/2, 0);
+
+        float mouseAngleDegrees = CorrectAtanForRotation(adjustedCursorPosition.x,adjustedCursorPosition.y);
+
+
+
+        return mouseAngleDegrees;
+
+    }
+
+    public static float CorrectAtanForRotation(float x, float y, bool flipY = false) {
+        float degrees = Mathf.Atan(y/x) * Mathf.Rad2Deg;
+
+        if (flipY) {
+            y = -1*y;
+        }
+
+
+        if (x < 0 && y > 0) {
+            degrees += 180f;
+        } else if (x < 0 && y < 0) {
+            degrees -= 180f;
+        }
+
+        
+        return degrees;
+
+        
+
+
+    } 
 
     /// <summary>
     /// Gets normalized direction vector for the player's mouse cursor. 

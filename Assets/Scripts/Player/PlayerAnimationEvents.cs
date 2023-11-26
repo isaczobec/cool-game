@@ -8,8 +8,15 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     [SerializeField] private Player player;
 
+    [SerializeField] private FootStepVFX footStepVFX;
+
+
     public event EventHandler<EventArgs> playerUsedItem; //placeholder, ska förmodligen ha med något mer här sen
     public event EventHandler<EventArgs> playerStoppedAttacking; 
+
+    [Header("Audio")]
+    [SerializeField] private AudioManager playerAudioManager;
+    [SerializeField] private string gravelFootsteps = "gravelFootsteps";
 
     public void UsedItem() {
         playerUsedItem?.Invoke(this, EventArgs.Empty);
@@ -22,6 +29,15 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void PlayerEndedAttack() {
         playerStoppedAttacking?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void LeftFootstep() {
+        footStepVFX.CreateFootStepVFX(leftFoot: true);
+        playerAudioManager.PlayRandom(gravelFootsteps, randomPitchFactor: 0.1f);
+    }
+    public void RightFootstep() {
+        footStepVFX.CreateFootStepVFX(leftFoot: false);
+        playerAudioManager.PlayRandom(gravelFootsteps, randomPitchFactor: 0.1f);
     }
 
 }
