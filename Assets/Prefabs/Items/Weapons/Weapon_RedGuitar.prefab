@@ -433,6 +433,8 @@ MonoBehaviour:
     type: 3}
   slashVFX: {fileID: 5416154923823902010}
   slashVFXObject: {fileID: 7988122963008286031}
+  starBurstVFXObject: {fileID: 789162858280147642, guid: cff9da0975be30943819e08c83d4bb3a,
+    type: 3}
 --- !u!114 &3466526808971610100
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class SlashVFX : MonoBehaviour
 
         transform.parent = player.transform;
 
-
+        
     }
 
     private void Update() {

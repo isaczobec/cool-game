@@ -9,6 +9,7 @@ public class Item_ElectricGuitar : Item
 
     [SerializeField] private SlashVFX slashVFX;
     [SerializeField] private GameObject slashVFXObject;
+    [SerializeField] private GameObject starBurstVFXObject;
     
 
 
@@ -26,6 +27,15 @@ public class Item_ElectricGuitar : Item
         //slashVFX.Slash();
         GameObject slash = Instantiate(slashVFXObject);
         slash.SetActive(true);
+
+        // spawn a starburst vfx
+        GameObject starBurst = Instantiate(starBurstVFXObject,GetHoldingTransform());
+        starBurst.transform.localPosition = Vector3.zero;
+        starBurst.transform.parent = null;
+        starBurst.transform.localScale = Vector3.one * 3;
+        starBurst.GetComponent<StarBurstVFX>().Setup(); 
+        
+        
         
         
     }
