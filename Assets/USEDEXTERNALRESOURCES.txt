@@ -10,3 +10,6 @@ https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271
 FONTS
 TT-ShinGo-Medium Medium from https://fontsisland.com/font/tt-shingo-medium-medium
 ^^^ Not ok to use comercially, buy a license or replace it with something free
+
+TEXTURES
+Leaves - https://opengameart.org/content/cool-leaves-textures
