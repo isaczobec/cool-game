@@ -31,7 +31,15 @@ public class Enemy : MonoBehaviour, IEntity
         player = Player.Instance;
 
         health = maxHealth;
+
+        InitializeEnemy();
         
+    }
+
+    /// <summary>
+    /// Base class method that is called in the start method.
+    /// </summary>
+    public virtual void InitializeEnemy() {
     }
 
     // Update is called once per frame

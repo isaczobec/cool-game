@@ -6,15 +6,25 @@ public class EnemyVisual : MonoBehaviour
 {
     //class with a bunch of methods that are used for a bunch of enemies
 
+    
+
     [SerializeField] public Enemy enemy;
     public Player player;
 
     private void Start() {
         player = Player.Instance;
+        InitializeVisual();
+    }
+
+    /// <summary>
+    /// Base class method that is ran when the script is started.
+    /// </summary>
+    public virtual void InitializeVisual() {
+
     }
 
 
-    public void FacePlayer(float spinSpeed, float minLerpAngle, float rightAngle = 90f, float leftAngle = 90f) {
+    public void FacePlayer(float spinSpeed, float minLerpAngle, float rightAngle = 90, float leftAngle = 270f) {
 
         Vector3 targetRotation;
         Vector3 oldRotation = transform.rotation.eulerAngles;
@@ -35,5 +45,8 @@ public class EnemyVisual : MonoBehaviour
         } */ //no idea why this doesnt work
         
     }
+
+
+
 
 }

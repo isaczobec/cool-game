@@ -10,6 +10,18 @@ public class SlashVFX : MonoBehaviour
     /// the item that produces this slash.
     /// </summary>
     [SerializeField] private Item item;
+
+    
+    /// <summary>
+    /// the bone that this slash will parent to
+    /// </summary>
+    [SerializeField] private Transform holdingBone;
+
+    /// <summary>
+    /// The transform the slash will be parented to after being parented to the holding bone
+    /// </summary>
+    [SerializeField] private Transform mainTransform;
+
     [SerializeField] private float scaleFactor;
 
     /// <summary>
@@ -28,15 +40,29 @@ public class SlashVFX : MonoBehaviour
 
     public void Slash() {
 
-        Player player = item.GetPlayer();
+        Player player;
 
-        transform.parent = player.GetHoldingBone();
+        if (item != null) {
+
+            player = item.GetPlayer();
+            transform.parent = player.GetHoldingBone();
+
+        } else {
+            transform.parent = holdingBone;
+        }
+
 
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = new Vector3(scaleFactor,scaleFactor,scaleFactor);
 
-        transform.parent = player.transform;
+
+        if (item != null) {
+
+        transform.parent = item.GetPlayer().transform;
+        } else {
+            transform.parent = mainTransform;
+        }
 
         
     }
