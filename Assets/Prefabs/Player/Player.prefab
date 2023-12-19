@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 751186315615386755}
   - component: {fileID: 8035993062039692478}
   - component: {fileID: 1357393089599295678}
+  - component: {fileID: 762233070674074845}
   m_Layer: 7
   m_Name: HurtBox
   m_TagString: Untagged
@@ -99,6 +100,21 @@ MonoBehaviour:
   isPlayer: 1
   player: {fileID: 6231046335246940828}
   enemy: {fileID: 0}
+--- !u!114 &762233070674074845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890898181403468840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1296d9ed05a626d4d992d22cdac472df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactZoneLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1189145850823018650
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +227,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8726187817388264777}
+  - {fileID: 7320507364772823621}
   m_Father: {fileID: 7137960658632945514}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9163645902791815970
@@ -345,8 +362,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.1400001, z: 55.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7320507364772823621}
+  m_Children: []
   m_Father: {fileID: 5472977245268144200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &931273966187980362
@@ -388,7 +404,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 68ec5b4e5adee60488f68a998cc5ed18, type: 2}
   m_TargetDisplay: 0
@@ -416,8 +432,7 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras:
-  - {fileID: 7953981481539653671}
+  m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -568,11 +583,11 @@ Transform:
   m_GameObject: {fileID: 8385934814008522832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1400001, z: 55.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8726187817388264777}
+  m_Father: {fileID: 5472977245268144200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7953981481539653671
 Camera:
@@ -583,8 +598,8 @@ Camera:
   m_GameObject: {fileID: 8385934814008522832}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -615,7 +630,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 256
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 68ec5b4e5adee60488f68a998cc5ed18, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: ee2261e4d00e25546abaa22bec9e97bb, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -640,7 +655,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 1
+  m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -648,7 +663,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

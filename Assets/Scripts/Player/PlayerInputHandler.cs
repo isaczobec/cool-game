@@ -21,6 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     public event EventHandler<EventArgs> inventoryToggled;
+    public event EventHandler<EventArgs> interact;
 
     public event EventHandler<bool> onPlayerAttackEvent; // the bool is if the player started attaqcking or not
 
@@ -38,16 +39,21 @@ public class PlayerInputHandler : MonoBehaviour
 
         playerMovementControls.UI.Enable();
         playerMovementControls.UI.Inventory.performed += InventoryToggled;
+        playerMovementControls.UI.Interact.performed += InteractPressed;
 
         Instance = this;
         
 
     }
 
+    private void InteractPressed(InputAction.CallbackContext context)
+    {
+        interact?.Invoke(this, EventArgs.Empty);
+    }
+
     private void InventoryToggled(InputAction.CallbackContext context)
     {
         inventoryToggled?.Invoke(this, EventArgs.Empty);
-        Debug.Log("A");
     }
 
     private void AttackStarted(InputAction.CallbackContext context)

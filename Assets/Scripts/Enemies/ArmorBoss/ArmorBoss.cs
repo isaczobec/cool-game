@@ -1,4 +1,7 @@
 using System;
+using TMPro;
+using UnityEditor.Rendering.Fullscreen.ShaderGraph;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +22,12 @@ public class ArmorBoss : Enemy
     [Header("Other")]
     [SerializeField] private float difficultyFactor = 0.5f;
     [SerializeField] private ArmorBossAnimationEvents armorBossAnimationEvents;
+
+    [SerializeField] private InteractZone talkInteractZone;
+
+    private bool fullScale = false; // if the boss has reached full scale at the start of the fight
+    [SerializeField] private float scaleUpSpeed = 5f;
+    [SerializeField] private float ScaleUpToWhenFightBegins = 2f; // what the scale of the boss will be when the fight begins
     
 
     /// <summary>
@@ -34,6 +43,7 @@ public class ArmorBoss : Enemy
     public string state;
     public string zoomMovingState = "ZOOMMOVING";
     public string soulAttackState = "SOULATTACK";
+    public string unAgressiveState = "UNAGRESSIVE";
 
 
     /// <summary>
@@ -53,15 +63,39 @@ public class ArmorBoss : Enemy
         armorBossAnimationEvents.fireSoulProjectile += AnimationEvent_FireSoulProjectile;
 
         phase = firstPhase;
-        state = zoomMovingState;
+        state = unAgressiveState;
 
         moveDestination = GetRandomZoomPosition();
+
+        talkInteractZone.InteractZoneClicked += TalkedWith;
     }
 
+    private void TalkedWith(object sender, EventArgs e)
+    {
+        state = zoomMovingState; // initiate the bossbattle
+        ArmorBossChangedState?.Invoke(this, zoomMovingState);
+        talkInteractZone.SetZoneEnabled(false);
+
+    }
 
     public override void HandleAI() {
         if (state == zoomMovingState) {
             HandleZooming(moveDestination);
+        }
+
+        // scale up to full size
+        if (fullScale == false && state != unAgressiveState) {HandleStartScaleUp();} 
+    }
+
+    /// <summary>
+    /// Scales up the boss when the fight begins
+    /// </summary>
+    private void HandleStartScaleUp() {
+        
+        transform.localScale = transform.localScale + Time.deltaTime * scaleUpSpeed * Vector3.one;
+        if (transform.localScale.x >= ScaleUpToWhenFightBegins) {
+            transform.localScale = new Vector3(ScaleUpToWhenFightBegins,ScaleUpToWhenFightBegins,ScaleUpToWhenFightBegins);
+            fullScale = true;
         }
     }
 
