@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2450002044183306693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8729965683839041105}
+    m_Modifications:
+    - target: {fileID: 2380709951120615322, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135405205706692859, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710653
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710707
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532309423496621394, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_Name
+      value: Trail
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5974275734005457689, guid: f3ce2111f5c9650498a5ad4aac5a1c06, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7323789748721267201, guid: f3ce2111f5c9650498a5ad4aac5a1c06, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f3ce2111f5c9650498a5ad4aac5a1c06, type: 3}
+--- !u!4 &948788276003218160 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+    type: 3}
+  m_PrefabInstance: {fileID: 2450002044183306693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2870076009045234343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,6 +419,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6573947307254099260}
+    - targetCorrespondingSourceObject: {fileID: 6845424593853323683, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 948788276003218160}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5385562339658196779, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
@@ -382,7 +472,7 @@ MonoBehaviour:
   player: {fileID: 0}
   maxHealth: 20000
   baseDamage: 200
-  soulProjectile: {fileID: 7733447657660921148, guid: 30d8cfd91f384dd408340ef25ef57605,
+  soulProjectile: {fileID: 7733447657660921148, guid: bd780668233f3ff4e9ca079804bb316d,
     type: 3}
   movementSpeedFactor: 4
   zoomMovementSpeedFactor: 1

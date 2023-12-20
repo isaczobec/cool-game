@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Fullscreen.ShaderGraph;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
@@ -28,6 +29,11 @@ public class ArmorBoss : Enemy
     private bool fullScale = false; // if the boss has reached full scale at the start of the fight
     [SerializeField] private float scaleUpSpeed = 5f;
     [SerializeField] private float ScaleUpToWhenFightBegins = 2f; // what the scale of the boss will be when the fight begins
+
+    [Header("Attack Variables")]
+
+    [SerializeField] private float soulProjectileAngleDifference = 35f;
+    [SerializeField] private int soulProjectileBurstAmount = 5;
     
 
     /// <summary>
@@ -141,7 +147,7 @@ public class ArmorBoss : Enemy
     }
     private void AnimationEvent_FireSoulProjectile(object sender, System.EventArgs e)
     {
-        FireSoulProjectile();
+        FireSoulProjectileBurst(soulProjectileBurstAmount,soulProjectileAngleDifference);
     }
 
     private void AnimationEvent_StoppedAttacking(object sender, System.EventArgs e)
@@ -153,12 +159,44 @@ public class ArmorBoss : Enemy
         ArmorBossChangedState?.Invoke(this, zoomMovingState);
     }
 
-    private void FireSoulProjectile() {
+
+    /// <summary>
+    /// Fires a simaltaneous burst of soul projectiles against the player
+    /// </summary>
+    private void FireSoulProjectileBurst(int burstAmount, float angleDifference) {
+
+        Vector3 playerDir = Player.Instance.transform.position - transform.position;
+
+
+
+        for (int i=0; i<burstAmount;i++) {
+            
+
+            Vector3 dir = Quaternion.AngleAxis(i * angleDifference - burstAmount*angleDifference/2,Vector3.forward) * playerDir;
+            
+            
+            FireSoulProjectile(dir);
+        }
+
+
+        
+        
+
+    }
+
+
+    /// <summary>
+    /// Fire a single soul projectile in a direction vector
+    /// </summary>
+    /// <param name="direction"></param>
+    private void FireSoulProjectile(Vector3 direction) {
+        
         GameObject projectileObject = Instantiate(soulProjectile);
-        FireBallProjectile projectile = projectileObject.GetComponent<FireBallProjectile>();
+        SoulProjectile projectile = projectileObject.GetComponent<SoulProjectile>();
         projectile.SetOwner(null, this);
         projectile.ownerEntity = this;
-        projectile.Initialize();
+        projectile.Initialize(direction);
+
     }
 
 

@@ -97,7 +97,7 @@ Material:
         a: 1}
     - _HealthFullyLostTopColor: {r: 0.31132078, g: 0.0014684978, b: 0.0014684978,
         a: 1}
-    - _HealthSlider: {r: -0.06859908, g: 0, b: 0, a: 0}
+    - _HealthSlider: {r: -0.06852529, g: 0, b: 0, a: 0}
     - _LostHealthColor: {r: 1, g: 0.6034185, b: 0, a: 1}
     - _LostHealthColor2: {r: 1, g: 0.99997777, b: 0, a: 1}
     - _PlayerTextureOffset: {r: -3.53, g: -0.21, b: 0, a: 0}
