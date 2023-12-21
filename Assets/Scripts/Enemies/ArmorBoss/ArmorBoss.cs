@@ -34,7 +34,14 @@ public class ArmorBoss : Enemy
 
     [SerializeField] private float soulProjectileAngleDifference = 35f;
     [SerializeField] private int soulProjectileBurstAmount = 5;
+
+    [Header("Sound Variables")]
+
+    [SerializeField] private SoundTrack phase1Music;
     
+
+    [Header("public Variables")]
+
 
     /// <summary>
     /// Which phase the boss is currently in
@@ -81,6 +88,8 @@ public class ArmorBoss : Enemy
         state = zoomMovingState; // initiate the bossbattle
         ArmorBossChangedState?.Invoke(this, zoomMovingState);
         talkInteractZone.SetZoneEnabled(false);
+
+        phase1Music.Play();
 
     }
 

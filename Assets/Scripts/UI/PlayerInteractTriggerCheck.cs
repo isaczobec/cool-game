@@ -40,14 +40,18 @@ public class PlayerInteractTriggerCheck : MonoBehaviour
         if (interactZoneLayerMask == (interactZoneLayerMask | (1 << otherCollider.transform.gameObject.layer)))
         {// if the collided with object is on the same layer as this one
 
-            if (otherCollider.gameObject.TryGetComponent<InteractZone>(out InteractZone interactZone))
+            if (otherCollider.gameObject.TryGetComponent<IZone>(out IZone zone))
             {
                 if (entered) {
-                    interactZone.PlayerEntered();
-                    currentInteractZone = interactZone;
+                    zone.PlayerEntered();
+                    if (zone.GetType() == typeof(InteractZone)) {
+                        currentInteractZone = (InteractZone)zone;
+                    }
                 } else {
-                    interactZone.PlayerLeft();
-                    currentInteractZone = null;
+                    zone.PlayerLeft();
+                    if (zone.GetType() == typeof(InteractZone)) {
+                        currentInteractZone = null;
+                    }
                 }
             }
 

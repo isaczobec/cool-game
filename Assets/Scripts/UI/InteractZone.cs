@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InteractZone : MonoBehaviour
+public class InteractZone :  MonoBehaviour, IZone
 {
 
     /// <summary>
@@ -19,6 +19,10 @@ public class InteractZone : MonoBehaviour
 
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
+
+    [Header("Optional Variables")]
+    [SerializeField] private bool switchScene; // if this interactzone should switch to another scene when pressed
+    [SerializeField] private string sceneName;
 
 
     [Header("Animation Variables, reused inv animations")]
@@ -48,8 +52,14 @@ public class InteractZone : MonoBehaviour
 
             }
 
+            if (switchScene) {SwitchScene();}
+
         }
 
+    }
+
+    private void SwitchScene() {
+        LevelManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>

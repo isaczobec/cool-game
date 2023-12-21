@@ -28,6 +28,9 @@ public class Sound
     public float dopplerLevel = 0f;
 
 
+    [SerializeField] public bool loop;
+
+
 
     [HideInInspector]
     public AudioSource audioSource;
