@@ -29,6 +29,8 @@ public class DialougeBubble : MonoBehaviour
 
     private List<DialougeLine> dialougeLineQueue = new List<DialougeLine>(); 
 
+    
+
 
     private bool activated = false;
 
@@ -119,6 +121,8 @@ public class DialougeBubble : MonoBehaviour
 
         
 
+        
+
     
 
 
@@ -170,28 +174,38 @@ public class DialougeBubble : MonoBehaviour
     private void NextDialougeLine()
     {
 
-        if (currentDialougeEventTag != "") {
-            DialougeLineFinnished?.Invoke(this, currentDialougeEventTag);
+        if (activated == true) {
+
+            if (currentDialougeEventTag != "") {
+                DialougeLineFinnished?.Invoke(this, currentDialougeEventTag);
+            }
+
+            // disable the bubble as this was the last dialouge line
+            if (dialougeLineQueue.Count == 1 && activated == true)
+            {
+                CloseDialougeBox();
+
+            }
+            else if (dialougeLineQueue.Count > 1)
+            { // play the next dialouge box
+                PlayDialougeLine(dialougeLineQueue[1]);
+            }
+            if (dialougeLineQueue.Count != 0)
+            {
+                dialougeLineQueue.RemoveAt(0);
+            } // remove the current dialouge box from the queue 
         }
 
-        // disable the bubble as this was the last dialouge line
-        if (dialougeLineQueue.Count == 1 && activated == true)
-        {
+    }
 
-            activated = false;
-            animator.SetTrigger(uiBoxDisabled);
-            audioManager.Play(bubbleDisappearSoundName);
-            Player.Instance.SetLetPlayerMove(true);
+    private void CloseDialougeBox()
+    {
+        currentDialougeEventTag = "";
 
-        }
-        else if (dialougeLineQueue.Count > 1)
-        { // play the next dialouge box
-            PlayDialougeLine(dialougeLineQueue[1]);
-        }
-        if (dialougeLineQueue.Count != 0)
-        {
-            dialougeLineQueue.RemoveAt(0);
-        } // remove the current dialouge box from the queue 
+        activated = false;
+        animator.SetTrigger(uiBoxDisabled);
+        audioManager.Play(bubbleDisappearSoundName);
+        Player.Instance.SetLetPlayerMove(true);
     }
 
 

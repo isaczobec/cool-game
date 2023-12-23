@@ -143,28 +143,32 @@ public class PlayerAnimation : MonoBehaviour
 
     private void UpdatePlayerOrientation(Vector2 movementVector) {
 
-        if (player.GetPlayerIsAttacking()) { // if the player is currently attacking, change their direction to whichever way they are attacking
+        if (Player.Instance.GetLetPlayerMove()) {
 
-            Vector3 slerpDirection;
-            if (MouseInfo.GetMousePixelPosition().x > 0) {
-                slerpDirection = Vector3.right;
-            } else {
+            if (player.GetPlayerIsAttacking()) { // if the player is currently attacking, change their direction to whichever way they are attacking
 
-                slerpDirection = Vector3.left;
+                Vector3 slerpDirection;
+                if (MouseInfo.GetMousePixelPosition().x > 0) {
+                    slerpDirection = Vector3.right;
+                } else {
+
+                    slerpDirection = Vector3.left;
+                }
+
+            visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,slerpDirection,Time.deltaTime * turnAroundSpeed);
+
+
+            } else { // else change their direction to the direction they are moving
+
+
+
+            Vector3 xInputVector = movementVector * Vector3.right;
+
+            visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,xInputVector,Time.deltaTime * turnAroundSpeed);
+
             }
-
-        visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,slerpDirection,Time.deltaTime * turnAroundSpeed);
-
-
-        } else { // else change their direction to the direction they are moving
-
-
-
-        Vector3 xInputVector = movementVector * Vector3.right;
-
-        visualParentTransform.forward = Vector3.Slerp(visualParentTransform.forward,xInputVector,Time.deltaTime * turnAroundSpeed);
-
         }
+
     }
 
 

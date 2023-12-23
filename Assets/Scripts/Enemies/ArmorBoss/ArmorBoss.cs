@@ -81,11 +81,15 @@ public class ArmorBoss : Enemy
 
         moveDestination = GetRandomZoomPosition();
 
-        DialougeBubble.Instance.DialougeLineFinnished += TalkedFinnished;
+        //DialougeBubble.Instance.DialougeLineFinnished += TalkedFinnished;
+        talkInteractZone.InteractZoneClicked += TalkedFinnished;
     }
 
+    /*
     private void TalkedFinnished(object sender, string tag)
     {
+
+
 
         if (tag == beginFightDialougeTag) {
             state = zoomMovingState; // initiate the bossbattle
@@ -96,7 +100,20 @@ public class ArmorBoss : Enemy
         } 
 
 
-    }
+    } */
+
+    
+    private void TalkedFinnished(object sender, EventArgs tag)
+    {
+
+            state = zoomMovingState; // initiate the bossbattle
+            ArmorBossChangedState?.Invoke(this, zoomMovingState);
+            talkInteractZone.SetZoneEnabled(false);
+
+            phase1Music.Play();
+
+
+    } 
 
     public override void HandleAI() {
         if (state == zoomMovingState) {

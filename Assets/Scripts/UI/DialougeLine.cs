@@ -26,6 +26,9 @@ public class DialougeLine
     [SerializeField] public float timeUntilAutoProceed = 0f;
 
     [SerializeField] public string dialougeEventTag = "";
+
+
+    [SerializeField] public Transform cameraPositionTransform;
     
 
     
