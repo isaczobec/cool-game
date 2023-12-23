@@ -94,6 +94,8 @@ public class Player : MonoBehaviour, IEntity
 
     private Item equipedItem; // the item the player is currently holding
 
+    private bool letPlayerMove = true;
+
 
     public static Player Instance {get; private set;}
 
@@ -155,7 +157,10 @@ public class Player : MonoBehaviour, IEntity
 
     private void UpdateVelocity() {
 
-        Vector3 inputVector = playerInputHandler.GetPlayerMovementVector();
+        Vector3 inputVector = Vector3.zero;
+        if (letPlayerMove) {
+            inputVector = playerInputHandler.GetPlayerMovementVector();
+        }
 
 
         if (inputVector.x != 0) {
@@ -334,7 +339,7 @@ public class Player : MonoBehaviour, IEntity
 
     private void OnJumpEvent(object sender, PlayerInputHandler.OnPlayerJumpEventArgs e)
     {
-        if (e.startedJumping && isGrounded == true) {
+        if (e.startedJumping && isGrounded == true && letPlayerMove) {
 
         OnPlayerJumped?.Invoke(this,EventArgs.Empty);
         RemoveGroundLock(makeVelocityZero: true);
@@ -440,6 +445,14 @@ public class Player : MonoBehaviour, IEntity
 
     public Transform GetTransform() {
         return transform;
+    }
+
+    
+    public void SetLetPlayerMove(bool allow) {
+        letPlayerMove = allow;
+    }
+    public bool GetLetPlayerMove() {
+        return letPlayerMove;
     }
 
     

@@ -150,7 +150,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""a2c7e4b0-abb0-47f5-9086-40561717b522"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

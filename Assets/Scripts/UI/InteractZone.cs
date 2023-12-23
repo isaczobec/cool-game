@@ -23,6 +23,12 @@ public class InteractZone :  MonoBehaviour, IZone
     [Header("Optional Variables")]
     [SerializeField] private bool switchScene; // if this interactzone should switch to another scene when pressed
     [SerializeField] private string sceneName;
+    [SerializeField] private bool playDialouge; // if this interactzone should play dialouge when interacted with
+    [SerializeField] private string dialougeLineGroupName; // the name of the dialouge group that should be played
+
+    private DialougeLineGroups dialougeLineGroups;
+
+
 
 
     [Header("Animation Variables, reused inv animations")]
@@ -39,6 +45,11 @@ public class InteractZone :  MonoBehaviour, IZone
 
     private void Start() {
         textMeshPro.text = interactText;
+
+        // set the dialouge groups
+        if (playDialouge) {
+            dialougeLineGroups = GetComponent<DialougeLineGroups>();
+        }
     }
 
     public void ZoneInteractedWith() {
@@ -54,8 +65,14 @@ public class InteractZone :  MonoBehaviour, IZone
 
             if (switchScene) {SwitchScene();}
 
+            if (playDialouge) {PlayDialouge();}
+
         }
 
+    }
+
+    private void PlayDialouge() {
+        dialougeLineGroups.QueueDialougeLines(dialougeLineGroupName,playInstantly: true);
     }
 
     private void SwitchScene() {

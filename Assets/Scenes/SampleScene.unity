@@ -293,6 +293,7 @@ Transform:
   - {fileID: 1438335900}
   - {fileID: 680958726}
   - {fileID: 183105213}
+  - {fileID: 827224023}
   - {fileID: 1549259}
   - {fileID: 1429704403}
   m_Father: {fileID: 0}
@@ -375,6 +376,181 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d0a3a34cb910f24cbb416230c3d1cd4, type: 3}
+--- !u!1001 &827224022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 695409393}
+    m_Modifications:
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: sceneName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: switchScene
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: interactText
+      value: Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: playDialouge
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: dialougeLineGroupName
+      value: chicanery
+      objectReference: {fileID: 0}
+    - target: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_Name
+      value: InteractZone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -14.194
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061256766016516961, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 12.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061256766016516961, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6.49
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 827224025}
+  m_SourcePrefab: {fileID: 100100000, guid: 553a87e5fa983fa4c976d33e8fff6f43, type: 3}
+--- !u!4 &827224023 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+    type: 3}
+  m_PrefabInstance: {fileID: 827224022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &827224024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+    type: 3}
+  m_PrefabInstance: {fileID: 827224022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &827224025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827224024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a300166b413f0141ba2a8f6c8ba462c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogeLineGroups:
+  - dialougeGroupName: chicanery
+    dialougeLines:
+    - text: I don't know walt, you've been seeming sus lately... It's almost like
+        we've got an imposter among us... You sussy baka!!!
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.05
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      speakerImage: {fileID: 0}
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+    - text: If you truly do not know who I am...
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.74
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      speakerImage: {fileID: 0}
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+    - text: Then maybe your best choice...
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.11
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      speakerImage: {fileID: 0}
+      freezePlayerMovement: 1
+      skippable: 0
+      timeUntilAutoProceed: 1
+    - text: Is to thread lightly.
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 40
+      scrollSpeed: 0.14
+      color: {r: 1, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: 7bc1607ad7aa86444adfe62b0fd42705, type: 3}
+      speakerImage: {fileID: 0}
+      freezePlayerMovement: 1
+      skippable: 0
+      timeUntilAutoProceed: 1.5
 --- !u!1001 &1429704402
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -189,13 +189,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: toggled
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -403,7 +403,7 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3952044380654418609}
-    m_Position: {x: 510, y: 240, z: 0}
+    m_Position: {x: 520, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 922665474468867236}
     m_Position: {x: 260, y: 110, z: 0}
@@ -412,10 +412,10 @@ AnimatorStateMachine:
     m_Position: {x: 10, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7031397305031014299}
-    m_Position: {x: 270, y: 330, z: 0}
+    m_Position: {x: 230, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8285577468760892592}
-    m_Position: {x: 50, y: 420, z: 0}
+    m_Position: {x: 60, y: 420, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

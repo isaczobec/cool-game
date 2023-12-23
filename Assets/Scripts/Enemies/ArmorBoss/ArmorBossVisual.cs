@@ -45,6 +45,7 @@ public class ArmorBossVisual : EnemyVisual
     /// Toggles the trigger event with the same string name as the armorbossstate.
     /// </summary>
     private void SetAnimatorState(object sender, string armorBossState) {
+
         armorBossAnimator.SetTrigger(armorBossState);
     }
     

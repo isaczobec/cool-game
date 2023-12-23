@@ -25,6 +25,7 @@ public class ArmorBoss : Enemy
     [SerializeField] private ArmorBossAnimationEvents armorBossAnimationEvents;
 
     [SerializeField] private InteractZone talkInteractZone;
+    [SerializeField] private string beginFightDialougeTag = "beginFightDialougeTag";
 
     private bool fullScale = false; // if the boss has reached full scale at the start of the fight
     [SerializeField] private float scaleUpSpeed = 5f;
@@ -80,16 +81,20 @@ public class ArmorBoss : Enemy
 
         moveDestination = GetRandomZoomPosition();
 
-        talkInteractZone.InteractZoneClicked += TalkedWith;
+        DialougeBubble.Instance.DialougeLineFinnished += TalkedFinnished;
     }
 
-    private void TalkedWith(object sender, EventArgs e)
+    private void TalkedFinnished(object sender, string tag)
     {
-        state = zoomMovingState; // initiate the bossbattle
-        ArmorBossChangedState?.Invoke(this, zoomMovingState);
-        talkInteractZone.SetZoneEnabled(false);
 
-        phase1Music.Play();
+        if (tag == beginFightDialougeTag) {
+            state = zoomMovingState; // initiate the bossbattle
+            ArmorBossChangedState?.Invoke(this, zoomMovingState);
+            talkInteractZone.SetZoneEnabled(false);
+
+            phase1Music.Play();
+        } 
+
 
     }
 
