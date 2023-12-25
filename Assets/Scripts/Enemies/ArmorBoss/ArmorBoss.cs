@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Fullscreen.ShaderGraph;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using Random = UnityEngine.Random;
 
 public class ArmorBoss : Enemy
@@ -65,6 +66,8 @@ public class ArmorBoss : Enemy
     /// </summary>
     private Vector3 moveDestination;
 
+    private bool shouldStartBossfight = false;
+
 
     // Events
 
@@ -81,41 +84,58 @@ public class ArmorBoss : Enemy
 
         moveDestination = GetRandomZoomPosition();
 
-        //DialougeBubble.Instance.DialougeLineFinnished += TalkedFinnished;
+        DialougeBubble.Instance.DialougeLineFinnished += TalkedFinnishedDialouge;
         talkInteractZone.InteractZoneClicked += TalkedFinnished;
     }
 
-    /*
-    private void TalkedFinnished(object sender, string tag)
+    
+    private void TalkedFinnishedDialouge(object sender, string tag)
     {
 
 
 
         if (tag == beginFightDialougeTag) {
-            state = zoomMovingState; // initiate the bossbattle
+
+            Debug.Log("talekd finnished!");
+            /*state = zoomMovingState; // initiate the bossbattle
             ArmorBossChangedState?.Invoke(this, zoomMovingState);
             talkInteractZone.SetZoneEnabled(false);
 
-            phase1Music.Play();
+            phase1Music.Play();*/
+
+            //StartBossFight();
+
+            shouldStartBossfight = true;
+
+
         } 
-
-
-    } */
-
-    
-    private void TalkedFinnished(object sender, EventArgs tag)
-    {
-
-            state = zoomMovingState; // initiate the bossbattle
-            ArmorBossChangedState?.Invoke(this, zoomMovingState);
-            talkInteractZone.SetZoneEnabled(false);
-
-            phase1Music.Play();
 
 
     } 
 
+    
+    private void TalkedFinnished(object sender, EventArgs tag)
+    {
+        //StartBossFight();
+
+    }
+
+    private void StartBossFight()
+    {
+        state = zoomMovingState; // initiate the bossbattle
+        ArmorBossChangedState?.Invoke(this, zoomMovingState);
+        talkInteractZone.SetZoneEnabled(false);
+
+        phase1Music.Play();
+    }
+
     public override void HandleAI() {
+
+        if (shouldStartBossfight == true) {
+            StartBossFight();
+            shouldStartBossfight = false;
+        }
+
         if (state == zoomMovingState) {
             HandleZooming(moveDestination);
         }

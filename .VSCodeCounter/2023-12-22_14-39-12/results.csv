@@ -1,0 +1,104 @@
+"filename", "language", "JSON", "C#", "UnityShader", "comment", "blank", "total"
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Demo Elements\Code\CameraController.cs", "C#", 0, 42, 0, 2, 10, 54
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Demo Elements\Code\GUIControls.cs", "C#", 0, 42, 0, 0, 7, 49
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\Gravity.cs", "C#", 0, 11, 0, 3, 6, 20
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\PlayerCamera.cs", "C#", 0, 27, 0, 2, 12, 41
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\PlayerInputController.cs", "C#", 0, 29, 0, 5, 12, 46
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\PlayerMachine.cs", "C#", 0, 146, 0, 36, 47, 229
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\PlayerMachineDebug.cs", "C#", 0, 21, 0, 0, 7, 28
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\Scripts\SimpleStateMachine.cs", "C#", 0, 112, 0, 5, 30, 147
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BSPTree.cs", "C#", 0, 253, 0, 55, 70, 378
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs", "C#", 0, 103, 0, 47, 31, 181
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs", "C#", 0, 636, 0, 79, 194, 909
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCollider.cs", "C#", 0, 189, 0, 22, 60, 271
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCollisionType.cs", "C#", 0, 6, 0, 4, 3, 13
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperMath.cs", "C#", 0, 47, 0, 9, 13, 69
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperStateMachine.cs", "C#", 0, 84, 0, 19, 24, 127
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\DebugDraw.cs", "C#", 0, 68, 0, 1, 17, 86
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Math3d.cs", "C#", 0, 426, 0, 155, 206, 787
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\AnimatorParentMove.cs", "C#", 0, 16, 0, 5, 3, 24
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\IKHands.cs", "C#", 0, 99, 0, 10, 9, 118
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorAnimatorEvents.cs", "C#", 0, 35, 0, 3, 7, 45
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorController.cs", "C#", 0, 238, 0, 89, 58, 385
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorData.cs", "C#", 0, 30, 0, 10, 2, 42
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorInputController.cs", "C#", 0, 45, 0, 11, 10, 66
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorInputSystemController.cs", "C#", 0, 12, 0, 4, 3, 19
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorMovementController.cs", "C#", 0, 162, 0, 32, 35, 229
+"c:\UnityProjects\cool-game\Assets\ExplosiveLLC\Warrior FREE\Code\WarriorTiming.cs", "C#", 0, 61, 0, 3, 2, 66
+"c:\UnityProjects\cool-game\Assets\Scripts\Camera\MouseInfo.cs", "C#", 0, 56, 0, 4, 37, 97
+"c:\UnityProjects\cool-game\Assets\Scripts\Camera\PlayerCameraHolderController.cs", "C#", 0, 36, 0, 2, 16, 54
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\ArmorBoss\ArmorBoss.cs", "C#", 0, 108, 0, 26, 83, 217
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\ArmorBoss\ArmorBossAnimationEvents.cs", "C#", 0, 15, 0, 0, 10, 25
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\ArmorBoss\ArmorBossVisual.cs", "C#", 0, 39, 0, 6, 31, 76
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\Enemy.cs", "C#", 0, 63, 0, 14, 28, 105
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\EnemyVisual.cs", "C#", 0, 25, 0, 7, 21, 53
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\FireElemental\FireElemental.cs", "C#", 0, 35, 0, 3, 20, 58
+"c:\UnityProjects\cool-game\Assets\Scripts\Enemies\FireElemental\FireElementalVisual.cs", "C#", 0, 15, 0, 0, 4, 19
+"c:\UnityProjects\cool-game\Assets\Scripts\Hitbox\HitInfo.cs", "C#", 0, 12, 0, 6, 9, 27
+"c:\UnityProjects\cool-game\Assets\Scripts\Hitbox\Hitbox.cs", "C#", 0, 45, 0, 4, 23, 72
+"c:\UnityProjects\cool-game\Assets\Scripts\Hitbox\Hurtbox.cs", "C#", 0, 22, 0, 4, 14, 40
+"c:\UnityProjects\cool-game\Assets\Scripts\Items\Item.cs", "C#", 0, 29, 0, 22, 22, 73
+"c:\UnityProjects\cool-game\Assets\Scripts\Items\ItemData.cs", "C#", 0, 11, 0, 18, 9, 38
+"c:\UnityProjects\cool-game\Assets\Scripts\Items\Weapons\Item_ElectricGuitar.cs", "C#", 0, 25, 0, 4, 16, 45
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\AdjustUiToCamera.cs", "C#", 0, 29, 0, 1, 11, 41
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\DeleteGameObject.cs", "C#", 0, 20, 0, 0, 7, 27
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\DontDestroyOnLevelSwitch.cs", "C#", 0, 10, 0, 1, 6, 17
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\EntityDamageFlash.cs", "C#", 0, 56, 0, 14, 33, 103
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\IEntity.cs", "C#", 0, 10, 0, 0, 7, 17
+"c:\UnityProjects\cool-game\Assets\Scripts\Other\LevelManager.cs", "C#", 0, 42, 0, 0, 21, 63
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\Player.cs", "C#", 0, 277, 0, 20, 151, 448
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\PlayerAdjustRig.cs", "C#", 0, 37, 0, 1, 36, 74
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\PlayerAnimation.cs", "C#", 0, 84, 0, 2, 102, 188
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\PlayerAnimationEvents.cs", "C#", 0, 32, 0, 0, 12, 44
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\PlayerAvatar.cs", "C#", 0, 32, 0, 2, 20, 54
+"c:\UnityProjects\cool-game\Assets\Scripts\Player\PlayerInputHandler.cs", "C#", 0, 61, 0, 0, 35, 96
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\Projectile.cs", "C#", 0, 85, 0, 62, 62, 209
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\ProjectileScripts\FireBallProjectile.cs", "C#", 0, 30, 0, 5, 26, 61
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\ProjectileScripts\NoteProjectile.cs", "C#", 0, 44, 0, 4, 33, 81
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\ProjectileScripts\NoteProjectileVisual.cs", "C#", 0, 11, 0, 0, 9, 20
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\ProjectileScripts\SoulProjectile.cs", "C#", 0, 55, 0, 5, 48, 108
+"c:\UnityProjects\cool-game\Assets\Scripts\Projectiles\ProjectileVisual.cs", "C#", 0, 23, 0, 8, 10, 41
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\AudioManager.cs", "C#", 0, 103, 0, 25, 62, 190
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\Sound.cs", "C#", 0, 22, 0, 3, 14, 39
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\SoundGroup.cs", "C#", 0, 15, 0, 3, 10, 28
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\SoundTrack.cs", "C#", 0, 25, 0, 0, 11, 36
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\SoundTrackHandler.cs", "C#", 0, 48, 0, 0, 33, 81
+"c:\UnityProjects\cool-game\Assets\Scripts\Sound\SoundTrackZone.cs", "C#", 0, 15, 0, 0, 7, 22
+"c:\UnityProjects\cool-game\Assets\Scripts\Text\DamagePopup.cs", "C#", 0, 40, 0, 4, 16, 60
+"c:\UnityProjects\cool-game\Assets\Scripts\Text\TextHandler.cs", "C#", 0, 19, 0, 6, 11, 36
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\EnableCanvas.cs", "C#", 0, 14, 0, 1, 3, 18
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\HealthBar.cs", "C#", 0, 34, 0, 2, 26, 62
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\IZone.cs", "C#", 0, 7, 0, 0, 2, 9
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\InteractZone.cs", "C#", 0, 63, 0, 13, 29, 105
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\InventorySlot.cs", "C#", 0, 46, 0, 6, 33, 85
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\InventoryUI.cs", "C#", 0, 68, 0, 4, 54, 126
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\PlayerHealthBar.cs", "C#", 0, 60, 0, 9, 42, 111
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\PlayerInteractTriggerCheck.cs", "C#", 0, 47, 0, 1, 13, 61
+"c:\UnityProjects\cool-game\Assets\Scripts\UI\ScreenFade.cs", "C#", 0, 21, 0, 0, 7, 28
+"c:\UnityProjects\cool-game\Assets\Scripts\Vfx\FootStepVFX.cs", "C#", 0, 24, 0, 4, 17, 45
+"c:\UnityProjects\cool-game\Assets\Scripts\Vfx\SlashVFX.cs", "C#", 0, 39, 0, 15, 24, 78
+"c:\UnityProjects\cool-game\Assets\Scripts\Vfx\StarBurstVFX.cs", "C#", 0, 17, 0, 1, 13, 31
+"c:\UnityProjects\cool-game\Assets\Settings\InputSystem\PlayerControls.cs", "C#", 0, 346, 0, 14, 23, 383
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader", "UnityShader", 0, 0, 111, 0, 33, 144
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader", "UnityShader", 0, 0, 115, 0, 31, 146
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader", "UnityShader", 0, 0, 111, 0, 33, 144
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader", "UnityShader", 0, 0, 247, 0, 71, 318
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader", "UnityShader", 0, 0, 245, 0, 66, 311
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader", "UnityShader", 0, 0, 198, 0, 50, 248
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader", "UnityShader", 0, 0, 191, 0, 50, 241
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader", "UnityShader", 0, 0, 86, 0, 21, 107
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader", "UnityShader", 0, 0, 191, 0, 50, 241
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader", "UnityShader", 0, 0, 111, 0, 28, 139
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader", "UnityShader", 0, 0, 126, 0, 33, 159
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_SDF.shader", "UnityShader", 0, 0, 247, 0, 71, 318
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMP_Sprite.shader", "UnityShader", 0, 0, 97, 0, 20, 117
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMPro.cginc", "UnityShader", 0, 0, 65, 0, 20, 85
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc", "UnityShader", 0, 0, 124, 0, 34, 158
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc", "UnityShader", 0, 0, 72, 0, 14, 86
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc", "UnityShader", 0, 0, 83, 0, 19, 102
+"c:\UnityProjects\cool-game\Assets\TextMesh Pro\Sprites\EmojiOne.json", "JSON", 155, 0, 0, 0, 2, 157
+"c:\UnityProjects\cool-game\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs", "C#", 0, 195, 0, 1, 47, 243
+"c:\UnityProjects\cool-game\Assets\TutorialInfo\Scripts\Readme.cs", "C#", 0, 14, 0, 0, 3, 17
+"c:\UnityProjects\cool-game\Packages\manifest.json", "JSON", 47, 0, 0, 0, 1, 48
+"c:\UnityProjects\cool-game\Packages\packages-lock.json", "JSON", 409, 0, 0, 0, 1, 410
+"Total", "-", 611, 5696, 2420, 968, 2998, 12693

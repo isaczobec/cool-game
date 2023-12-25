@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -119,6 +120,10 @@ public class DialougeBubble : MonoBehaviour
 
         currentDialougeEventTag = dialougeLine.dialougeEventTag;
 
+        if (dialougeLine.cameraPositionTransform != null) {
+            PlayerCameraController.Instance.SetTargetTransform(dialougeLine.cameraPositionTransform);
+        }
+
         
 
         
@@ -206,6 +211,8 @@ public class DialougeBubble : MonoBehaviour
         animator.SetTrigger(uiBoxDisabled);
         audioManager.Play(bubbleDisappearSoundName);
         Player.Instance.SetLetPlayerMove(true);
+
+        PlayerCameraController.Instance.ReturnToPlayerCamera();
     }
 
 

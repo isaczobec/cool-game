@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1317745741231053644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5569665060123762097}
+  m_Layer: 10
+  m_Name: InteractCamTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5569665060123762097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317745741231053644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.33883905, y: 0.3463439, z: -0.13580044, w: 0.86417145}
+  m_LocalPosition: {x: -9.67, y: 15.93, z: -10.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050542254611707657}
+  m_LocalEulerAnglesHint: {x: 42.82, y: 43.68, z: 0}
 --- !u!1001 &2450002044183306693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,7 +227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5569665060123762097}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
         type: 3}
@@ -241,6 +276,7 @@ MonoBehaviour:
       skippable: 1
       timeUntilAutoProceed: 0
       dialougeEventTag: 
+      cameraPositionTransform: {fileID: 5569665060123762097}
     - text: I'll kill you you lite piece of shit!
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 30
@@ -249,9 +285,10 @@ MonoBehaviour:
       textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
       speakerImage: {fileID: 0}
       freezePlayerMovement: 1
-      skippable: 1
-      timeUntilAutoProceed: 0
+      skippable: 0
+      timeUntilAutoProceed: 1
       dialougeEventTag: beginFightDialougeTag
+      cameraPositionTransform: {fileID: 0}
 --- !u!114 &2640572778048835811 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,

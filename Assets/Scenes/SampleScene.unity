@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11257972, g: 0.41770256, b: 0.72310334, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -476,7 +476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2972596145314342318, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2090146853}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
         type: 3}
@@ -521,6 +525,8 @@ MonoBehaviour:
       freezePlayerMovement: 1
       skippable: 1
       timeUntilAutoProceed: 0
+      dialougeEventTag: 
+      cameraPositionTransform: {fileID: 2090146853}
     - text: If you truly do not know who I am...
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 30
@@ -531,6 +537,8 @@ MonoBehaviour:
       freezePlayerMovement: 1
       skippable: 1
       timeUntilAutoProceed: 0
+      dialougeEventTag: 
+      cameraPositionTransform: {fileID: 0}
     - text: Then maybe your best choice...
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 30
@@ -539,8 +547,10 @@ MonoBehaviour:
       textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
       speakerImage: {fileID: 0}
       freezePlayerMovement: 1
-      skippable: 0
+      skippable: 1
       timeUntilAutoProceed: 1
+      dialougeEventTag: 
+      cameraPositionTransform: {fileID: 0}
     - text: Is to thread lightly.
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 40
@@ -549,8 +559,10 @@ MonoBehaviour:
       textScrollSound: {fileID: 8300000, guid: 7bc1607ad7aa86444adfe62b0fd42705, type: 3}
       speakerImage: {fileID: 0}
       freezePlayerMovement: 1
-      skippable: 0
+      skippable: 1
       timeUntilAutoProceed: 1.5
+      dialougeEventTag: 
+      cameraPositionTransform: {fileID: 0}
 --- !u!1001 &1429704402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,6 +683,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1789651139473159225}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2090146852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2090146853}
+  m_Layer: 10
+  m_Name: cameraInteractPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2090146853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090146852}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.2426727, y: 0.18941304, z: -0.048374075, w: 0.9502067}
+  m_LocalPosition: {x: -5.78, y: 3.6000004, z: -3.58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 827224023}
+  m_LocalEulerAnglesHint: {x: 28.653, y: 22.547, z: 0}
 --- !u!1001 &2119072109
 PrefabInstance:
   m_ObjectHideFlags: 0

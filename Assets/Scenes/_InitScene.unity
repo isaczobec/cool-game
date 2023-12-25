@@ -664,12 +664,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6897778367044481044}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1000569575 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7137960658632945514, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
-    type: 3}
-  m_PrefabInstance: {fileID: 1063446670338923822}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1000569576 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6231046335246940828, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
@@ -694,6 +688,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce839464fd67784ea6560bb5dcca10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1000569579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7137960658632945514, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
+    type: 3}
+  m_PrefabInstance: {fileID: 1063446670338923822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1093854039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,11 +1647,6 @@ PrefabInstance:
       propertyPath: testPointer
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7636403238043295877, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
-        type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 1000569575}
     - target: {fileID: 8443147325912854842, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
         type: 3}
       propertyPath: sounds.Array.size
@@ -1667,6 +1662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerVisualParent
       objectReference: {fileID: 0}
+    - target: {fileID: 9163645902791815970, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72,
+        type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 1000569579}
     m_RemovedComponents:
     - {fileID: 8462019388933727710, guid: eb6296a2aa9d5bb45b0cefea3dd3cf72, type: 3}
     m_RemovedGameObjects:
