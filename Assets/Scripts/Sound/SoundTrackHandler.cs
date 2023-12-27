@@ -9,6 +9,8 @@ public class SoundTrackHandler : MonoBehaviour
 
     public List<SoundTrack> soundTrackList = new List<SoundTrack>();
 
+    
+
     private void Awake() {
         Instance = this;
     }
@@ -57,8 +59,11 @@ public class SoundTrackHandler : MonoBehaviour
         soundTrackList.Add(soundTrack);
 
 
-        soundTrack.sound.volume = 0f;
-        soundTrack.audioManager.Play(soundTrack.sound.name);
+        if (!soundTrack.audioManager.GetSound(soundTrack.sound.name).audioSource.isPlaying) {
+            soundTrack.sound.volume = 0f;
+
+            soundTrack.audioManager.Play(soundTrack.sound.name);
+        }
         soundTrack.audioManager.FadeAudioSource(true,soundTrack.soundName,soundTrack.fadeInTime,soundTrack.targetVolume);
     }
 

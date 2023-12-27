@@ -271,7 +271,7 @@ public class Player : MonoBehaviour, IEntity
                     print("hit");
                     
                     //Calculate how much of the momentum should be kept after the collision
-                    float velocityCollisionFactor = Mathf.Sin(Mathf.Deg2Rad*Vector3.Angle(previousRaycastHit.normal.normalized,velocity.normalized));
+                    float velocityCollisionFactor = Mathf.Abs(Mathf.Sin(Mathf.Deg2Rad*Vector3.Angle(previousRaycastHit.normal.normalized,velocity.normalized)));
 
 
                     return new CollisionDetectionOutput{newPositionVector=position,newVelocityVector = leftoverVelocity.normalized * velocity.magnitude * velocityCollisionFactor,lastRaycastHit = previousRaycastHit};

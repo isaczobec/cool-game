@@ -10,9 +10,11 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private float scrollIncrement = 3;
     [SerializeField] private float zoomSpeed = 2f;
 
-    [SerializeField] private Transform playerCameraTransform; // the camera that is in front of the player
+    [SerializeField] private CameraGotoPoint playerCameraGotoTransform; // the camera that is in front of the player
     [SerializeField] private Transform parentTransform;
     private Transform cameraTargetTransform; // the transform this camera will slerp towards
+
+    private float targetFov;
 
     private Vector3 targetPosition;
     private Quaternion targetRotation;
@@ -20,6 +22,13 @@ public class PlayerCameraController : MonoBehaviour
 
     [SerializeField] private float lerpSpeed = 4f;
     [SerializeField] private float minimumLerpDistance = 0.1f;
+
+
+    [Header("Camera Fov settings")]
+    [SerializeField] private Camera[] cameras;
+    [SerializeField] private float cameraFovLerpSpeed;
+    [SerializeField] private float minCameraFovDiff;
+
 
 
     
@@ -38,9 +47,9 @@ public class PlayerCameraController : MonoBehaviour
     void Start()
     {
 
-        SetTargetTransform(playerCameraTransform);
-        Debug.Log("playerCameraTransform");
-        Debug.Log(playerCameraTransform);
+        SetTargetTransform(playerCameraGotoTransform);
+        Debug.Log("playerCameraGotoTransform");
+        Debug.Log(playerCameraGotoTransform);
 
         transform.position = new Vector3(transform.position.x,transform.position.y,defaultDistance);
         targetDistance = transform.position.z;
@@ -53,13 +62,27 @@ public class PlayerCameraController : MonoBehaviour
 
         MoveTowardsTargetTransform();
 
+        HandleCameraFov();
+
         
 
     }
 
+    private void HandleCameraFov() {
+        foreach (Camera camera in cameras) {
+
+            if (Mathf.Abs(camera.fieldOfView - targetFov) < minCameraFovDiff) {
+                camera.fieldOfView = targetFov;
+            } else {
+                camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetFov, Time.deltaTime * cameraFovLerpSpeed);
+            }
+
+        }
+    }
+
     private void MoveTowardsTargetTransform()
     {
-        if (cameraTargetTransform == playerCameraTransform)
+        if (cameraTargetTransform == playerCameraGotoTransform)
         {
             LerpTowardsTargetPositionRotation(cameraTargetTransform.position,cameraTargetTransform.rotation);
         }
@@ -120,19 +143,24 @@ public class PlayerCameraController : MonoBehaviour
             targetDistance = minDistance;
         }
 
-        playerCameraTransform.position = new Vector3(playerCameraTransform.position.x,playerCameraTransform.position.y,targetDistance);
+        Transform playerTransform = playerCameraGotoTransform.GetGotoTransform();
+
+        playerCameraGotoTransform.GetGotoTransform().position = new Vector3(playerTransform.position.x,playerTransform.position.y,targetDistance);
     }
 
     public Transform GetTargetTransform() {
         return cameraTargetTransform;
     }
-    public void SetTargetTransform(Transform targetTransform) {
+    public void SetTargetTransform(CameraGotoPoint gotoTransform) {
 
+        targetFov = gotoTransform.GetTargetFov();
+
+        Transform targetTransform = gotoTransform.GetGotoTransform();
 
         
         cameraTargetTransform = targetTransform;
 
-        if (targetTransform == playerCameraTransform) {
+        if (targetTransform == playerCameraGotoTransform) {
             transform.parent = parentTransform;
         } else {
             transform.parent = targetTransform;
@@ -173,6 +201,6 @@ public class PlayerCameraController : MonoBehaviour
     }
 
     public void ReturnToPlayerCamera() {
-        SetTargetTransform(playerCameraTransform);
+        SetTargetTransform(playerCameraGotoTransform);
     }
 }

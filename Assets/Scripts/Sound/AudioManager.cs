@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
 
 
     }
+
+
     private List<FadeInformation> fadeInformations = new List<FadeInformation>();
 
     [SerializeField] private SoundGroup[] soundGroups;
@@ -133,11 +135,21 @@ public class AudioManager : MonoBehaviour
         //StartCoroutine(Fade(fadeIn, soundName, duration, targetVolume));
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
 
+        FadeInformation fadeInfo = fadeInformations.Find(s => s.sound.name == soundName);
 
-        Debug.Log("soundtofade");
-        Debug.Log(s);
+        if (fadeInfo == null) {
 
-        fadeInformations.Add(new FadeInformation{sound = s, duration = duration, targetVolume = targetVolume, startVol = s.audioSource.volume,fadeIn = fadeIn});
+            fadeInformations.Add(new FadeInformation{sound = s, duration = duration, targetVolume = targetVolume, startVol = s.audioSource.volume,fadeIn = fadeIn});
+
+        } else {
+            fadeInfo.duration =duration;
+            fadeInfo.fadeIn =fadeIn;
+            fadeInfo.targetVolume=targetVolume;
+            fadeInfo.startVol = s.audioSource.volume;
+            fadeInfo.time = 0f;
+        }
+
+
     }
 
     private void HandleFading() {
@@ -154,7 +166,9 @@ public class AudioManager : MonoBehaviour
                         fadeInformations[i].sound.audioSource.Stop();
                     }
 
+
                     fadeInformations.RemoveAt(i);
+
                 }
             }
 

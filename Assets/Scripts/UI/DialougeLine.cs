@@ -28,7 +28,7 @@ public class DialougeLine
     [SerializeField] public string dialougeEventTag = "";
 
 
-    [SerializeField] public Transform cameraPositionTransform;
+    [SerializeField] public CameraGotoPoint cameraGotoPoint;
     
 
     

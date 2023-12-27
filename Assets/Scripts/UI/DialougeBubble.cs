@@ -120,8 +120,8 @@ public class DialougeBubble : MonoBehaviour
 
         currentDialougeEventTag = dialougeLine.dialougeEventTag;
 
-        if (dialougeLine.cameraPositionTransform != null) {
-            PlayerCameraController.Instance.SetTargetTransform(dialougeLine.cameraPositionTransform);
+        if (dialougeLine.cameraGotoPoint != null) {
+            PlayerCameraController.Instance.SetTargetTransform(dialougeLine.cameraGotoPoint);
         }
 
         
