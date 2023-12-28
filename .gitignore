@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # dont track the skybox folder; to heavy
 /Assets/Fantasy*Skybox*FREE
+
+.fake

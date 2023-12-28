@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleBridge.unity
     guid: f7b217f0757bd914d812fc321ea37438
+  - enabled: 1
+    path: Assets/Scenes/BeachScene.unity
+    guid: b76b1a0f9b705694c8575ad287b71cc4
   m_configObjects: {}

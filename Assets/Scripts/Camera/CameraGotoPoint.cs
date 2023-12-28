@@ -10,7 +10,7 @@ public class CameraGotoPoint : MonoBehaviour
     [SerializeField] private float cameraTargetFov;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gotoTransform = transform;
     }

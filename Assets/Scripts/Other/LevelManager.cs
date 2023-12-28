@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
 
     private bool waitingToLoad = false;
 
+    private Vector3 playerSpawnPosition;
+
     private string sceneToLoadNext;
     
 
@@ -35,12 +37,15 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void LoadScene(string sceneName) {
+    public void LoadScene(string sceneName, Vector3 playerSpawnPosition) {
 
         if (!waitingToLoad) {
             screenFade.StartFadeIn();
             waitingToLoad = true;
             sceneToLoadNext = sceneName;
+
+            this.playerSpawnPosition = playerSpawnPosition;
+
         } else {
             Debug.Log("Already trying to load a scene!");
         }
@@ -53,6 +58,12 @@ public class LevelManager : MonoBehaviour
             SceneManager.LoadScene(sceneToLoadNext);
             screenFade.StartFadeOut();
             waitingToLoad = false;
+
+            if (playerSpawnPosition != null) {
+                Player.Instance.transform.position = playerSpawnPosition;
+            }
+
+            
         }
     }
     

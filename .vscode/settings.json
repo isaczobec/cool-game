@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "cool-game.sln"
+    "dotnet.defaultSolution": "cool-game.sln",
+    "dotnet.preferCSharpExtension": true
 }

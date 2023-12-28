@@ -23,6 +23,7 @@ public class InteractZone :  MonoBehaviour, IZone
     [Header("Optional Variables")]
     [SerializeField] private bool switchScene; // if this interactzone should switch to another scene when pressed
     [SerializeField] private string sceneName;
+    [SerializeField] private Vector3 playerSpawnPosition; 
     [SerializeField] private bool playDialouge; // if this interactzone should play dialouge when interacted with
     [SerializeField] private string dialougeLineGroupName; // the name of the dialouge group that should be played
 
@@ -76,7 +77,7 @@ public class InteractZone :  MonoBehaviour, IZone
     }
 
     private void SwitchScene() {
-        LevelManager.Instance.LoadScene(sceneName);
+        LevelManager.Instance.LoadScene(sceneName,playerSpawnPosition);
     }
 
     /// <summary>
