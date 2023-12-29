@@ -36,7 +36,8 @@ public class IntroCutsceneHandler : MonoBehaviour
     private void DialougeLineFinnishedEvent(object sender, string e)
     {
         if (e == dialougeEvent1) {
-         // do something       
+            ScreenTextureOverlay.Instance.FadeOut(cutSceneOverlayColorFadeInTime);
+            
         }
     }
 
@@ -53,6 +54,7 @@ public class IntroCutsceneHandler : MonoBehaviour
     }
 
     private void StartCutScene() {
+        cutSceneTriggered = true;
         ScreenTextureOverlay.Instance.FadeToColor(cutSceneOverlayColor,cutSceneOverlayColorFadeInTime);
         dialougeLineGroups.QueueDialougeLines(dialougeGroup1Name,playInstantly:true);
     }
