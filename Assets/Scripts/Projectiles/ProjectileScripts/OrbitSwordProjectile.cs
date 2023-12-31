@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -16,6 +17,14 @@ public class OrbitSwordProjectile : Projectile
 
 
     [SerializeField] private Transform visualObjectTransform;
+    [SerializeField] private GameObject trailObject;
+
+    [SerializeField] private Animator animator;
+
+     [SerializeField] private string hitSomethingReference = "HitSomething";
+     [SerializeField] private string randomSpeedReference = "RandomSpeed";
+     [SerializeField] private float randomSpeedMin = 0.5f;
+     [SerializeField] private float randomSpeedMax = 2f;
 
 
 
@@ -27,12 +36,20 @@ public class OrbitSwordProjectile : Projectile
     public void InitializeProjectile (Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed)
     {
 
+        animator.SetFloat(randomSpeedReference,UnityEngine.Random.Range(randomSpeedMin,randomSpeedMax));
+
         
         orbitCenter = orbitPosition;
         this.moveSpeed = moveSpeed;
         this.distanceFromOrbitcenter = distanceFromOrbitcenter;
         this.distanceFromOrbitcenter = distanceFromOrbitcenter;
         this.angleOffset = angleOffset;
+
+        HandleOrbiting();
+
+        trailObject.SetActive(true);
+
+
 
     }
 
@@ -55,7 +72,13 @@ public class OrbitSwordProjectile : Projectile
         visualObjectTransform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg * angleOffset - 90f);
     }
 
-    
+    public override void HandleLifeTimeExpired()
+    {
+        hitbox.DisableHitbox();
+        animator.SetTrigger(hitSomethingReference);
+    }
+
+
 
 
 

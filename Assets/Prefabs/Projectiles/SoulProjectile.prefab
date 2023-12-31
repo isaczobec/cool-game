@@ -13,6 +13,16 @@ PrefabInstance:
       propertyPath: objectToDelete
       value: 
       objectReference: {fileID: 7733447657660921148}
+    - target: {fileID: 2380709951120615322, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_Time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135405205706692859, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_Time
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -77,6 +87,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081677536375543992, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
+      value: 12.300708
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081677536375543992, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
+      value: 3.5493965
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081677536375543992, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
+      value: 135.58699
       objectReference: {fileID: 0}
     - target: {fileID: 4532309423496621394, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
         type: 3}
@@ -718,7 +743,6 @@ MonoBehaviour:
   defaultHitSoundName: defaultHitSound
   defaultHitSoundGroupName: defaultHitSoundGroup
   travelSpeed: 45
-  maxLifeTime: 10
   hoamingStrength: 0.63
   hoamingStrengthWhenFarAway: 6
   maxDistBeforeAccel: 55

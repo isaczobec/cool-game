@@ -90,14 +90,14 @@ Material:
     - _VoronoiStrength: 1
     - _voronoiSpeed: 2
     m_Colors:
-    - _HealthAlertSlider: {r: 0.3226, g: 0, b: 0, a: 0}
+    - _HealthAlertSlider: {r: 0.3429, g: 0, b: 0, a: 0}
     - _HealthBarColorBottom: {r: 0.6348829, g: 1, b: 0.23113209, a: 0}
     - _HealthBarColorTop: {r: 0.004811049, g: 1, b: 0, a: 0}
     - _HealthFullyLostBottomColor: {r: 0.6509434, g: 0.009211446, b: 0.009211446,
         a: 1}
     - _HealthFullyLostTopColor: {r: 0.31132078, g: 0.0014684978, b: 0.0014684978,
         a: 1}
-    - _HealthSlider: {r: -0.18332908, g: 0, b: 0, a: 0}
+    - _HealthSlider: {r: -0.15226378, g: 0, b: 0, a: 0}
     - _LostHealthColor: {r: 1, g: 0.6034185, b: 0, a: 1}
     - _LostHealthColor2: {r: 1, g: 0.99997777, b: 0, a: 1}
     - _PlayerTextureOffset: {r: -3.53, g: -0.21, b: 0, a: 0}

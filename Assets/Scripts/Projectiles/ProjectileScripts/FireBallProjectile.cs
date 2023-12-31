@@ -10,7 +10,6 @@ public class FireBallProjectile : Projectile
 
     private Vector2 velocity = Vector2.zero;
 
-    [SerializeField] private float maxLifeTime = 10;
 
 
     
