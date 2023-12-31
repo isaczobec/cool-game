@@ -13,6 +13,7 @@ public class ArmorBoss : Enemy
 
     [Header("Projectile References")]
     [SerializeField] private GameObject soulProjectile;
+    [SerializeField] private GameObject orbitSwordProjectile;
 
 
     [Header("Movement")]
@@ -199,6 +200,8 @@ public class ArmorBoss : Enemy
     private void AnimationEvent_FireSoulProjectile(object sender, System.EventArgs e)
     {
         FireSoulProjectileBurst(soulProjectileBurstAmount,soulProjectileAngleDifference);
+
+        CreateOrbitSwordGroup(10,Player.Instance.transform.position,40,0.3f);
     }
 
     private void AnimationEvent_StoppedAttacking(object sender, System.EventArgs e)
@@ -249,6 +252,28 @@ public class ArmorBoss : Enemy
         projectile.Initialize(direction);
 
     }
+
+    private void CreateOrbitSwordGroup(int amount, Vector3 orbitPosition, float distanceFromOrbitcenter,float moveSpeed) {
+        
+        float angleIncrement = Mathf.PI * 2 / amount;
+
+        for (int i = 0; i<amount; i++) {
+            float angleOffset = angleIncrement * i;
+            CreateOrbitSword(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed);
+        }
+
+    }
+
+    private void CreateOrbitSword(Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed) {
+        GameObject projectileObject = Instantiate(orbitSwordProjectile);
+        OrbitSwordProjectile projectile = projectileObject.GetComponent<OrbitSwordProjectile>();
+        projectile.SetOwner(null, this);
+        projectile.ownerEntity = this;
+        projectile.InitializeProjectile(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed);
+        
+    }
+
+    
 
 
     

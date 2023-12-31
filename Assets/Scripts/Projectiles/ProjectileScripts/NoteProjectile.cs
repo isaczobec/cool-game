@@ -12,7 +12,6 @@ public class NoteProjectile : Projectile
 
     private Vector2 velocity = Vector2.zero;
 
-    [SerializeField] private float maxLifeTime = 10;
 
 
     [Header("Sound Variables")]
@@ -43,14 +42,15 @@ public class NoteProjectile : Projectile
     {
         transform.position += new Vector3(velocity.x * Time.deltaTime, velocity.y * Time.deltaTime, 0f);
 
-        if (lifeTime > maxLifeTime) {
-            HitInfo empty = new HitInfo();
 
-            //disable the projectile and play the "death" animation if the lifetime expires
-            visualGameObject.GetComponent<ProjectileVisual>().animator.SetTrigger("hitSomething");
-            hitbox.DisableHitbox();
-        }
+    }
 
+    public override void HandleLifeTimeExpired()
+    {
+
+        //disable the projectile and play the "death" animation if the lifetime expires
+        visualGameObject.GetComponent<ProjectileVisual>().animator.SetTrigger("hitSomething");
+        hitbox.DisableHitbox();
     }
 
     public override void HitSomething(HitInfo hitInfo)

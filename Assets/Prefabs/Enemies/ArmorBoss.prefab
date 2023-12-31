@@ -586,6 +586,8 @@ MonoBehaviour:
   baseDamage: 200
   soulProjectile: {fileID: 7733447657660921148, guid: bd780668233f3ff4e9ca079804bb316d,
     type: 3}
+  orbitSwordProjectile: {fileID: 7733447657660921148, guid: b7fad828eda464645ab14f23252e4347,
+    type: 3}
   movementSpeedFactor: 4
   zoomMovementSpeedFactor: 1
   difficultyFactor: 0.5
@@ -643,6 +645,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9063587400210614015}
     m_Modifications:
+    - target: {fileID: -9003323146575883303, guid: 2f1dc1443a9090848b8826d70b202210,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -9003323146575883303, guid: 2f1dc1443a9090848b8826d70b202210,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
     - target: {fileID: -8679921383154817045, guid: 2f1dc1443a9090848b8826d70b202210,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -713,6 +725,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 50754954277266222, guid: 2f1dc1443a9090848b8826d70b202210,
+        type: 3}
+      propertyPath: m_Name
+      value: fk
+      objectReference: {fileID: 0}
+    - target: {fileID: 882129737928793925, guid: 2f1dc1443a9090848b8826d70b202210,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 882129737928793925, guid: 2f1dc1443a9090848b8826d70b202210,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
     - target: {fileID: 919132149155446097, guid: 2f1dc1443a9090848b8826d70b202210,
         type: 3}
       propertyPath: m_Name
@@ -737,6 +764,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8729965683839041105}
     m_Modifications:
+    - target: {fileID: -8912189966947192040, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.168
+      objectReference: {fileID: 0}
+    - target: {fileID: -8912189966947192040, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e4c651c23a499fc468580d61094004e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -787,11 +824,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -401618067098223726, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -401618067098223726, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
+    - target: {fileID: 902343934094000621, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 902343934094000621, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
+    - target: {fileID: 902343934094000621, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18c1000e52a5a964e8f95258db37c2f9, type: 2}
     - target: {fileID: 919132149155446097, guid: e4c651c23a499fc468580d61094004e6,
         type: 3}
       propertyPath: m_Name
       value: ArmorBossVer1RIGGED
       objectReference: {fileID: 0}
+    - target: {fileID: 3076138552580877421, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076138552580877421, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
+    - target: {fileID: 7831909060113432234, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831909060113432234, guid: e4c651c23a499fc468580d61094004e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f320735472a687499e6d4e603185c93, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

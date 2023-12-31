@@ -8,7 +8,6 @@ public class SoulProjectile : Projectile
 
     private Vector2 velocity;
 
-    [SerializeField] private float maxLifeTime = 10;
 
         
     [SerializeField] private float hoamingStrength = 0.1f;
@@ -67,7 +66,6 @@ public class SoulProjectile : Projectile
         transform.position = transform.position + new Vector3(velocity.x * Time.deltaTime * travelSpeed, velocity.y * Time.deltaTime * travelSpeed, 0f);
 
 
-        HandleExpiredLifeTime();
 
 
     }
@@ -80,15 +78,13 @@ public class SoulProjectile : Projectile
 
     }
 
-    private void HandleExpiredLifeTime() {
-        if (lifeTime > maxLifeTime) {
+    public override void HandleLifeTimeExpired() {
             HitInfo empty = new HitInfo();
 
             //disable the projectile and play the "death" animation if the lifetime expires
             velocity = Vector2.zero;
             visualGameObject.GetComponent<ProjectileVisual>().animator.SetTrigger("hitSomething");
             hitbox.DisableHitbox();
-        }
 
     }
 

@@ -32,11 +32,14 @@ public class Projectile : MonoBehaviour
     /// </summary>
     public Hitbox hitbox; 
 
+    public bool canTravelThroughWalls;
+
 
     /// <summary>
     /// the amount of seconds this projectile has been alive
     /// </summary>
     public float lifeTime {get; private set;} 
+    public float maxLifeTime {get; private set;} = 10f; 
 
 
     
@@ -45,6 +48,8 @@ public class Projectile : MonoBehaviour
     /// the amount of seconds the entity which got hit will be invincible.
     /// </summary>
     public float invincibilityTimeOnHit;
+
+    
 
 
     /// <summary>
@@ -66,6 +71,7 @@ public class Projectile : MonoBehaviour
     public event EventHandler<EventArgs> ProjectileHitSomething;
     
 
+
     
 
     // Update is called once per frame
@@ -76,6 +82,7 @@ public class Projectile : MonoBehaviour
     }
 
     private void Start() {
+        
         OnProjectileCreated();
     }
 
@@ -111,6 +118,8 @@ public class Projectile : MonoBehaviour
 
 
 
+
+
     /// <summary>
     /// Parent class method that is called every frame. Updates the projectile. Conatains some logic that usually should be ran every frame
     /// </summary>
@@ -124,14 +133,28 @@ public class Projectile : MonoBehaviour
     /// </summary>
     /// <param name="hitInfo">Class that passes on all info for the hit to the regarded classes.</param>
     public virtual void HitSomething(HitInfo hitInfo) {
-        Debug.Log(this);
-        ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
 
-        CreateDamageNumber(hitInfo);
+        
 
-        // play hit sound
-        audioManager.PlayRandom(defaultHitSoundGroupName);
-        audioManager.Play(defaultHitSoundName);
+
+        // if this projectile didnt despawn naturally, hit something
+        if (hitInfo != null) {
+            ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
+            
+            CreateDamageNumber(hitInfo);
+
+            // play hit sound
+            audioManager.PlayRandom(defaultHitSoundGroupName);
+            audioManager.Play(defaultHitSoundName);
+
+
+        } else if (!canTravelThroughWalls) {
+            ProjectileHitSomething?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        
+
     }
 
     /// <summary>
@@ -194,6 +217,17 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void HandleLifetime() {
         lifeTime += Time.deltaTime;
+
+        if (lifeTime > maxLifeTime) {
+            HandleLifeTimeExpired();
+        }
+    }
+
+    /// <summary>
+    /// what happens when this gameobjects lifetime is expired.
+    /// </summary>
+    public virtual void HandleLifeTimeExpired() {
+        Destroy(gameObject);
     }
 
     /// <summary>

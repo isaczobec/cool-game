@@ -711,6 +711,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   parentItem: {fileID: 0}
   hitbox: {fileID: 1227714842745161196}
+  canTravelThroughWalls: 1
   invincibilityTimeOnHit: 0.3
   visualGameObject: {fileID: 1232917440755224285}
   audioManager: {fileID: 424556289377509808}
