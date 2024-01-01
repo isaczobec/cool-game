@@ -18,6 +18,10 @@ public class Player : MonoBehaviour, IEntity
     [SerializeField] private float aerialAcceleration = 0.5f;
     [SerializeField] private float aerialMovementDamping = 1f;
 
+    [SerializeField] private float dashSpeed = 1f;
+    [SerializeField] private float dashCost = 100f;
+    [SerializeField] private float staminaRechargeRate = 10f;
+
 
     [Header("vertical movement Variables")]
     [SerializeField] private float aerialVerticalAcceleration = 6f;
@@ -43,9 +47,11 @@ public class Player : MonoBehaviour, IEntity
     [SerializeField] private float GroundedDistanceOffset = 0.02f;
 
 
-    [Header("Health Variables")]
+    [Header("Stat Variables")]
     [SerializeField] public float maxHealth = 400f;
     public float health;
+    [SerializeField] public float maxStamina = 400f;
+    public float stamina;
 
 
     [Header("Other")]
@@ -67,6 +73,13 @@ public class Player : MonoBehaviour, IEntity
     public event EventHandler<EventArgs> OnPlayerJumped;
 
     public event EventHandler<HitInfo> OnPlayerGotHit;
+    public event EventHandler<EventArgs> OnPlayerDashed;
+
+
+    [Header("Stat bars")]
+    [SerializeField] private PlayerHealthBar healthBar;
+    [SerializeField] private PlayerHealthBar staminaBar;
+    [SerializeField] private PlayerHealthBar manaBar;
 
     
 
@@ -79,6 +92,8 @@ public class Player : MonoBehaviour, IEntity
     private float currentFloorAngle = 0f;
 
     private bool isRunning = false;
+
+    private bool isDashing = false;
 
     /// <summary>
     /// time in seconds the player still cannot be hit.
@@ -109,18 +124,29 @@ public class Player : MonoBehaviour, IEntity
 
     private void Start()
     {
+        // init player stats
+        health = maxHealth;
+        stamina = maxStamina;
+
+        healthBar.SetMaxDisplayNumber(maxHealth);
+        staminaBar.SetMaxDisplayNumber(maxStamina);
+
+
+
         MovementColliderLayerMask = 1 << MovementColliderLayerInt;
 
 
-        health = maxHealth;
 
         playerInputHandler.onPlayerJumpEvent+= OnJumpEvent;
+
+        playerInputHandler.dashEvent += PlayerDashed;
 
         ChangeEquippedItem(testWeaponPrefab);
 
         playerAnimationEvents.playerUsedItem += PlayerUseEquippedItem;
 
         playerAnimationEvents.playerStoppedAttacking += PlayerStoppedAttacking;
+
 
     }
 
@@ -131,10 +157,37 @@ public class Player : MonoBehaviour, IEntity
         HandleInvincibilityTime();
 
         UpdateAttacking();
+        RechargeStamina();
+    }
+
+    private void RechargeStamina()
+    {
+        if (stamina < maxStamina)
+        {
+
+            //recharge players stamina
+            ChangeStamina(staminaRechargeRate * Time.deltaTime);
+        }
+        else
+        {
+            ChangeStamina(maxStamina,true);
+        }
     }
 
     private void HandleInvincibilityTime() {
         invincibilityTime -= Time.deltaTime;
+    }
+
+
+    private void ChangeStamina(float delta, bool setHard = false) {
+        if (setHard) {
+            stamina = delta;
+        } else {
+            stamina += delta;
+
+        }
+
+        staminaBar.SetNewTargetLevel(stamina/maxStamina,stamina);
     }
 
 
@@ -155,172 +208,201 @@ public class Player : MonoBehaviour, IEntity
 
     }
 
+    private void PlayerDashed(object sender, EventArgs e)
+    {
+        if (isDashing == false && letPlayerMove) {
+            if (stamina >= dashCost) {
+
+                ChangeStamina(-dashCost);
+
+                isDashing = true;
+
+                Vector3 inputVector = Vector3.zero;
+                inputVector = playerInputHandler.GetPlayerMovementVector();
+
+                velocity = inputVector * dashSpeed;
+
+                OnPlayerDashed?.Invoke(this,EventArgs.Empty);
+                
+            }
+            
+            
+        }
+    }
+
+    public void StopDash() {
+        isDashing = false;
+    }
+
     private void UpdateVelocity() {
 
-        Vector3 inputVector = Vector3.zero;
-        if (letPlayerMove) {
-            inputVector = playerInputHandler.GetPlayerMovementVector();
-        }
 
-
-        if (inputVector.x != 0) {
-            isRunning = true;
-        } else {
-            isRunning = false;
-        }
-
-
-        // add horizontal velocity
-        float maxVelocity;
-        float acceleration;
-        float damping;
-        if (isGrounded) {
-            maxVelocity = maxGroundedMovementSpeed;
-            acceleration = groundedAcceleration;
-            damping = groundedMovementDamping;
-        } else {
-            maxVelocity = maxAerialMovementSpeed;
-            acceleration = aerialAcceleration;
-            damping = aerialMovementDamping;
-        }
-
-        Vector2 playerInputedXVelocityChange = inputVector * new Vector2(1,0) * acceleration * Time.deltaTime;
-
-        if (playerInputedXVelocityChange.x != 0) {
-
-        if (Mathf.Abs(playerInputedXVelocityChange.x + velocity.x) < maxVelocity || Mathf.Abs(playerInputedXVelocityChange.x + velocity.x) < Mathf.Abs(velocity.x)) {
-        velocity += playerInputedXVelocityChange;
-        }
-
-        } else {
-            //if the player isnt inputting anything, lower its velocity
-            if (velocity.x > 0) {
-                velocity.x -= damping * Time.deltaTime;
+            Vector3 inputVector = Vector3.zero;
+            if (letPlayerMove) {
+                inputVector = playerInputHandler.GetPlayerMovementVector();
             }
-            else if (velocity.x < 0) {
-                velocity.x += damping * Time.deltaTime;
+
+
+            if (inputVector.x != 0) {
+                isRunning = true;
             } else {
-                velocity.x = 0;
+                isRunning = false;
             }
-        }
 
 
-
-        // add vertical velocity
-        Vector2 playerInputedYVelocityChange;
-        if (inputVector.y > 0) { // if the player is holding up
-            playerInputedYVelocityChange = inputVector * new Vector2(0,1) * aerialVerticalAcceleration * Time.deltaTime;
-            if (maxAerialVerticalSpeed > velocity.y + playerInputedYVelocityChange.y) {
-                velocity += playerInputedYVelocityChange;
-            } 
-        } else if (inputVector.y < 0) { // if the player is holding down
-            playerInputedYVelocityChange = inputVector * new Vector2(0,1) * DownVerticalAcceleration * Time.deltaTime;
-            if (-1 * maxDownVerticalSpeed < velocity.y + playerInputedYVelocityChange.y) {
-                velocity += playerInputedYVelocityChange;
+            // add horizontal velocity
+            float maxVelocity;
+            float acceleration;
+            float damping;
+            if (isGrounded) {
+                maxVelocity = maxGroundedMovementSpeed;
+                acceleration = groundedAcceleration;
+                damping = groundedMovementDamping;
+            } else {
+                maxVelocity = maxAerialMovementSpeed;
+                acceleration = aerialAcceleration;
+                damping = aerialMovementDamping;
             }
-        } else  { //if vertical input is nothing
-            if (velocity.y < -1 * MaxNaturalGravity) { //reduce the players fall speed if it is falling faster then gravity and is not inputting anything
-                velocity.y += downVerticalSpeedDamping * Time.deltaTime;
+
+            Vector2 playerInputedXVelocityChange = inputVector * new Vector2(1,0) * acceleration * Time.deltaTime;
+
+            if (playerInputedXVelocityChange.x != 0) {
+
+            if (Mathf.Abs(playerInputedXVelocityChange.x + velocity.x) < maxVelocity || Mathf.Abs(playerInputedXVelocityChange.x + velocity.x) < Mathf.Abs(velocity.x)) {
+            velocity += playerInputedXVelocityChange;
             }
-        }
 
-
-        if (!isGrounded) {
-            if (velocity.y > -1 * MaxNaturalGravity) { // if the player isnt faller faster than max gravity, apply gravity
-        velocity += Vector2.down*gravityAcceleration * Time.deltaTime;
-            }
-        }
-    }
-
-    public class CollisionDetectionOutput {
-        public Vector3 newPositionVector;
-        public Vector3 newVelocityVector;
-        public RaycastHit lastRaycastHit;
-    }
-    private CollisionDetectionOutput HandleCollisions(Vector3 position, Vector3 velocity) {
-
-       
-        Vector3 originalPosition = position;
-
-        float leftoverMagnitude = velocity.magnitude;
-        Vector3 leftoverVelocity = velocity;
-
-        RaycastHit raycastHit;
-        RaycastHit previousRaycastHit = new RaycastHit();
-        bool hitSomething = false;
-
-        bool collisionDone = false;
-        while ( collisionDone == false) {
-            if (Physics.CapsuleCast(position + movementCastTransformStartPoint.localPosition,position + movementCastTransformEndPoint.localPosition,movementCastRadius + skinwidth,leftoverVelocity.normalized,out raycastHit,leftoverMagnitude*Time.deltaTime,layerMask: MovementColliderLayerMask)) {
-                hitSomething = true;
-                previousRaycastHit = raycastHit;
-
-
-                Vector3 positionChangeVector = leftoverVelocity.normalized * (raycastHit.distance - skinwidth);
-                position += positionChangeVector;
-                leftoverMagnitude -= raycastHit.distance;
-                leftoverVelocity = leftoverVelocity.normalized * leftoverMagnitude;
-                leftoverVelocity = Vector3.ProjectOnPlane(leftoverVelocity,raycastHit.normal);
-
-            }
-            else {
-
-                collisionDone = true;
-                if (hitSomething) {
-
-                    print("hit");
-                    
-                    //Calculate how much of the momentum should be kept after the collision
-                    float velocityCollisionFactor = Mathf.Abs(Mathf.Sin(Mathf.Deg2Rad*Vector3.Angle(previousRaycastHit.normal.normalized,velocity.normalized)));
-
-
-                    return new CollisionDetectionOutput{newPositionVector=position,newVelocityVector = leftoverVelocity.normalized * velocity.magnitude * velocityCollisionFactor,lastRaycastHit = previousRaycastHit};
-
+            } else {
+                //if the player isnt inputting anything, lower its velocity
+                if (velocity.x > 0) {
+                    velocity.x -= damping * Time.deltaTime;
                 }
-
-                return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity,lastRaycastHit = previousRaycastHit};
-
+                else if (velocity.x < 0) {
+                    velocity.x += damping * Time.deltaTime;
+                } else {
+                    velocity.x = 0;
+                }
             }
+
+
+
+            // add vertical velocity
+            Vector2 playerInputedYVelocityChange;
+            if (inputVector.y > 0) { // if the player is holding up
+                playerInputedYVelocityChange = inputVector * new Vector2(0,1) * aerialVerticalAcceleration * Time.deltaTime;
+                if (maxAerialVerticalSpeed > velocity.y + playerInputedYVelocityChange.y) {
+                    velocity += playerInputedYVelocityChange;
+                } 
+            } else if (inputVector.y < 0) { // if the player is holding down
+                playerInputedYVelocityChange = inputVector * new Vector2(0,1) * DownVerticalAcceleration * Time.deltaTime;
+                if (-1 * maxDownVerticalSpeed < velocity.y + playerInputedYVelocityChange.y) {
+                    velocity += playerInputedYVelocityChange;
+                }
+            } else  { //if vertical input is nothing
+                if (velocity.y < -1 * MaxNaturalGravity) { //reduce the players fall speed if it is falling faster then gravity and is not inputting anything
+                    velocity.y += downVerticalSpeedDamping * Time.deltaTime;
+                }
+            }
+
+
+            if (!isGrounded == !isDashing) {
+                if (velocity.y > -1 * MaxNaturalGravity) { // if the player isnt faller faster than max gravity, apply gravity
+            velocity += Vector2.down*gravityAcceleration * Time.deltaTime;
+                }
+            }
+            
+
         }
 
-        return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity,lastRaycastHit = previousRaycastHit};
-
-    }
-
-    private void GroundCheck(RaycastHit lastRayCastHit) {
+        public class CollisionDetectionOutput {
+            public Vector3 newPositionVector;
+            public Vector3 newVelocityVector;
+            public RaycastHit lastRaycastHit;
+        }
+        private CollisionDetectionOutput HandleCollisions(Vector3 position, Vector3 velocity) {
 
         
+            Vector3 originalPosition = position;
+
+            float leftoverMagnitude = velocity.magnitude;
+            Vector3 leftoverVelocity = velocity;
+
+            RaycastHit raycastHit;
+            RaycastHit previousRaycastHit = new RaycastHit();
+            bool hitSomething = false;
+
+            bool collisionDone = false;
+            while ( collisionDone == false) {
+                if (Physics.CapsuleCast(position + movementCastTransformStartPoint.localPosition,position + movementCastTransformEndPoint.localPosition,movementCastRadius + skinwidth,leftoverVelocity.normalized,out raycastHit,leftoverMagnitude*Time.deltaTime,layerMask: MovementColliderLayerMask)) {
+                    hitSomething = true;
+                    previousRaycastHit = raycastHit;
 
 
-        if (Physics.SphereCast(transform.position + movementCastTransformStartPoint.localPosition,GroundCheckRadius,Vector3.down,out RaycastHit raycastHit,movementCastRadius - GroundCheckRadius + GroundCheckOffset,layerMask: MovementColliderLayerMask)) {
+                    Vector3 positionChangeVector = leftoverVelocity.normalized * (raycastHit.distance - skinwidth);
+                    position += positionChangeVector;
+                    leftoverMagnitude -= raycastHit.distance;
+                    leftoverVelocity = leftoverVelocity.normalized * leftoverMagnitude;
+                    leftoverVelocity = Vector3.ProjectOnPlane(leftoverVelocity,raycastHit.normal);
 
-            float floorAngle = Vector3.Angle(raycastHit.normal.normalized,Vector3.up.normalized);
+                }
+                else {
 
-            if (floorAngle <= maxFloorDegrees) {
+                    collisionDone = true;
+                    if (hitSomething) {
 
-            
-            //velocity.y = Mathf.Sin(Mathf.Deg2Rad*floorAngle) * velocity.y;
+                        print("hit");
+                        
+                        //Calculate how much of the momentum should be kept after the collision
+                        float velocityCollisionFactor = Mathf.Abs(Mathf.Sin(Mathf.Deg2Rad*Vector3.Angle(previousRaycastHit.normal.normalized,velocity.normalized)));
 
-            currentFloorAngle = Vector3.Angle(raycastHit.normal.normalized,Vector3.up.normalized);
 
-            
-            if (raycastHit.distance >= GroundedDistanceOffset) {
-            transform.position += Vector3.down * (raycastHit.distance - GroundedDistanceOffset);
-            } else {
-                transform.position += Vector3.up * (GroundedDistanceOffset - raycastHit.distance);
+                        return new CollisionDetectionOutput{newPositionVector=position,newVelocityVector = leftoverVelocity.normalized * velocity.magnitude * velocityCollisionFactor,lastRaycastHit = previousRaycastHit};
+
+                    }
+
+                    return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity,lastRaycastHit = previousRaycastHit};
+
+                }
             }
 
+            return new CollisionDetectionOutput{newPositionVector = position + velocity * Time.deltaTime, newVelocityVector = velocity,lastRaycastHit = previousRaycastHit};
 
-        isGrounded = true;
-        return;
-            }
         }
 
-        if (isGrounded) {
-            velocity.y = Mathf.Tan(Mathf.Deg2Rad*currentFloorAngle) * velocity.x;
-            RemoveGroundLock();
-        } else {
-        isGrounded = false;
+        private void GroundCheck(RaycastHit lastRayCastHit) {
+
+            
+
+
+            if (Physics.SphereCast(transform.position + movementCastTransformStartPoint.localPosition,GroundCheckRadius,Vector3.down,out RaycastHit raycastHit,movementCastRadius - GroundCheckRadius + GroundCheckOffset,layerMask: MovementColliderLayerMask)) {
+
+                float floorAngle = Vector3.Angle(raycastHit.normal.normalized,Vector3.up.normalized);
+
+                if (floorAngle <= maxFloorDegrees) {
+
+                
+                //velocity.y = Mathf.Sin(Mathf.Deg2Rad*floorAngle) * velocity.y;
+
+                currentFloorAngle = Vector3.Angle(raycastHit.normal.normalized,Vector3.up.normalized);
+
+                
+                if (raycastHit.distance >= GroundedDistanceOffset) {
+                transform.position += Vector3.down * (raycastHit.distance - GroundedDistanceOffset);
+                } else {
+                    transform.position += Vector3.up * (GroundedDistanceOffset - raycastHit.distance);
+                }
+
+
+            isGrounded = true;
+            return;
+                }
+            }
+
+            if (isGrounded) {
+                velocity.y = Mathf.Tan(Mathf.Deg2Rad*currentFloorAngle) * velocity.x;
+                RemoveGroundLock();
+            } else {
+            isGrounded = false;
         }
         
     }
@@ -399,7 +481,7 @@ public class Player : MonoBehaviour, IEntity
 
     //
     private void UpdateAttacking() {
-        if (playerInputHandler.GetPlayerAttackInput() > 0) { //a float that is either 1 or 0 depending on is the player is holding the attack button or not
+        if (playerInputHandler.GetPlayerAttackInput() > 0 && letPlayerMove) { //a float that is either 1 or 0 depending on is the player is holding the attack button or not
             isAttacking = true;
         }
     }
@@ -418,6 +500,8 @@ public class Player : MonoBehaviour, IEntity
             health -= hitInfo.damage;
             invincibilityTime = hitInfo.invincibilityTime;
             OnPlayerGotHit?.Invoke(this, hitInfo);
+
+            healthBar.SetNewTargetLevel(health/maxHealth,health);
         }
     }
 

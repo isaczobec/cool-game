@@ -28,6 +28,8 @@ public class PlayerAnimation : MonoBehaviour
     private string playerJumped = "playerJumped";
 
     private string xVelocityPercent = "xVelocityPercent"; //how much of the max x momentum the player is currently moving at
+
+    private string dashTrigger = "dashTrigger";
     
 
 
@@ -69,12 +71,19 @@ public class PlayerAnimation : MonoBehaviour
 
         player.OnPlayerJumped += Player_OnJumpedEvent;
 
+        player.OnPlayerDashed += Player_PlayerDashed;
+
 
         
 
 
     }
 
+    private void Player_PlayerDashed(object sender, EventArgs e)
+    {
+        visualParentTransform.forward = player.GetVelocity().normalized;
+        animator.SetTrigger(dashTrigger);
+    }
 
     private void Update() {
 

@@ -25,6 +25,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public event EventHandler<bool> onPlayerAttackEvent; // the bool is if the player started attaqcking or not
 
+    public event EventHandler<EventArgs> dashEvent; // the bool is if the player started attaqcking or not
 
     public static PlayerInputHandler Instance {get; private set;}
     
@@ -35,6 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerMovementControls.NormalMovement.Jump.canceled += JumpCanceled;
         playerMovementControls.NormalMovement.Attack.performed += AttackStarted;
         playerMovementControls.NormalMovement.Attack.canceled += AttackCanceled;
+        playerMovementControls.NormalMovement.Dash.performed += DashPerformed;
 
 
         playerMovementControls.UI.Enable();
@@ -44,6 +46,11 @@ public class PlayerInputHandler : MonoBehaviour
         Instance = this;
         
 
+    }
+
+    private void DashPerformed(InputAction.CallbackContext context)
+    {
+        dashEvent?.Invoke(this, EventArgs.Empty);
     }
 
     private void InteractPressed(InputAction.CallbackContext context)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,19 +42,27 @@ public class PlayerHealthBar : MonoBehaviour
     private float currentHealthLevel;
     private float targetHealthLevel;
 
+    private float targetFraction = 1; // the fraction the bar is lerping towards
+
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
 
+
+    /// <summary>
+    /// The max stat number that is always displayed
+    /// </summary>
+    public float maxDisplayNumber;
+    private float targetDisplayNumber;
     private float currentHealthDisplayNumber;
     [SerializeField] private float HealthNumberTickDownSpeed = 8f;
 
 
     
 
+
     // Start is called before the first frame update
     void Start()
     {
-        player.OnPlayerGotHit += Player_OnPlayerGotHit;
         healthBarMaterial.SetVector(healthAlertSliderReferenceString,new Vector2(maxAlertHealthBarLevel,0));
         healthBarMaterial.SetVector(healthSliderReferenceString,new Vector2(maxHealthBarLevel,0));
 
@@ -63,30 +72,64 @@ public class PlayerHealthBar : MonoBehaviour
         healthTickDownCooldown = healthTickDownDelay;
 
 
-        textMeshPro.text = player.maxHealth.ToString() + "/" + player.maxHealth.ToString();
+        textMeshPro.text = maxDisplayNumber.ToString() + "/" + maxDisplayNumber.ToString();
 
+        if (maxDisplayNumber != 0) {
+            currentHealthDisplayNumber = maxDisplayNumber;
+            targetDisplayNumber = maxDisplayNumber;
 
-        currentHealthDisplayNumber = player.maxHealth;
+            
+        }
     }
 
-    private void Player_OnPlayerGotHit(object sender, HitInfo e)
-    {
-        float healthPercent = player.GetHealthPercent();
-
+    public void SetMaxDisplayNumber(float number) {
+        maxDisplayNumber = number;
+        targetDisplayNumber = maxDisplayNumber;
         
-        // set the alert level instantly when taken damage
-        float AlertHealthLevel = (maxAlertHealthBarLevel - minAlertHealthBarLevel) * healthPercent + minAlertHealthBarLevel;  
+    }
 
-        healthBarMaterial.SetVector(healthAlertSliderReferenceString,new Vector2(AlertHealthLevel,0));
 
-        targetHealthLevel = (maxHealthBarLevel - minHealthBarLevel) * healthPercent + minHealthBarLevel;
 
-        healthTickDownCooldown = healthTickDownDelay;
 
-        animator.SetTrigger(takeDamageReferenceString);
+    /// <summary>
+    /// Sets the target level to a fraction [0,1]
+    /// </summary>
+    /// <param name="fraction"></param>
+    public void SetNewTargetLevel(float fraction, float displayNumber)
+    {
 
+        if (fraction != targetFraction) {
+
+
+            SetDecreaseInBar(fraction, displayNumber, flashHealthBar:fraction < targetFraction,changeTickDownCooldown:fraction < targetFraction);
+
+            targetFraction = fraction;
+        }
 
     }
+
+
+    private void SetDecreaseInBar(float fraction, float displayNumber,bool changeTickDownCooldown = true,bool flashHealthBar = true)
+    {
+        // set the alert level instantly when taken damage
+        float AlertHealthLevel = (maxAlertHealthBarLevel - minAlertHealthBarLevel) * fraction + minAlertHealthBarLevel;
+
+        healthBarMaterial.SetVector(healthAlertSliderReferenceString, new Vector2(AlertHealthLevel, 0));
+
+        targetHealthLevel = (maxHealthBarLevel - minHealthBarLevel) * fraction + minHealthBarLevel;
+
+        if (changeTickDownCooldown) {healthTickDownCooldown = healthTickDownDelay;}
+
+        if (flashHealthBar) {animator.SetTrigger(takeDamageReferenceString);}
+
+        targetDisplayNumber = displayNumber;
+    }
+
+
+
+
+
+
 
     // Update is called once per frame
     private void Update()
@@ -104,7 +147,7 @@ public class PlayerHealthBar : MonoBehaviour
         healthBarMaterial.SetFloat(voronoiStrengthReferenceString,voronoiStrength);
 
 
-        currentHealthDisplayNumber = Mathf.Lerp(currentHealthDisplayNumber, player.health, Time.deltaTime * HealthNumberTickDownSpeed);
-        textMeshPro.text = Mathf.Round(currentHealthDisplayNumber).ToString() + "/" + player.maxHealth.ToString();
+        currentHealthDisplayNumber = Mathf.Lerp(currentHealthDisplayNumber, targetDisplayNumber, Time.deltaTime * HealthNumberTickDownSpeed);
+        textMeshPro.text = Mathf.Round(currentHealthDisplayNumber).ToString() + "/" + maxDisplayNumber;
     }
 }

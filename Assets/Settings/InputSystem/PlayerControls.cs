@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a650a07b-c2ec-451b-942e-985c3fd7fa7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""123a0ce1-31a5-4870-94ba-c7e981e80bc2"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -191,6 +211,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_NormalMovement_Move = m_NormalMovement.FindAction("Move", throwIfNotFound: true);
         m_NormalMovement_Jump = m_NormalMovement.FindAction("Jump", throwIfNotFound: true);
         m_NormalMovement_Attack = m_NormalMovement.FindAction("Attack", throwIfNotFound: true);
+        m_NormalMovement_Dash = m_NormalMovement.FindAction("Dash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
@@ -259,6 +280,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_NormalMovement_Move;
     private readonly InputAction m_NormalMovement_Jump;
     private readonly InputAction m_NormalMovement_Attack;
+    private readonly InputAction m_NormalMovement_Dash;
     public struct NormalMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -266,6 +288,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_NormalMovement_Move;
         public InputAction @Jump => m_Wrapper.m_NormalMovement_Jump;
         public InputAction @Attack => m_Wrapper.m_NormalMovement_Attack;
+        public InputAction @Dash => m_Wrapper.m_NormalMovement_Dash;
         public InputActionMap Get() { return m_Wrapper.m_NormalMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +307,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(INormalMovementActions instance)
@@ -297,6 +323,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(INormalMovementActions instance)
@@ -373,6 +402,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

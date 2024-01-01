@@ -9,6 +9,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] private Player player;
 
     [SerializeField] private FootStepVFX footStepVFX;
+    [SerializeField] private Transform visualObjectTransform;
+
+    
 
 
     public event EventHandler<EventArgs> playerUsedItem; //placeholder, ska förmodligen ha med något mer här sen
@@ -38,6 +41,12 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void RightFootstep() {
         footStepVFX.CreateFootStepVFX(leftFoot: false);
         playerAudioManager.PlayRandom(gravelFootsteps, randomPitchFactor: 0.1f);
+    }
+
+    public void StoppedDashing() {
+        Debug.Log("stopDash");
+        player.StopDash();
+        visualObjectTransform.rotation = Quaternion.Euler(new Vector3(0f,visualObjectTransform.rotation.eulerAngles.y,0f));
     }
 
 }
