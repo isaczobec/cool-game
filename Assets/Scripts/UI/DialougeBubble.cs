@@ -52,6 +52,8 @@ public class DialougeBubble : MonoBehaviour
     [Header("Text Variables")]
     [SerializeField] private float separatorTimeMultiplier = 3f;
 
+    private SoundTrack currentSoundTrack;
+
 
     private string currentDialougeEventTag;
     public event EventHandler<string> DialougeLineFinnished;
@@ -123,6 +125,15 @@ public class DialougeBubble : MonoBehaviour
         if (dialougeLine.cameraGotoPoint != null) {
             PlayerCameraController.Instance.SetTargetTransform(dialougeLine.cameraGotoPoint);
         }
+
+
+        if (dialougeLine.soundTrack != null) {
+            currentSoundTrack?.Stop();
+            currentSoundTrack = dialougeLine.soundTrack;
+            currentSoundTrack?.Play(); // attempt to play this dialouge lines soundtrack
+            
+        }
+
 
         
 
@@ -213,6 +224,8 @@ public class DialougeBubble : MonoBehaviour
         Player.Instance.SetLetPlayerMove(true);
 
         PlayerCameraController.Instance.ReturnToPlayerCamera();
+
+        currentSoundTrack?.Stop();
     }
 
 

@@ -29,6 +29,8 @@ public class DialougeLine
 
 
     [SerializeField] public CameraGotoPoint cameraGotoPoint;
+
+    [SerializeField] public SoundTrack soundTrack; // the soundtrack that will attempt to be played when this line appears
     
 
     

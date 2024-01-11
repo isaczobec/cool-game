@@ -511,6 +511,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8348223635203234552, guid: 2233890f3ed91c74a98062ca2f5ba7e7,
         type: 3}
+      propertyPath: soundName
+      value: Bossa
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348223635203234552, guid: 2233890f3ed91c74a98062ca2f5ba7e7,
+        type: 3}
       propertyPath: fadeInTime
       value: 2
       objectReference: {fileID: 0}
@@ -595,6 +600,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 821027100}
     m_Modifications:
+    - target: {fileID: 2640572778048835811, guid: 2d0a3a34cb910f24cbb416230c3d1cd4,
+        type: 3}
+      propertyPath: stopAllSoundTracks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5481528613363494928, guid: 2d0a3a34cb910f24cbb416230c3d1cd4,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SoundTrack : MonoBehaviour
 {
+    [SerializeField] public string soundName;
 
-    [SerializeField] public AudioManager audioManager;
     [SerializeField] public bool dissallowMusicOverlap;
     [SerializeField] public int priority;
 
@@ -13,15 +13,12 @@ public class SoundTrack : MonoBehaviour
     [SerializeField] public float fadeOutTime;
 
     [SerializeField] public float targetVolume = 0.7f;
-    [SerializeField] public string soundName;
     public Sound sound;
 
-    private void Start() {
-        sound = audioManager.GetSound(soundName);
 
-        Debug.Log("sound:");
-        Debug.Log(sound);
-    }
+    
+
+    
 
     public void Play() {
         SoundTrackHandler.Instance.TryPlaySoundTrack(this);
@@ -29,6 +26,11 @@ public class SoundTrack : MonoBehaviour
 
     public void Stop() {
         SoundTrackHandler.Instance.StopSoundTrack(this);
+
+    }
+
+    public void Pause() {
+        SoundTrackHandler.Instance.PauseSoundTrack(this);
 
     }
 

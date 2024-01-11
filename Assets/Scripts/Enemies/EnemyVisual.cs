@@ -11,7 +11,7 @@ public class EnemyVisual : MonoBehaviour
     [SerializeField] public Enemy enemy;
     public Player player;
 
-    private void Start() {
+    private void Awake() {
         player = Player.Instance;
         InitializeVisual();
     }

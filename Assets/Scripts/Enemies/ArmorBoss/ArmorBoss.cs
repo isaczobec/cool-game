@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Fullscreen.ShaderGraph;
@@ -19,7 +20,7 @@ public class ArmorBoss : Enemy
     [Header("Movement")]
     [SerializeField] private float movementSpeedFactor = 2f;
 
-    [SerializeField] private float zoomMovementSpeedFactor = 1f;
+    [SerializeField] private float zoomMovementSpeedFactor = 1.25f;
 
 
     [Header("Other")]
@@ -57,7 +58,7 @@ public class ArmorBoss : Enemy
     /// Which state the boss is in (If it is moving, attacking, etc) 
     /// </summary>
     public string state;
-    public string zoomMovingState = "ZOOMMOVING";
+    public string zoomMovingState = "ZOOMMOVINGstate";
     public string soulAttackState = "SOULATTACK";
     public string unAgressiveState = "UNAGRESSIVE";
 
@@ -68,6 +69,10 @@ public class ArmorBoss : Enemy
     private Vector3 moveDestination;
 
     private bool shouldStartBossfight = false;
+
+    // couroutines
+
+    private Coroutine spawnOrbitSwordsRoutine;
 
 
     // Events
@@ -126,6 +131,7 @@ public class ArmorBoss : Enemy
         state = zoomMovingState; // initiate the bossbattle
         ArmorBossChangedState?.Invoke(this, zoomMovingState);
         talkInteractZone.SetZoneEnabled(false);
+        spawnOrbitSwordsRoutine = StartCoroutine(SpawnOrbitSwords(5f,10,40,0.3f)); // start the routine of spawning swords
 
         phase1Music.Play();
     }
@@ -138,8 +144,12 @@ public class ArmorBoss : Enemy
         }
 
         if (state == zoomMovingState) {
-            HandleZooming(moveDestination);
+            HandleZooming(moveDestination + Player.Instance.transform.localPosition);
         }
+        
+        if (state == soulAttackState) {
+            HandleSoulAttackMovement(moveDestination + Player.Instance.transform.localPosition);
+        } 
 
         // scale up to full size
         if (fullScale == false && state != unAgressiveState) {HandleStartScaleUp();} 
@@ -163,9 +173,11 @@ public class ArmorBoss : Enemy
     /// <returns></returns>
 
 
-    private float minimumZoomDistance = 0.1f;
+    private float minimumZoomDistance = 0.4f;
 
     private void HandleZooming(Vector3 zoomDestination) {
+
+
         Vector3 newPostition = Vector3.Lerp(transform.localPosition, zoomDestination, Time.deltaTime * movementSpeedFactor * zoomMovementSpeedFactor);
 
         if ((newPostition - transform.position).magnitude < minimumZoomDistance) {
@@ -176,14 +188,40 @@ public class ArmorBoss : Enemy
         }
     }
 
+    private float attackZoomSpeedMultiplier = 0.4f;
+    private void HandleSoulAttackMovement(Vector3 zoomDestination) {
+        Vector3 newPostition = Vector3.Lerp(transform.localPosition, zoomDestination, Time.deltaTime * movementSpeedFactor * zoomMovementSpeedFactor * attackZoomSpeedMultiplier);
+
+        transform.position = newPostition;
+    }
+
 
     private float zoomPlayerXOffset = 35f; // how far to the right or left of the player the boss will zoom to
     private float zoomPlayerYOffsetRange = 20f; // how far up or down from the player the boss will zoom to
 
-    private Vector3 GetRandomZoomPosition() {
+    private float minPlayerDistance = 17f;
+
+    /// <summary>
+    /// Gets a target position for the boss to move to
+    /// </summary>
+    /// <param name="relativeToPlayer">if the position is relative to the player or not.</param>
+    /// <returns></returns>
+    private Vector3 GetRandomZoomPosition(bool relativeToPlayer = true) {
         Vector3 playerPos = Player.Instance.transform.localPosition;
-        float zoomX = (Random.Range(1f,0f) * 2f - 1f) * zoomPlayerXOffset + playerPos.x;
-        float zoomY = Random.Range(-zoomPlayerYOffsetRange,zoomPlayerYOffsetRange) + playerPos.y; 
+
+        float zoomX;
+        float zoomY;
+
+        if (relativeToPlayer) {
+            zoomX = (Random.Range(0,2) * 2 - 1) * zoomPlayerXOffset; // only allow the boss to zoom a set amount of x from the player so it doesnt get to close
+        
+
+            zoomY = Random.Range(-zoomPlayerYOffsetRange,zoomPlayerYOffsetRange); 
+        } else {
+            zoomX = (Random.Range(1f,0f) * 2f - 1f) * zoomPlayerXOffset + playerPos.x;
+            zoomY = Random.Range(-zoomPlayerYOffsetRange,zoomPlayerYOffsetRange) + playerPos.y; 
+        }
+
 
         
 
@@ -201,7 +239,6 @@ public class ArmorBoss : Enemy
     {
         FireSoulProjectileBurst(soulProjectileBurstAmount,soulProjectileAngleDifference);
 
-        CreateOrbitSwordGroup(10,Player.Instance.transform.position,40,0.3f);
     }
 
     private void AnimationEvent_StoppedAttacking(object sender, System.EventArgs e)
@@ -271,6 +308,13 @@ public class ArmorBoss : Enemy
         projectile.ownerEntity = this;
         projectile.InitializeProjectile(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed);
         
+    }
+
+    private IEnumerator SpawnOrbitSwords(float cooldown, int amount, float distanceFromOrbitcenter, float moveSpeed) {
+        while (true) {
+            CreateOrbitSwordGroup(amount,Player.Instance.transform.localPosition,distanceFromOrbitcenter,moveSpeed);
+            yield return new WaitForSeconds(cooldown);
+        }
     }
 
     

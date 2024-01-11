@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SoundTrackHandler : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SoundTrackHandler : MonoBehaviour
     public static SoundTrackHandler Instance {get; private set;}
 
     public List<SoundTrack> soundTrackList = new List<SoundTrack>();
+    [SerializeField] private AudioManager audioManager;
 
     
 
@@ -40,9 +42,9 @@ public class SoundTrackHandler : MonoBehaviour
 
             }
 
-            if (soundTrack.priority > highestPrio) {
+            if (soundTrack.priority >= highestPrio) {
                 foreach (SoundTrack sT in soundTracksToStop) {
-                    StopSoundTrack(sT);
+                    PauseSoundTrack(sT);
                 } 
                 PlaySoundTrack(soundTrack);
             }
@@ -54,30 +56,129 @@ public class SoundTrackHandler : MonoBehaviour
 
     }
 
+
     private void PlaySoundTrack(SoundTrack soundTrack) {
 
-        soundTrackList.Add(soundTrack);
+        // SoundTrack targetSoundTrack = soundTrackList.Find(s => s.soundName == soundTrack.soundName);
 
+        // if (targetSoundTrack == null) { // only add this soundtrack to the list if it wasnt playing track again if it
 
-        if (!soundTrack.audioManager.GetSound(soundTrack.sound.name).audioSource.isPlaying) {
-            soundTrack.sound.volume = 0f;
+        bool containsSoundTrack = false;
+        foreach (SoundTrack st in soundTrackList) {
 
-            soundTrack.audioManager.Play(soundTrack.sound.name);
+            
+            Debug.Log("st");
+            Debug.Log(st);
+
+            Debug.Log("sountrack");
+            Debug.Log(soundTrack);
+
+            if (st?.soundName == soundTrack.soundName) {
+                containsSoundTrack = true;
+                break;
+            }
         }
-        soundTrack.audioManager.FadeAudioSource(true,soundTrack.soundName,soundTrack.fadeInTime,soundTrack.targetVolume);
+
+        if (containsSoundTrack == false) {
+            soundTrackList.Add(soundTrack);
+            }
+        
+
+        Sound targetSound = audioManager.GetSound(soundTrack.soundName);
+
+        if (!targetSound.audioSource.isPlaying) {
+            targetSound.volume = 0f;
+
+            audioManager.Play(soundTrack.soundName,oneShot:false); // the sound is not played as a one shot since it is music
+        }
+        audioManager.FadeAudioSource(true,soundTrack.soundName,soundTrack.fadeInTime,soundTrack.targetVolume);
+
+
     }
 
-    public void StopSoundTrack(SoundTrack soundTrack) {
-
-        if (soundTrackList.Contains(soundTrack)) {
+    public void StopSoundTrack(SoundTrack soundTrack, bool autoResumeHighestPriority = true) {
 
 
-            soundTrackList.Remove(soundTrack);
+        SoundTrack targetSoundTrack = null;
+        foreach (SoundTrack st in soundTrackList) {
+            if (st?.soundName == soundTrack.soundName) {
+                targetSoundTrack = st;
+                break;
+            }
+        }
 
-            soundTrack.audioManager.FadeAudioSource(false,soundTrack.soundName,soundTrack.fadeOutTime,0f);
+        if (targetSoundTrack != null) {
+
+
+            soundTrackList.Remove(targetSoundTrack);
+
+            audioManager.FadeAudioSource(false,targetSoundTrack.soundName,soundTrack.fadeOutTime,0f);
+
+            if (autoResumeHighestPriority) {
+                PlaySoundTrackWithHighestPrio();
+            }
+        }
+
+        
+
+    }
+
+
+    private void PlaySoundTrackWithHighestPrio() {
+
+        SoundTrack highestPrioSoundtrack = null;
+        float highestPrio = 0f;
+
+        foreach (SoundTrack sT in soundTrackList) {
+            if (sT != null) {
+
+                if (sT.dissallowMusicOverlap) {
+                    if (sT.priority > highestPrio) {
+                        highestPrioSoundtrack = sT;
+                        highestPrio = sT.priority;
+                    }
+                }
+            }
+        }
+
+        if (highestPrioSoundtrack != null && !audioManager.GetSound(highestPrioSoundtrack.soundName).audioSource.isPlaying) {
+            PlaySoundTrack(highestPrioSoundtrack);
+        }
+    }
+
+    public void PauseSoundTrack(SoundTrack soundTrack, bool autoResumeHighestPriority = true) {
+
+        SoundTrack targetSoundTrack = null;
+        foreach (SoundTrack st in soundTrackList) {
+            if (st?.soundName == soundTrack.soundName) {
+                targetSoundTrack = st;
+                break;
+            }
+        }
+
+
+        if (targetSoundTrack != null) {
+
+        
+
+            audioManager.FadeAudioSource(false,targetSoundTrack.soundName,soundTrack.fadeOutTime,0f,stopCompletely:false);
+
+            if (autoResumeHighestPriority) {
+                PlaySoundTrackWithHighestPrio();
+            }
         }
 
     }
+
+    public void StopAllSoundTracks() {
+        foreach (SoundTrack soundTrack in soundTrackList) {
+            StopSoundTrack(soundTrack);
+        }
+
+        soundTrackList = new List<SoundTrack>();
+    }
+
+    
 
 
 

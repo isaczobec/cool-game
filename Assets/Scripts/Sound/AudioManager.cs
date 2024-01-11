@@ -21,9 +21,11 @@ public class AudioManager : MonoBehaviour
 
         public bool finnished = false;
 
+        public bool stopSoundCompletely;
+
         public void FadeSound() {
             
-            time += Time.deltaTime;
+            time += Time.fixedDeltaTime;
             sound.audioSource.volume = Mathf.Lerp(startVol,targetVolume,time/duration);
 
             if (time >= duration) {
@@ -85,7 +87,7 @@ public class AudioManager : MonoBehaviour
         return Array.Find(sounds, sound => sound.name == soundName);
     }
 
-    public void Play(string name, float pitchFactor = 1f, float volumeFactor = 1f, float randomPitchFactor = 0f) {
+    public void Play(string name, float pitchFactor = 1f, float volumeFactor = 1f, float randomPitchFactor = 0f, bool oneShot = true) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         
         if (s != null) {
@@ -94,7 +96,11 @@ public class AudioManager : MonoBehaviour
         s.audioSource.pitch = s.pitch * pitchFactor * UnityEngine.Random.Range(1 - finalRandomPitchFactor, 1 + finalRandomPitchFactor);
         
         s.audioSource.volume = s.volume * volumeFactor;
-        s.audioSource.PlayOneShot(s.clip);
+        if (oneShot == true) {
+            s.audioSource.PlayOneShot(s.clip);
+            } else {
+                s.audioSource.Play();
+        }
         }
     }
 
@@ -131,7 +137,7 @@ public class AudioManager : MonoBehaviour
        
     }
 
-    public void FadeAudioSource(bool fadeIn, string soundName, float duration, float targetVolume) {
+    public void FadeAudioSource(bool fadeIn, string soundName, float duration, float targetVolume, bool stopCompletely = true) {
         //StartCoroutine(Fade(fadeIn, soundName, duration, targetVolume));
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
 
@@ -139,7 +145,7 @@ public class AudioManager : MonoBehaviour
 
         if (fadeInfo == null) {
 
-            fadeInformations.Add(new FadeInformation{sound = s, duration = duration, targetVolume = targetVolume, startVol = s.audioSource.volume,fadeIn = fadeIn});
+            fadeInformations.Add(new FadeInformation{sound = s, duration = duration, targetVolume = targetVolume, startVol = s.audioSource.volume,fadeIn = fadeIn, stopSoundCompletely = stopCompletely});
 
         } else {
             fadeInfo.duration =duration;
@@ -163,8 +169,12 @@ public class AudioManager : MonoBehaviour
                 {
 
                     if (fadeInformations[i].fadeIn == false) {
-                        fadeInformations[i].sound.audioSource.Stop();
-                    }
+                        if (fadeInformations[i].stopSoundCompletely == true) {
+                            fadeInformations[i].sound.audioSource.Stop();
+                        } else {
+                            fadeInformations[i].sound.audioSource.Pause();
+                        }
+                    } 
 
 
                     fadeInformations.RemoveAt(i);

@@ -406,6 +406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8348223635203234552, guid: 2233890f3ed91c74a98062ca2f5ba7e7,
         type: 3}
+      propertyPath: soundName
+      value: Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348223635203234552, guid: 2233890f3ed91c74a98062ca2f5ba7e7,
+        type: 3}
       propertyPath: fadeInTime
       value: 2
       objectReference: {fileID: 0}

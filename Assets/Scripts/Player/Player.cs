@@ -498,10 +498,21 @@ public class Player : MonoBehaviour, IEntity
 
 
             health -= hitInfo.damage;
-            invincibilityTime = hitInfo.invincibilityTime;
-            OnPlayerGotHit?.Invoke(this, hitInfo);
 
-            healthBar.SetNewTargetLevel(health/maxHealth,health);
+            if (health > 0f) {
+                invincibilityTime = hitInfo.invincibilityTime;
+                OnPlayerGotHit?.Invoke(this, hitInfo);
+
+                healthBar.SetNewTargetLevel(health/maxHealth,health);
+
+            } else { // the player died
+                health = 0f;
+                healthBar.SetNewTargetLevel(0,0);
+                DeathHandler.Instance.InitiatePlayerDeath();
+            }
+
+
+            
         }
     }
 

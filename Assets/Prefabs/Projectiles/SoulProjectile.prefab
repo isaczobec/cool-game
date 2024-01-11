@@ -16,12 +16,12 @@ PrefabInstance:
     - target: {fileID: 2380709951120615322, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
         type: 3}
       propertyPath: m_Time
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3135405205706692859, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
         type: 3}
       propertyPath: m_Time
-      value: 0.6
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3398777393207100213, guid: f3ce2111f5c9650498a5ad4aac5a1c06,
         type: 3}
