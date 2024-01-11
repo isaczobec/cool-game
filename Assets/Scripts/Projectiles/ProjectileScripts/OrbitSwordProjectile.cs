@@ -9,6 +9,8 @@ public class OrbitSwordProjectile : Projectile
 
     private Vector3 orbitCenter;
     private float distanceFromOrbitcenter;
+    private float speedTowardsCenter;
+
 
     private float angleOffset;
 
@@ -33,13 +35,18 @@ public class OrbitSwordProjectile : Projectile
         HandleOrbiting();
     }
 
-    public void InitializeProjectile (Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed)
+    public void InitializeProjectile (Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed,float speedTowardsCenter = 0)
     {
 
         animator.SetFloat(randomSpeedReference,UnityEngine.Random.Range(randomSpeedMin,randomSpeedMax));
 
+        if (speedTowardsCenter != 0) {
+            transform.localRotation = Quaternion.Euler(0,0,90);
+        }
+
         
         orbitCenter = orbitPosition;
+        this.speedTowardsCenter = speedTowardsCenter;
         this.moveSpeed = moveSpeed;
         this.distanceFromOrbitcenter = distanceFromOrbitcenter;
         this.distanceFromOrbitcenter = distanceFromOrbitcenter;
@@ -58,7 +65,11 @@ public class OrbitSwordProjectile : Projectile
         float x = math.cos(angleOffset);
         float y = math.sin(angleOffset);
 
+        
+
         Vector3 newPosition = new Vector3(x * distanceFromOrbitcenter, y * distanceFromOrbitcenter, 0f) + orbitCenter;
+
+        distanceFromOrbitcenter -= speedTowardsCenter * Time.deltaTime;
         
         transform.position = newPosition;
 

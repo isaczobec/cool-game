@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.Properties;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class NoteProjectile : Projectile
 {
 
     [SerializeField] private float travelSpeed = 1f;
+    [SerializeField] private float hoamingStrength = 10f;
 
     private Vector2 velocity = Vector2.zero;
 
@@ -21,6 +23,8 @@ public class NoteProjectile : Projectile
 
     [Header("VFX")]
     [SerializeField] private GameObject StarBurstVFXObject;
+
+    private Enemy targetEnemy; // the enemy this projectile will hoam towards
 
 
     
@@ -35,11 +39,20 @@ public class NoteProjectile : Projectile
 
         velocity = GetVelocityToCursor(travelSpeed);
         Debug.Log(velocity);
+
+        targetEnemy = EnemyManager.Instance.GetClosestEnemyTo(transform.position);
         
     }
 
     public override void UpdateProjectile()
     {
+
+        if (targetEnemy != null && velocity != Vector2.zero) {
+            velocity = Vector3.Slerp(velocity,(targetEnemy.transform.position - transform.position).normalized * travelSpeed,hoamingStrength * Time.deltaTime);
+        } else {
+            targetEnemy = EnemyManager.Instance.GetClosestEnemyTo(transform.position);
+        }
+
         transform.position += new Vector3(velocity.x * Time.deltaTime, velocity.y * Time.deltaTime, 0f);
 
 

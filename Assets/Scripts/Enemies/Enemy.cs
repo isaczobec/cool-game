@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour, IEntity
         health = maxHealth;
 
         InitializeEnemy();
+
+        EnemyManager.Instance.AddEnemyToEnemyList(this);
         
     }
 
@@ -63,6 +65,7 @@ public class Enemy : MonoBehaviour, IEntity
     /// </summary>
     public virtual void HandleDeath() {
         if (health <= 0) {
+            EnemyManager.Instance.RemoveEnemyFromEnemyList(this);
             Destroy(gameObject); // destroys this enemy
         }
     }

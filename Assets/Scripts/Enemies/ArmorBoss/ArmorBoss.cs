@@ -290,29 +290,29 @@ public class ArmorBoss : Enemy
 
     }
 
-    private void CreateOrbitSwordGroup(int amount, Vector3 orbitPosition, float distanceFromOrbitcenter,float moveSpeed) {
+    private void CreateOrbitSwordGroup(int amount, Vector3 orbitPosition, float distanceFromOrbitcenter,float moveSpeed, float speedTowardsCenter = 0f) {
         
         float angleIncrement = Mathf.PI * 2 / amount;
 
         for (int i = 0; i<amount; i++) {
             float angleOffset = angleIncrement * i;
-            CreateOrbitSword(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed);
+            CreateOrbitSword(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed, speedTowardsCenter);
         }
 
     }
 
-    private void CreateOrbitSword(Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed) {
+    private void CreateOrbitSword(Vector3 orbitPosition, float distanceFromOrbitcenter, float angleOffset,float moveSpeed,float speedTowardsCenter = 0f) {
         GameObject projectileObject = Instantiate(orbitSwordProjectile);
         OrbitSwordProjectile projectile = projectileObject.GetComponent<OrbitSwordProjectile>();
         projectile.SetOwner(null, this);
         projectile.ownerEntity = this;
-        projectile.InitializeProjectile(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed);
+        projectile.InitializeProjectile(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed, speedTowardsCenter);
         
     }
 
-    private IEnumerator SpawnOrbitSwords(float cooldown, int amount, float distanceFromOrbitcenter, float moveSpeed) {
+    private IEnumerator SpawnOrbitSwords(float cooldown, int amount, float distanceFromOrbitcenter, float moveSpeed, float speedTowardsCenter = 0f) {
         while (true) {
-            CreateOrbitSwordGroup(amount,Player.Instance.transform.localPosition,distanceFromOrbitcenter,moveSpeed);
+            CreateOrbitSwordGroup(amount,Player.Instance.transform.localPosition,distanceFromOrbitcenter,moveSpeed,speedTowardsCenter);
             yield return new WaitForSeconds(cooldown);
         }
     }

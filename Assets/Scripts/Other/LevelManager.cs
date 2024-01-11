@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     private string sceneToLoadNext;
     
 
+    public event EventHandler<EventArgs> sceneChanged;
+
 
 
 
@@ -56,6 +58,7 @@ public class LevelManager : MonoBehaviour
     {
         if (waitingToLoad) {
             SceneManager.LoadScene(sceneToLoadNext);
+            sceneChanged?.Invoke(this,EventArgs.Empty);
             screenFade.StartFadeOut();
             waitingToLoad = false;
 
