@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     private string sceneToLoadNext;
     
 
+    public event EventHandler<EventArgs> sceneLoadInitiated;
     public event EventHandler<EventArgs> sceneChanged;
 
 
@@ -42,6 +43,7 @@ public class LevelManager : MonoBehaviour
     public void LoadScene(string sceneName, Vector3 playerSpawnPosition) {
 
         if (!waitingToLoad) {
+            sceneLoadInitiated?.Invoke(this,EventArgs.Empty); // call the scene change event
             screenFade.StartFadeIn();
             waitingToLoad = true;
             sceneToLoadNext = sceneName;
@@ -57,16 +59,37 @@ public class LevelManager : MonoBehaviour
     private void ScreenFade_FadeInFinnished(object sender, EventArgs e)
     {
         if (waitingToLoad) {
-            SceneManager.LoadScene(sceneToLoadNext);
-            sceneChanged?.Invoke(this,EventArgs.Empty);
-            screenFade.StartFadeOut();
-            waitingToLoad = false;
 
-            if (playerSpawnPosition != null) {
-                Player.Instance.transform.position = playerSpawnPosition;
-            }
+            StartCoroutine(LoadLevelAsync());
+
+            // SceneManager.LoadScene(sceneToLoadNext);
+            // sceneChanged?.Invoke(this,EventArgs.Empty);
+            // screenFade.StartFadeOut();
+            // waitingToLoad = false;
+
+            // if (playerSpawnPosition != null) {
+            //     Player.Instance.transform.position = playerSpawnPosition;
+            // }
 
             
+        }
+    }
+
+    private IEnumerator LoadLevelAsync() {
+
+
+        AsyncOperation progress = SceneManager.LoadSceneAsync(sceneToLoadNext,LoadSceneMode.Single);
+
+        while (!progress.isDone) {
+            yield return null;
+        }
+
+        sceneChanged?.Invoke(this,EventArgs.Empty);
+        screenFade.StartFadeOut();
+        waitingToLoad = false;
+
+        if (playerSpawnPosition != null) {
+            Player.Instance.transform.position = playerSpawnPosition;
         }
     }
     

@@ -1013,7 +1013,7 @@ MonoBehaviour:
   audioManager: {fileID: 424556289377509808}
   defaultHitSoundName: defaultHitSound
   defaultHitSoundGroupName: defaultHitSoundGroup
-  travelSpeed: 32
+  travelSpeed: 45
   hoamingStrength: 7
   dizzySoundsString: dizzySounds
   chanceToPlayDizzySounds: 0.3

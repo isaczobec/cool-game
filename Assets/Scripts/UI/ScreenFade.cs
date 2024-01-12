@@ -13,6 +13,14 @@ public class ScreenFade : MonoBehaviour
 
     public event EventHandler fadeInFinnished;
 
+
+    public static ScreenFade Instance{get; private set;}
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        }
+    }
+
     public void FadeInFinnished() {
         fadeInFinnished?.Invoke(this, EventArgs.Empty);
     }

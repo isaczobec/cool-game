@@ -134,6 +134,8 @@ public class ArmorBoss : Enemy
         spawnOrbitSwordsRoutine = StartCoroutine(SpawnOrbitSwords(5f,10,40,0.3f)); // start the routine of spawning swords
 
         phase1Music.Play();
+
+        BossFightManager.Instance.SetNewBossEnemy(this);
     }
 
     public override void HandleAI() {
@@ -290,13 +292,18 @@ public class ArmorBoss : Enemy
 
     }
 
-    private void CreateOrbitSwordGroup(int amount, Vector3 orbitPosition, float distanceFromOrbitcenter,float moveSpeed, float speedTowardsCenter = 0f) {
+    private void CreateOrbitSwordGroup(int amount, Vector3 orbitPosition, float distanceFromOrbitcenter,float moveSpeed, float speedTowardsCenter = 0f, bool randomAngleOffset = true) {
+
+        float randAngle = 0f;
+        if (randomAngleOffset) {
+            randAngle = Random.Range(0f, Mathf.PI * 2);
+        }
         
         float angleIncrement = Mathf.PI * 2 / amount;
 
         for (int i = 0; i<amount; i++) {
             float angleOffset = angleIncrement * i;
-            CreateOrbitSword(orbitPosition,  distanceFromOrbitcenter,  angleOffset, moveSpeed, speedTowardsCenter);
+            CreateOrbitSword(orbitPosition,  distanceFromOrbitcenter,  angleOffset + randAngle, moveSpeed, speedTowardsCenter);
         }
 
     }
@@ -310,9 +317,11 @@ public class ArmorBoss : Enemy
         
     }
 
-    private IEnumerator SpawnOrbitSwords(float cooldown, int amount, float distanceFromOrbitcenter, float moveSpeed, float speedTowardsCenter = 0f) {
+    private IEnumerator SpawnOrbitSwords(float cooldown, int amount, float distanceFromOrbitcenter, float moveSpeed, float speedTowardsCenter = 0f,int amountOfGroups = 2, float distancePerGroup = 15) {
         while (true) {
-            CreateOrbitSwordGroup(amount,Player.Instance.transform.localPosition,distanceFromOrbitcenter,moveSpeed,speedTowardsCenter);
+            for (int i = 0; i < amountOfGroups; i++) {
+                CreateOrbitSwordGroup(amount,Player.Instance.transform.localPosition,distanceFromOrbitcenter + i * distancePerGroup,moveSpeed,speedTowardsCenter);
+            }
             yield return new WaitForSeconds(cooldown);
         }
     }

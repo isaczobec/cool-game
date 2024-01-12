@@ -22,10 +22,10 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void Start() {
-        LevelManager.Instance.sceneChanged += LevelManager_SceneChanged;
+        ScreenFade.Instance.fadeInFinnished += ScreenFade_FadeInFinnished;
     }
 
-    private void LevelManager_SceneChanged(object sender, EventArgs e)
+    private void ScreenFade_FadeInFinnished(object sender, EventArgs e)
     {
         enemies.Clear(); // clear all enemies when moving to a new level
     }

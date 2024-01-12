@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IEntity
     /// variable attack damage can be multiplied with for scaling.
     /// </summary>
     [SerializeField] public float baseDamage;
+    [SerializeField] public bool isBossEnemy = false;
     private float health;
 
 
@@ -90,6 +91,10 @@ public class Enemy : MonoBehaviour, IEntity
         health -= hitInfo.damage;
         invincibilityTime = hitInfo.invincibilityTime;
         Debug.Log("Ouch but enemy");
+
+        if (isBossEnemy) {
+            BossFightManager.Instance.BossEnemyGetHit();
+        }
     }
 
     public float GetInvincibilityTime() {
