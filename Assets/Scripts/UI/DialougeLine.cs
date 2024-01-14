@@ -18,8 +18,10 @@ public class DialougeLine
     [SerializeField] public float scrollSpeed = 0.05f;
     [SerializeField] public Color color = Color.black;
     [SerializeField] public AudioClip textScrollSound;
+    [SerializeField] public int lettersBetweenSpeechSounds = 1;
 
     [SerializeField] public Texture speakerImage;
+    [SerializeField] public string speakerName;
 
     [SerializeField] public bool freezePlayerMovement = true;
     [SerializeField] public bool skippable = true;

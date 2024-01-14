@@ -154,13 +154,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317745741231053644}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33883905, y: 0.3463439, z: -0.13580044, w: 0.86417145}
-  m_LocalPosition: {x: -9.67, y: 6.74, z: -10.2}
+  m_LocalRotation: {x: 0.05093268, y: 0.3356173, z: -0.018176386, w: 0.9404449}
+  m_LocalPosition: {x: -7.08, y: 0.47, z: -5.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1050542254611707657}
-  m_LocalEulerAnglesHint: {x: 42.82, y: 43.68, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.2, y: 39.28, z: 0}
 --- !u!114 &5868958804867298831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa55f7e2df8fc544bb2c92fb24335c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTargetFov: 60
+  cameraTargetFov: 80
 --- !u!1001 &2450002044183306693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -408,26 +408,31 @@ MonoBehaviour:
   dialogeLineGroups:
   - dialougeGroupName: default
     dialougeLines:
-    - text: Wanna fight you sussy baka?
+    - text: Alright, I don't really think it's worth my time coming up with some
+        edgy dialouge for this...
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 30
-      scrollSpeed: 0.05
+      scrollSpeed: 0.02
       color: {r: 0, g: 0, b: 0, a: 1}
       textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      lettersBetweenSpeechSounds: 1
       speakerImage: {fileID: 0}
+      speakerName: Armor Person
       freezePlayerMovement: 1
       skippable: 1
       timeUntilAutoProceed: 0
       dialougeEventTag: 
       cameraGotoPoint: {fileID: 5868958804867298831}
       soundTrack: {fileID: 0}
-    - text: I'll kill you you lite piece of shit!
+    - text: so uhh.. yeah
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
       fontSize: 30
-      scrollSpeed: 0.05
+      scrollSpeed: 0.035
       color: {r: 1, g: 0, b: 0, a: 1}
       textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      lettersBetweenSpeechSounds: 1
       speakerImage: {fileID: 0}
+      speakerName: Armor Person
       freezePlayerMovement: 1
       skippable: 0
       timeUntilAutoProceed: 1

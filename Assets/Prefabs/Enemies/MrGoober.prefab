@@ -56,13 +56,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3850507350555968401}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09128501, y: 0.37671414, z: -0.03733545, w: 0.9210644}
-  m_LocalPosition: {x: -1.323, y: 0.64, z: -1.193}
+  m_LocalRotation: {x: 0.06987077, y: 0.32606733, z: -0.02417375, w: 0.942451}
+  m_LocalPosition: {x: -1.188, y: 0.3, z: -1.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5797752531301368812}
-  m_LocalEulerAnglesHint: {x: 11.32, y: 44.489, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.48, y: 38.169, z: 0}
 --- !u!114 &3460126358339963966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +75,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa55f7e2df8fc544bb2c92fb24335c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTargetFov: 60
+  cameraTargetFov: 90
+--- !u!1 &7070526601137725981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8098214780723415641}
+  - component: {fileID: 5306483420542135021}
+  m_Layer: 0
+  m_Name: IntimateCameraTransformPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8098214780723415641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070526601137725981}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.019447995, y: 0.60511327, z: 0.0147886, w: 0.79576445}
+  m_LocalPosition: {x: -0.968, y: -0.021, z: -0.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5797752531301368812}
+  m_LocalEulerAnglesHint: {x: -2.8, y: 74.5, z: 0}
+--- !u!114 &5306483420542135021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070526601137725981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa55f7e2df8fc544bb2c92fb24335c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTargetFov: 45
 --- !u!1001 &4294062717462390061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,6 +254,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -9.145953
       objectReference: {fileID: 0}
+    - target: {fileID: -1526964690268444965, guid: a1cf4a07e1057db4688540afbd539ef9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d471a95bceddd4f45a2cf3236be9face, type: 2}
     - target: {fileID: -148924850277314041, guid: a1cf4a07e1057db4688540afbd539ef9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -488,6 +538,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7767172051959371746, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8098214780723415641}
+    - targetCorrespondingSourceObject: {fileID: 7767172051959371746, guid: 48a1ff196308e7b4aa7e4918ab836a42,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 9135141812859216288}
     - targetCorrespondingSourceObject: {fileID: 6845424593853323683, guid: 48a1ff196308e7b4aa7e4918ab836a42,
         type: 3}
@@ -546,6 +600,11 @@ MonoBehaviour:
   gooberDialougeFinnishedString: gooberDialougeFinnished
   visualTransform: {fileID: 7296004603327270317}
   forwardsTransform: {fileID: 0}
+  material: {fileID: 2100000, guid: d471a95bceddd4f45a2cf3236be9face, type: 2}
+  isTalkingReference: _IsTalking
+  dialougeLineGroups: {fileID: 23610366157319662}
+  firstTimeTalkedToDialougeGroupString: GooberIntro
+  secondTimeTalkedToDialougeGroupString: GooberTextureRant
 --- !u!1001 &4476813752839521693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -556,13 +615,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
         type: 3}
+      propertyPath: interactText
+      value: Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
+        type: 3}
       propertyPath: playDialouge
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,
         type: 3}
       propertyPath: dialougeLineGroupName
-      value: GooberIntro
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 565900839114755100, guid: 553a87e5fa983fa4c976d33e8fff6f43,
         type: 3}
@@ -695,27 +759,194 @@ MonoBehaviour:
       fontSize: 30
       scrollSpeed: 0.02
       color: {r: 0, g: 0, b: 0, a: 1}
-      textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
       speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
       freezePlayerMovement: 1
       skippable: 1
       timeUntilAutoProceed: 0
       dialougeEventTag: wave
       cameraGotoPoint: {fileID: 3460126358339963966}
       soundTrack: {fileID: 4217241639555756019}
-    - text: GOOBA LOOBA WOOBA!
+    - text: Since Isac is using this game for his portfolio, I will also be interjecting
+        comments at seemingly irrelevant times about his excelence and expertise
+        in many different areas.
       font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
-      fontSize: 40
+      fontSize: 30
       scrollSpeed: 0.02
       color: {r: 0, g: 0, b: 0, a: 1}
-      textScrollSound: {fileID: 8300000, guid: 1bbfd193ad60e244da3b57ac1c1df9b7, type: 3}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
       speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
       freezePlayerMovement: 1
       skippable: 1
       timeUntilAutoProceed: 0
-      dialougeEventTag: gooberDialougeFinnished
+      dialougeEventTag: wave
       cameraGotoPoint: {fileID: 3460126358339963966}
       soundTrack: {fileID: 4217241639555756019}
+    - text: "For instance, did you know that Isac graduated from T\xE4by Enskilda
+        Gymnasium with 22.4 meritpo\xE4ng out of 22.5? That's pretty good if you
+        ask me! "
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: 'Anyways... This demo is pretty unfinished, but I still think it showcases
+        some level of skill in areas like programming, music, sound design, 3D-modelling,
+        VFX and graphic design. '
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: Actually, Isac has made everything (except the animations for the humanoid
+        characters and some textures) completely from scratch!
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: Pretty impressive, huh? He can make music and 3d/2d art, do sound design,
+        program, is good at maths (and is extremely humble as well!)
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: Moving on, the boss battle against the person in black armor is the coolest
+        thing about this demo. You can check it out by going to the leftmost side
+        of this street.
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: I wish you luck...
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: 
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: You're gonna need it.
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 40
+      scrollSpeed: 0.05
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: 72958ee4891a0104ea4478f61db48ca3, type: 3}
+      lettersBetweenSpeechSounds: 5
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 0
+      timeUntilAutoProceed: 0.5
+      dialougeEventTag: gooberDialougeFinnished
+      cameraGotoPoint: {fileID: 5306483420542135021}
+      soundTrack: {fileID: 4217241639555756019}
+  - dialougeGroupName: GooberTextureRant
+    dialougeLines:
+    - text: Hey, did you notice how theese buildings have missing textures?
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 4217241639555756019}
+    - text: Yeah, apparently the company that owns them didn't pay their taxes or
+        something, so the authorities took them away as a form of payment!
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 0}
+    - text: I wonder when they will be added back in...
+      font: {fileID: 11400000, guid: f1389f619dd40cb4188e4dd569e63a38, type: 2}
+      fontSize: 30
+      scrollSpeed: 0.02
+      color: {r: 0, g: 0, b: 0, a: 1}
+      textScrollSound: {fileID: 8300000, guid: cf05700ecdd8fd545976035217e0c447, type: 3}
+      lettersBetweenSpeechSounds: 7
+      speakerImage: {fileID: 0}
+      speakerName: Mr. Goober
+      freezePlayerMovement: 1
+      skippable: 1
+      timeUntilAutoProceed: 0
+      dialougeEventTag: wave
+      cameraGotoPoint: {fileID: 3460126358339963966}
+      soundTrack: {fileID: 0}
 --- !u!114 &4217241639555756019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,6 +975,7 @@ MonoBehaviour:
     dopplerLevel: 0
     loop: 0
     audioSource: {fileID: 0}
+  isPlaying: 0
 --- !u!114 &4418429792739428313 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 248186295856775748, guid: 553a87e5fa983fa4c976d33e8fff6f43,

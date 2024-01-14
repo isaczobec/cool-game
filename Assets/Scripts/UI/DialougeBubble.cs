@@ -11,6 +11,7 @@ public class DialougeBubble : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] private TextMeshProUGUI speakerNameText;
 
     
     [Header("Sound")]
@@ -49,6 +50,12 @@ public class DialougeBubble : MonoBehaviour
 
     private float timeUntilAutoProceed = 0f; // 0 if there is no auto proceed
 
+    private bool isPrintingText = false;
+
+    private int currentLettersBetweenSpeechSounds;
+    private int LettersBetweenSpeechSoundsCounter;
+
+
     [Header("Text Variables")]
     [SerializeField] private float separatorTimeMultiplier = 3f;
 
@@ -57,6 +64,7 @@ public class DialougeBubble : MonoBehaviour
 
     private string currentDialougeEventTag;
     public event EventHandler<string> DialougeLineFinnished;
+    public event EventHandler<EventArgs> DialougeBubbleClosed;
 
     public static DialougeBubble Instance;
     private void Awake() {
@@ -106,9 +114,15 @@ public class DialougeBubble : MonoBehaviour
         // Change variables
         activated = true;
 
+        isPrintingText = true;
+
         amountOfCharactersCurrentlyShowing = 0;
         amountOfCharactersToShow = dialougeLine.text.Length;
-        
+
+        speakerNameText.text = dialougeLine.speakerName;
+        currentLettersBetweenSpeechSounds = dialougeLine.lettersBetweenSpeechSounds;
+        LettersBetweenSpeechSoundsCounter = 0;
+
         scrollSpeed = dialougeLine.scrollSpeed;
         targetText = dialougeLine.text;
         textMeshProUGUI.text = "";
@@ -128,7 +142,7 @@ public class DialougeBubble : MonoBehaviour
 
 
         if (dialougeLine.soundTrack != null) {
-            currentSoundTrack?.Stop();
+            currentSoundTrack?.Pause();
             currentSoundTrack = dialougeLine.soundTrack;
             currentSoundTrack?.Play(); // attempt to play this dialouge lines soundtrack
             
@@ -159,11 +173,16 @@ public class DialougeBubble : MonoBehaviour
                 } else {
                     timeUntilNextCharacter = scrollSpeed;
                 }
+
                     
-                if (newChar != ' ') {
+                if (newChar != ' ' && LettersBetweenSpeechSoundsCounter == 0) {
                     audioManager.Play(textScrollSoundName);
                 }
+                LettersBetweenSpeechSoundsCounter += 1;
+                LettersBetweenSpeechSoundsCounter = LettersBetweenSpeechSoundsCounter % currentLettersBetweenSpeechSounds;
             }
+        } else {
+            isPrintingText = false;
         }
     }
 
@@ -175,6 +194,8 @@ public class DialougeBubble : MonoBehaviour
 
                 textMeshProUGUI.text = targetText;
                 amountOfCharactersCurrentlyShowing = amountOfCharactersToShow;
+
+                isPrintingText = false;
             }
 
 
@@ -226,6 +247,8 @@ public class DialougeBubble : MonoBehaviour
         PlayerCameraController.Instance.ReturnToPlayerCamera();
 
         currentSoundTrack?.Stop();
+
+        DialougeBubbleClosed?.Invoke(this, EventArgs.Empty);
     }
 
 
@@ -239,6 +262,10 @@ public class DialougeBubble : MonoBehaviour
         if (playInstantly) {
             PlayDialougeLine(dialougeLineQueue[0]);
         }
+    }
+
+    public bool GetIsPrintingText() {
+        return isPrintingText;
     }
 
 

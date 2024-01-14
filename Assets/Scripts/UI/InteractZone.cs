@@ -14,6 +14,7 @@ public class InteractZone :  MonoBehaviour, IZone
 
     private bool hidden = true;
     private bool zoneEnabled = true;
+    private bool playerInZone = true;
 
     [SerializeField] private bool hideOnIteract = true;
 
@@ -23,6 +24,7 @@ public class InteractZone :  MonoBehaviour, IZone
     [Header("Optional Variables")]
     [SerializeField] private bool switchScene; // if this interactzone should switch to another scene when pressed
     [SerializeField] private string sceneName;
+    [SerializeField] private bool stopMusic = false;
     [SerializeField] private Vector3 playerSpawnPosition; 
     [SerializeField] private bool playDialouge; // if this interactzone should play dialouge when interacted with
     [SerializeField] private string dialougeLineGroupName; // the name of the dialouge group that should be played
@@ -50,8 +52,22 @@ public class InteractZone :  MonoBehaviour, IZone
         // set the dialouge groups
         if (playDialouge) {
             dialougeLineGroups = GetComponent<DialougeLineGroups>();
+            DialougeBubble.Instance.DialougeBubbleClosed += DialougeBubbleClosed;
         }
     }
+
+    private void DialougeBubbleClosed(object sender, EventArgs e)
+    {
+        Debug.Log("CLOSED!");
+        if (playerInZone) {
+            
+            // make the interact button pop back up but it doesnt work
+
+        }
+    }
+    
+
+    
 
     public void ZoneInteractedWith() {
 
@@ -77,6 +93,9 @@ public class InteractZone :  MonoBehaviour, IZone
     }
 
     private void SwitchScene() {
+        if (stopMusic) {
+            SoundTrackHandler.Instance.StopAllSoundTracks();
+        }
         LevelManager.Instance.LoadScene(sceneName,playerSpawnPosition);
     }
 
@@ -85,6 +104,7 @@ public class InteractZone :  MonoBehaviour, IZone
     /// </summary>
     /// <param name="collider"></param>
     public void PlayerEntered() {
+        playerInZone = true;
 
         if (zoneEnabled) {
             audioManager.Play("Entered");
@@ -96,6 +116,8 @@ public class InteractZone :  MonoBehaviour, IZone
     /// function that is run when the playr leaves this zone
     /// </summary>
     public void PlayerLeft() {
+        playerInZone = false;
+
         if (zoneEnabled) { 
             if (!hidden) {audioManager.Play("Left");}
             ToggleUIElemens(show:false);

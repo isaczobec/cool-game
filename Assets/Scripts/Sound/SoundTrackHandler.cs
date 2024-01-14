@@ -30,7 +30,7 @@ public class SoundTrackHandler : MonoBehaviour
             int highestPrio = 0; 
             foreach (SoundTrack sT in soundTrackList) {
 
-                if (sT != null && sT.dissallowMusicOverlap == true) {
+                if (sT != null && sT.dissallowMusicOverlap == true && sT.isPlaying == true) {
                     if (sT.priority > highestPrio) {
                         highestPrio = sT.priority;
                         if (sT.priority < soundTrack.priority && sT.dissallowMusicOverlap) {
@@ -63,6 +63,7 @@ public class SoundTrackHandler : MonoBehaviour
 
         // if (targetSoundTrack == null) { // only add this soundtrack to the list if it wasnt playing track again if it
 
+        SoundTrack targetSoundtrack = null;
         bool containsSoundTrack = false;
         foreach (SoundTrack st in soundTrackList) {
 
@@ -73,14 +74,17 @@ public class SoundTrackHandler : MonoBehaviour
             Debug.Log("sountrack");
             Debug.Log(soundTrack);
 
+
             if (st?.soundName == soundTrack.soundName) {
                 containsSoundTrack = true;
+                targetSoundtrack = st;
                 break;
             }
         }
 
         if (containsSoundTrack == false) {
             soundTrackList.Add(soundTrack);
+            targetSoundtrack = soundTrack;
             }
         
 
@@ -92,16 +96,19 @@ public class SoundTrackHandler : MonoBehaviour
             audioManager.Play(soundTrack.soundName,oneShot:false); // the sound is not played as a one shot since it is music
         }
         audioManager.FadeAudioSource(true,soundTrack.soundName,soundTrack.fadeInTime,soundTrack.targetVolume);
+        targetSoundtrack.isPlaying = true;
+
+
 
 
     }
 
-    public void StopSoundTrack(SoundTrack soundTrack, bool autoResumeHighestPriority = true) {
+    public void StopSoundTrack(SoundTrack soundTrack, bool autoResumeHighestPriority = true,bool removeSoundTrackFromList = true) {
 
 
         SoundTrack targetSoundTrack = null;
         foreach (SoundTrack st in soundTrackList) {
-            if (st?.soundName == soundTrack.soundName) {
+            if (st?.soundName == soundTrack?.soundName) {
                 targetSoundTrack = st;
                 break;
             }
@@ -110,9 +117,11 @@ public class SoundTrackHandler : MonoBehaviour
         if (targetSoundTrack != null) {
 
 
-            soundTrackList.Remove(targetSoundTrack);
+            if (removeSoundTrackFromList) { soundTrackList.Remove(targetSoundTrack); }
 
             audioManager.FadeAudioSource(false,targetSoundTrack.soundName,soundTrack.fadeOutTime,0f);
+
+            targetSoundTrack.isPlaying = false;
 
             if (autoResumeHighestPriority) {
                 PlaySoundTrackWithHighestPrio();
@@ -122,6 +131,8 @@ public class SoundTrackHandler : MonoBehaviour
         
 
     }
+
+    
 
 
     private void PlaySoundTrackWithHighestPrio() {
@@ -172,7 +183,7 @@ public class SoundTrackHandler : MonoBehaviour
 
     public void StopAllSoundTracks() {
         foreach (SoundTrack soundTrack in soundTrackList) {
-            StopSoundTrack(soundTrack);
+            StopSoundTrack(soundTrack, autoResumeHighestPriority:false, removeSoundTrackFromList: false);
         }
 
         soundTrackList = new List<SoundTrack>();

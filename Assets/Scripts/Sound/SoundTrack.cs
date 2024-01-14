@@ -15,6 +15,8 @@ public class SoundTrack : MonoBehaviour
     [SerializeField] public float targetVolume = 0.7f;
     public Sound sound;
 
+    public bool isPlaying = false;
+
 
     
 

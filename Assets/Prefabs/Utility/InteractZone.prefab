@@ -156,6 +156,8 @@ MonoBehaviour:
   textMeshPro: {fileID: 2713850419623105565}
   switchScene: 0
   sceneName: 
+  stopMusic: 0
+  playerSpawnPosition: {x: 0, y: 0, z: 0}
   playDialouge: 0
   dialougeLineGroupName: 
   animator: {fileID: 8761752388660681642}
